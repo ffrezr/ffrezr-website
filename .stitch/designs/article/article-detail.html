@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Death of the 1px Border - Francisco Frez</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e2",
+                        "primary": "#222222",
+                        "on-surface": "#222222",
+                        "tertiary": "#3a3c3c",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#ffffff",
+                        "on-error-container": "#410002",
+                        "on-primary": "#e5e2e1",
+                        "inverse-surface": "#2f3131",
+                        "tertiary-fixed-dim": "#454747",
+                        "surface-dim": "#dadada",
+                        "on-secondary-fixed-variant": "#3b3b3c",
+                        "tertiary-container": "#737575",
+                        "secondary": "#5e5e5e",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#5f5e5e",
+                        "on-primary-fixed-variant": "#e5e2e1",
+                        "on-primary-fixed": "#ffffff",
+                        "background": "#f9f9f9",
+                        "secondary-container": "#d5d4d4",
+                        "outline": "#777777",
+                        "surface-tint": "#5f5e5e",
+                        "on-tertiary-fixed": "#ffffff",
+                        "inverse-primary": "#c8c6c5",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#5d5f5f",
+                        "primary-fixed-dim": "#474746",
+                        "secondary-fixed": "#c7c6c6",
+                        "on-surface-variant": "#474747",
+                        "on-tertiary": "#e2e2e2",
+                        "surface-container": "#eeeeee",
+                        "surface-variant": "#e2e2e2",
+                        "secondary-fixed-dim": "#acabab",
+                        "primary-container": "#3c3b3b",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c6c6c6",
+                        "on-tertiary-fixed-variant": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#222222",
+                        "surface-container-low": "#f3f3f4",
+                        "on-secondary-container": "#1b1c1c",
+                        "surface-bright": "#f9f9f9",
+                        "surface": "#f9f9f9",
+                        "inverse-on-surface": "#f0f1f1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "2px",
+                        "sm": "2px",
+                        "md": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined { font-family: 'Material Symbols Outlined'; }
+        
+        /* Drop Cap Styling */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 0.8;
+            padding-top: 0.1em;
+            padding-right: 0.1em;
+            padding-left: 0.05em;
+            font-weight: 800;
+            color: #222222;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen flex flex-col pt-[88px]">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+<div class="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6 w-full">
+<div class="text-xl font-bold tracking-tight text-primary uppercase">Francisco Frez</div>
+<nav class="hidden md:flex space-x-8">
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">Home</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">About</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-primary border-b border-primary pb-1 transition-colors duration-300" href="#">Blog</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</nav>
+<button class="hidden md:inline-flex items-center justify-center bg-primary text-on-primary rounded-[2px] px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Get in touch</button>
+<button class="md:hidden text-primary"><span class="material-symbols-outlined">menu</span></button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center pb-32">
+<!-- Article Header -->
+<header class="w-full max-w-5xl px-6 md:px-12 pt-24 pb-16 flex flex-col items-center text-center">
+<div class="flex items-center gap-4 mb-8 text-[0.75rem] uppercase tracking-[0.05em] text-secondary font-bold font-label">
+<span class="text-primary">Design Theory</span>
+<span class="w-1 h-1 rounded-full bg-secondary-fixed-dim"></span>
+<span>Oct 12, 2024</span>
+<span class="w-1 h-1 rounded-full bg-secondary-fixed-dim"></span>
+<span>8 Min Read</span>
+</div>
+<h1 class="text-5xl md:text-7xl font-light tracking-[-0.02em] text-primary mb-8 max-w-4xl leading-tight font-headline">
+                The Death of the 1px Border
+            </h1>
+<p class="text-xl md:text-2xl text-on-surface-variant font-medium max-w-3xl leading-relaxed">
+                Why modern digital brutalism and editorial UI patterns are abandoning explicit lines in favor of tonal architecture and ambient space.
+            </p>
+</header>
+<!-- Hero Image -->
+<div class="w-full max-w-7xl px-6 md:px-12 mb-24">
+<div class="aspect-[21/9] w-full rounded bg-surface-container-low overflow-hidden relative shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+<img alt="Hero Image" class="w-full h-full object-cover" data-alt="abstract architectural composition with smooth intersecting planes of concrete and soft diffused light casting subtle gradients without sharp edges" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIa-PkvrEejzKYkKevShOrotByuA6Fydzztmx3Ecj7G0ENDay3ul2ba_1dWcWxtSULa9zW37qRkH378KSGsaWU4LV7NKfb59BqptGFnj5NFMOvetSPik3dCmfQ5uD4x7IG2a-PWdqq--LStOxXhP-IQ_3vSLYrGMLdAMBtoIZlxrLkI3UlSYMyZKUYCNwcwcdmrZCB6eIErcre-XTo9XnuG03CsiajnyqfTBb6TC9ys-5bLcz_WWRSo4QKEf3EgDDht2asSBAOtg"/>
+</div>
+<p class="text-right mt-4 text-[0.75rem] text-secondary tracking-wide uppercase">Architecture of the web, 2024.</p>
+</div>
+<!-- Article Content -->
+<article class="w-full max-w-3xl px-6 md:px-0 font-body">
+<div class="text-lg md:text-xl leading-[1.8] text-on-surface-variant mb-12 drop-cap">
+                For years, designers have relied on the humble one-pixel border to define space, separate content, and build the scaffolding of the internet. It was a crutch, a necessity born from an era where screen resolutions were low, and colors were limited. But as our digital canvases evolved, so too did our visual language. Today, we stand on the precipice of a new era in UI design: the era of tonal carving.
+            </div>
+<p class="text-lg md:text-xl leading-[1.8] text-on-surface-variant mb-16">
+                The concept is simple but profound: instead of drawing lines around things to indicate containment, we use subtle shifts in background color and ambient elevation to group elements visually. This approach, borrowed heavily from print editorial design and minimalist architecture, creates interfaces that feel less like software and more like curated spaces.
+            </p>
+<div class="w-full bg-surface-container-low p-12 md:p-16 mb-16 rounded shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+<blockquote class="text-2xl md:text-3xl font-bold text-primary leading-tight tracking-[-0.01em]">
+                    "A line is an explicit command. A tonal shift is a gentle suggestion. In modern design, we prefer to guide users, not confine them."
+                </blockquote>
+<div class="mt-8 flex items-center gap-4">
+<div class="w-12 h-[2px] bg-primary"></div>
+<span class="text-[0.75rem] uppercase tracking-[0.05em] font-bold text-secondary">Elena Rostova, Lead Designer</span>
+</div>
+</div>
+<h2 class="text-3xl md:text-4xl font-semibold text-primary mb-8 tracking-[-0.02em] font-headline">The Mechanics of Tonal Layering</h2>
+<p class="text-lg md:text-xl leading-[1.8] text-on-surface-variant mb-12">
+                Removing borders requires a highly disciplined color palette. You can no longer rely on arbitrary grays; every shade must be purposeful. We typically employ a strategy of three to four 'surface' levels. The base layer acts as the floor, the primary canvas. The subsequent layers float slightly above, creating soft distinctions.
+            </p>
+<!-- Example Layout within article to show "tonal carving" -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+<div class="bg-surface-container-lowest p-8 rounded shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+<h3 class="text-xl font-bold text-primary mb-4 tracking-[-0.01em]">Level 0: The Canvas</h3>
+<p class="text-on-surface-variant text-base">The deepest background layer. Usually a warm off-white or a very soft gray. It provides the negative space.</p>
+</div>
+<div class="bg-surface-container-low p-8 rounded shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+<h3 class="text-xl font-bold text-primary mb-4 tracking-[-0.01em]">Level 1: The Container</h3>
+<p class="text-on-surface-variant text-base">A slight tonal shift upwards. Used for large groups of content to distinguish them from the main canvas.</p>
+</div>
+</div>
+<p class="text-lg md:text-xl leading-[1.8] text-on-surface-variant mb-16">
+                When you combine this disciplined palette with generous negative space—what we call "The Breather"—the need for hard lines vanishes entirely. The resulting interface feels fluid, expansive, and high-contrast, ensuring the actual content remains the undisputed center of gravity.
+            </p>
+<div class="w-full aspect-[4/3] md:aspect-[16/9] mb-12 rounded bg-surface-container-high overflow-hidden shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+<img alt="Minimalist Interior" class="w-full h-full object-cover" data-alt="minimalist interior space showing white walls and subtle gray flooring creating natural boundaries without visible hard lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSIyml6wiaOMNSHydt7aPY-bDbo15zLNtr2SqH6DN4Dij9DlKHGlDAH-OJxyQ-MgdBRMEzJcfkrYBAxFM6NovAjgyLy3ogdn4bQmhMZrWs2niQg4mZ1yhz82IBJ7oI08E9HTe1yT1wbyGUdl7mjRaeAn9oszy6gSst4w6QgWEbpXICOMhcrpWDpI2AaejJ7j2UXvqy8SxtzOhnUpgst4PQMLTcGlQI9Hci1Tv8R44fImpCirPrn3WW0C0ke2c3DrecxPnegLZFOw"/>
+</div>
+<h2 class="text-3xl md:text-4xl font-semibold text-primary mb-8 tracking-[-0.02em] font-headline">The Ghost Border Exception</h2>
+<p class="text-lg md:text-xl leading-[1.8] text-on-surface-variant mb-12">
+                Are there exceptions? Of course. Input fields, for example, sometimes require more tactile definition than a simple background shift can provide. Here, we introduce the "Ghost Border"—a border set to a highly translucent state, often just 15% opacity. It provides the necessary structural hint without adding the visual noise of a solid line.
+            </p>
+<div class="flex justify-center mb-16 pt-8">
+<button class="bg-transparent border-b border-primary pb-1 text-primary font-bold uppercase tracking-wide text-sm hover:border-b-2 transition-all duration-200">
+                    Share this article
+                </button>
+</div>
+</article>
+</main>
+<!-- Footer -->
+<footer class="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
+<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
+<span class="text-xl font-bold tracking-tighter text-white">Francisco Frez</span>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Github</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Medium</a>
+</div>
+<span class="text-[#555555]">&copy; 2024 Francisco Frez. All rights reserved.</span>
+</div>
+</footer>
+</body></html>

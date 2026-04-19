@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Personal Portfolio - The Digital Curator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ffffff",
+                        "outline": "#777777",
+                        "surface-dim": "#dadada",
+                        "on-tertiary": "#e2e2e2",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#f9f9f9",
+                        "surface-tint": "#5f5e5e",
+                        "on-primary-fixed-variant": "#e5e2e1",
+                        "on-primary": "#e5e2e1",
+                        "secondary-fixed-dim": "#acabab",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#5f5e5e",
+                        "background": "#f9f9f9",
+                        "surface-container-low": "#f3f3f4",
+                        "on-surface": "#222222",
+                        "on-tertiary-fixed": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2",
+                        "on-secondary-container": "#1b1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-primary-container": "#ffffff",
+                        "secondary-fixed": "#c7c6c6",
+                        "on-background": "#222222",
+                        "on-primary-fixed": "#ffffff",
+                        "on-surface-variant": "#474747",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#737575",
+                        "primary": "#222222",
+                        "on-secondary-fixed-variant": "#3b3b3c",
+                        "inverse-primary": "#c8c6c5",
+                        "surface": "#f9f9f9",
+                        "outline-variant": "#c6c6c6",
+                        "secondary-container": "#d5d4d4",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a3c3c",
+                        "tertiary-fixed-dim": "#454747",
+                        "on-tertiary-fixed-variant": "#e2e2e2",
+                        "tertiary-fixed": "#5d5f5f",
+                        "primary-container": "#3c3b3b",
+                        "secondary": "#5e5e5e",
+                        "on-error-container": "#410002",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-on-surface": "#f0f1f1",
+                        "primary-fixed-dim": "#474746",
+                        "surface-container": "#eeeeee"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "2px",
+                        "sm": "2px",
+                        "md": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "72": "18rem",
+                        "80": "20rem",
+                        "96": "24rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: theme('colors.surface');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }.hairline-border {
+            border: 1px solid theme('colors.outline-variant');
+        }
+        .hairline-b {
+            border-bottom: 1px solid theme('colors.outline-variant');
+        }
+        .hairline-t {
+            border-top: 1px solid theme('colors.outline-variant');
+        }
+        .hairline-divide > * + * {
+            border-top: 1px solid theme('colors.outline-variant');
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen">
+<header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+<div class="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6 w-full">
+<div class="text-xl font-bold tracking-tight text-primary uppercase">Francisco Frez</div>
+<nav class="hidden md:flex space-x-8">
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-primary border-b border-primary pb-1 transition-colors duration-300" href="#">Home</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">About</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">Blog</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</nav>
+<button class="hidden md:inline-flex items-center justify-center bg-primary text-on-primary rounded-[2px] px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Get in touch</button>
+<button class="md:hidden text-primary"><span class="material-symbols-outlined">menu</span></button>
+</div>
+</header>
+<main class="flex-grow pt-40 w-full">
+<section class="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-56">
+<div class="lg:col-span-7 space-y-10">
+<h1 class="font-headline font-light text-[4rem] leading-[1.05] tracking-[-0.03em] text-primary">
+                    Designing digital experiences with architectural precision.
+                </h1>
+<p class="font-body text-[1.125rem] leading-relaxed text-on-surface-variant max-w-xl font-light">
+                    I am a multidisciplinary designer focused on creating high-end, editorial-style interfaces that elevate brand narratives and prioritize structural clarity.
+                </p>
+<div class="flex items-center gap-8 pt-6">
+<button class="bg-primary text-on-primary rounded-[2px] px-10 py-5 font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] hover:bg-neutral-800 transition-colors">
+                        View Projects
+                    </button>
+<a class="text-primary font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] border-b border-primary pb-1 hover:text-secondary transition-colors" href="#">
+                        Read Manifesto
+                    </a>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden">
+<img alt="Professional portrait" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn30GalPuTtDNcI7BdZu0cn_5MWKnN-PGzPc5xAqwkAlhhLwGgfigQiOE_LXq5aQ_fT9UypbIyF6SvnLxU_l0kRm4XFRhX8ZTs5k8ra5dGPEhx8ESKbU2S37Zri3G1ik54cesm1LrYNDpHjp-q1Imbcf7t-rW5zSj6-VZODyXz7DY7cZS9lBsXua5fl1doT1Pu46H5KsLz2IJ2JstqYq4WK1ObjKjqeGWwOvwO0kskBKvnuLSUZdF06MufD0mEO5Gi-fpfV8L8JQ"/>
+</div>
+</div>
+</section>
+<section class="mb-56 max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-20 items-center">
+<div class="md:col-span-4 space-y-8">
+<h2 class="font-headline font-light text-[2.5rem] tracking-tight text-primary">About Me</h2>
+<p class="font-body text-[0.9375rem] text-on-surface-variant leading-relaxed font-light">
+                    I specialize in turning complex problems into elegant solutions. My approach blends creativity with strategic thinking to deliver designs that not only look great but work seamlessly.
+                </p>
+</div>
+<div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-16">
+<div class="bg-surface-container-lowest py-24 px-12 flex flex-col justify-center items-center text-center hairline-border">
+<span class="material-symbols-outlined text-3xl mb-10 text-primary font-extralight">public</span>
+<h3 class="font-headline font-extralight text-7xl text-primary mb-6 tracking-tighter">120%</h3>
+<p class="font-body text-[0.8125rem] text-on-surface-variant uppercase tracking-widest max-w-[200px]">Average client engagement increase</p>
+</div>
+<div class="flex flex-col justify-center items-center">
+<div class="aspect-[4/5] bg-surface-container-low overflow-hidden w-full max-w-[320px]">
+<img alt="Portrait" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn30GalPuTtDNcI7BdZu0cn_5MWKnN-PGzPc5xAqwkAlhhLwGgfigQiOE_LXq5aQ_fT9UypbIyF6SvnLxU_l0kRm4XFRhX8ZTs5k8ra5dGPEhx8ESKbU2S37Zri3G1ik54cesm1LrYNDpHjp-q1Imbcf7t-rW5zSj6-VZODyXz7DY7cZS9lBsXua5fl1doT1Pu46H5KsLz2IJ2JstqYq4WK1ObjKjqeGWwOvwO0kskBKvnuLSUZdF06MufD0mEO5Gi-fpfV8L8JQ"/>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-56 max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
+<div>
+<span class="font-label text-[0.7rem] uppercase tracking-[0.2em] text-secondary flex items-center gap-3 mb-6">
+<span class="w-1 h-1 bg-secondary rounded-full"></span> Experiences
+                    </span>
+<h2 class="font-headline font-light text-[3.5rem] tracking-tight text-primary leading-none max-w-md">Explore My Design Journey</h2>
+</div>
+<div class="max-w-md">
+<p class="font-body text-[0.9375rem] text-on-surface-variant leading-relaxed mb-8 font-light">Over the past 4+ years, I've had the opportunity to work on a wide range of design projects, collaborating with diverse teams to bring visions to life.</p>
+<a class="text-primary font-label text-[0.7rem] uppercase tracking-[0.15em] border-b border-primary pb-1 hover:text-secondary transition-colors" href="#">Book A Call ↗</a>
+</div>
+</div>
+<div class="hairline-divide hairline-t">
+<div class="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+<div class="md:col-span-5">
+<h3 class="font-headline font-medium text-[1.125rem] text-primary">Creative Minds, New York, USA</h3>
+<p class="font-body text-[0.7rem] uppercase tracking-widest text-secondary mt-2">February 2022 - Present</p>
+</div>
+<div class="md:col-span-4">
+<p class="font-body text-[0.875rem] text-on-surface-variant font-light">Senior Product Designer &amp; Digital Strategist</p>
+</div>
+<div class="md:col-span-3 flex gap-4 justify-start md:justify-end">
+<span class="px-4 py-1 hairline-border rounded-[2px] text-[0.65rem] font-label uppercase tracking-widest text-primary">UI/UX</span>
+<span class="px-4 py-1 hairline-border rounded-[2px] text-[0.65rem] font-label uppercase tracking-widest text-primary">Branding</span>
+</div>
+</div>
+<div class="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+<div class="md:col-span-5">
+<h3 class="font-headline font-medium text-[1.125rem] text-primary">Innovative Designs Inc, USA</h3>
+<p class="font-body text-[0.7rem] uppercase tracking-widest text-secondary mt-2">January 2020 - February 2022</p>
+</div>
+<div class="md:col-span-4">
+<p class="font-body text-[0.875rem] text-on-surface-variant font-light">Lead Designer, San Francisco Studio</p>
+</div>
+<div class="md:col-span-3 flex gap-4 justify-start md:justify-end">
+<span class="px-4 py-1 hairline-border rounded-[2px] text-[0.65rem] font-label uppercase tracking-widest text-primary">Product</span>
+<span class="px-4 py-1 hairline-border rounded-[2px] text-[0.65rem] font-label uppercase tracking-widest text-primary">Strategy</span>
+</div>
+</div>
+<div class="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+<div class="md:col-span-5">
+<h3 class="font-headline font-medium text-[1.125rem] text-primary">Visionary Creations Ltd, UK</h3>
+<p class="font-body text-[0.7rem] uppercase tracking-widest text-secondary mt-2">February 2018 - December 2019</p>
+</div>
+<div class="md:col-span-4">
+<p class="font-body text-[0.875rem] text-on-surface-variant font-light">Principal Designer, Berlin Office</p>
+</div>
+<div class="md:col-span-3 flex gap-4 justify-start md:justify-end">
+<span class="px-4 py-1 bg-primary text-on-primary rounded-[2px] text-[0.65rem] font-label uppercase tracking-widest">Branding</span>
+<span class="px-4 py-1 bg-primary text-on-primary rounded-[2px] text-[0.65rem] font-label uppercase tracking-widest">Web</span>
+</div>
+</div>
+<div class="hairline-t"></div>
+</div>
+</section>
+<section class="mb-56 bg-white py-40 border-y border-neutral-100">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-24">
+<span class="font-label text-[0.7rem] uppercase tracking-[0.2em] text-secondary flex items-center justify-center gap-3 mb-6">
+<span class="w-1 h-1 bg-secondary rounded-full"></span> Portfolio
+                    </span>
+<h2 class="font-headline font-light text-[3.5rem] tracking-tight text-primary">Latest Works</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden mb-8 bg-surface-container-low hairline-border">
+<img alt="Project 1" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-1000 ease-out grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtJQOFcDWsArRlwxe4zjHVshvmml_PjvxQUv70YiSIhEdxY6oN7RB0gIkNoVGPSNSmPDF67YVgbH4OaTJpiMjWJe3UrQ0rg44aIQAnf--wN2VeD08awFyIA2whmbshaRSo-Mzh2AZB6wsc6RfIpdamcj7bYd3vAhxrUXJyNxH6GZvxFvf6WUMOMX6hbafxBDtOKuH6g5RrsKnza_XbFqSDVqxU-90_ToKRG28dAHMEOK-kGgtIzdJAL97TqitTPRO-hOhd3l2CVQ"/>
+</div>
+<h3 class="font-headline text-[0.9375rem] font-medium text-primary text-center uppercase tracking-widest">Halo Digital Agency website</h3>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden mb-8 bg-surface-container-low hairline-border">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-1000 ease-out grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFO_J-c8RiCvuhPU8lf7QUcM6TS0byVc9Li1vFV3Id-56l4dcTZudJEISdtXmDjKNv0e5w7E8uCbpRSCGLPnmPRdPAx3CA1N5mL2uJkCFQCfIYd0zzAnySlsYZktOS3_N00O8UUFcnbfC20bTt9nmgflakh--gp1owjyh_knExvyO4H9VGRBZL5-ahjp9OO3Ovgv7U_W37fpPxapI72VemO4l4Z4wmJj4jCssRglaGL8wWbQ6g23ohZTKTenJKP7K4rUeD2ZhBlw"/>
+</div>
+<h3 class="font-headline text-[0.9375rem] font-medium text-primary text-center uppercase tracking-widest">Editorial Design Concept</h3>
+</div>
+<div class="group cursor-pointer">
+<div class="aspect-[4/5] overflow-hidden mb-8 bg-surface-container-low hairline-border flex items-center justify-center relative">
+<div class="absolute inset-0 bg-neutral-100"></div>
+<span class="relative z-10 text-[0.65rem] uppercase tracking-[0.3em] text-neutral-400">Archival Series 03</span>
+</div>
+<h3 class="font-headline text-[0.9375rem] font-medium text-primary text-center uppercase tracking-widest">Minimalist Branding System</h3>
+</div>
+</div>
+<div class="text-center mt-24">
+<a class="text-primary font-label text-[0.7rem] uppercase tracking-[0.2em] hover:text-secondary transition-colors inline-flex items-center gap-3 border-b border-primary pb-1" href="#">
+                        Explore Collection <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<section class="mb-56 max-w-7xl mx-auto px-8">
+<div class="text-center mb-24">
+<span class="font-label text-[0.7rem] uppercase tracking-[0.2em] text-secondary flex items-center justify-center gap-3 mb-6">
+<span class="w-1 h-1 bg-secondary rounded-full"></span> Journal
+                </span>
+<h2 class="font-headline font-light text-[3.5rem] tracking-tight text-primary">Design Insights &amp; Trends</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+<article class="group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-10 bg-surface-container-low hairline-border">
+<img alt="Blog 1" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtJQOFcDWsArRlwxe4zjHVshvmml_PjvxQUv70YiSIhEdxY6oN7RB0gIkNoVGPSNSmPDF67YVgbH4OaTJpiMjWJe3UrQ0rg44aIQAnf--wN2VeD08awFyIA2whmbshaRSo-Mzh2AZB6wsc6RfIpdamcj7bYd3vAhxrUXJyNxH6GZvxFvf6WUMOMX6hbafxBDtOKuH6g5RrsKnza_XbFqSDVqxU-90_ToKRG28dAHMEOK-kGgtIzdJAL97TqitTPRO-hOhd3l2CVQ"/>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<span class="text-[0.6rem] uppercase tracking-widest font-label font-bold text-primary">Research</span>
+<span class="w-1 h-1 bg-neutral-300 rounded-full"></span>
+<span class="text-[0.7rem] text-secondary font-body">4 min read</span>
+</div>
+<h3 class="font-headline text-[1.25rem] font-light text-primary group-hover:underline decoration-1 underline-offset-8 transition-all leading-snug">Conducting in-depth usability testing in architectural systems</h3>
+</article>
+<article class="group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-10 bg-surface-container-low hairline-border">
+<img alt="Blog 2" class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFO_J-c8RiCvuhPU8lf7QUcM6TS0byVc9Li1vFV3Id-56l4dcTZudJEISdtXmDjKNv0e5w7E8uCbpRSCGLPnmPRdPAx3CA1N5mL2uJkCFQCfIYd0zzAnySlsYZktOS3_N00O8UUFcnbfC20bTt9nmgflakh--gp1owjyh_knExvyO4H9VGRBZL5-ahjp9OO3Ovgv7U_W37fpPxapI72VemO4l4Z4wmJj4jCssRglaGL8wWbQ6g23ohZTKTenJKP7K4rUeD2ZhBlw"/>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<span class="text-[0.6rem] uppercase tracking-widest font-label font-bold text-primary">Strategy</span>
+<span class="w-1 h-1 bg-neutral-300 rounded-full"></span>
+<span class="text-[0.7rem] text-secondary font-body">6 min read</span>
+</div>
+<h3 class="font-headline text-[1.25rem] font-light text-primary group-hover:underline decoration-1 underline-offset-8 transition-all leading-snug">Designing cohesive visual identities for premium digital products</h3>
+</article>
+<article class="group cursor-pointer">
+<div class="aspect-[16/10] overflow-hidden mb-10 bg-neutral-50 hairline-border flex items-center justify-center">
+<span class="text-[0.6rem] uppercase tracking-[0.2em] text-neutral-400">Insight Series</span>
+</div>
+<div class="flex items-center gap-4 mb-6">
+<span class="text-[0.6rem] uppercase tracking-widest font-label font-bold text-primary">Philosophy</span>
+<span class="w-1 h-1 bg-neutral-300 rounded-full"></span>
+<span class="text-[0.7rem] text-secondary font-body">5 min read</span>
+</div>
+<h3 class="font-headline text-[1.25rem] font-light text-primary group-hover:underline decoration-1 underline-offset-8 transition-all leading-snug">The evolution of minimalist interfaces in high-end design</h3>
+</article>
+</div>
+</section>
+<section class="mb-24 text-center bg-white py-40 mx-8 hairline-border">
+<h2 class="font-headline font-light text-[3rem] text-primary mb-8 tracking-tight">Got a Vision? Let's Bring It to Life!</h2>
+<p class="font-body text-[1rem] text-on-surface-variant max-w-lg mx-auto mb-16 leading-relaxed font-light">I'm always excited to collaborate on new and innovative projects. Whether you're starting from scratch or refining an existing idea.</p>
+<a class="bg-primary text-on-primary rounded-[2px] px-12 py-5 font-label font-bold text-[0.75rem] uppercase tracking-[0.15em] hover:bg-neutral-800 transition-colors inline-block" href="#">Book A Consultation ↗</a>
+</section>
+</main>
+<footer class="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
+<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
+<span class="text-xl font-bold tracking-tighter text-white">Francisco Frez</span>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Github</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Medium</a>
+</div>
+<span class="text-[#555555]">&copy; 2024 Francisco Frez. All rights reserved.</span>
+</div>
+</footer>
+
+</body></html>

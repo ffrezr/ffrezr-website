@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Blog &amp; Insights - Francisco Frez</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d5d4d4",
+                        "error": "#ba1a1a",
+                        "on-surface": "#222222",
+                        "tertiary-fixed": "#5d5f5f",
+                        "on-tertiary-fixed": "#ffffff",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-container": "#3c3b3b",
+                        "primary": "#222222",
+                        "surface-bright": "#f9f9f9",
+                        "on-primary-fixed-variant": "#e5e2e1",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f0f1f1",
+                        "tertiary": "#3a3c3c",
+                        "outline": "#777777",
+                        "tertiary-container": "#737575",
+                        "surface-container-low": "#f3f3f4",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#474747",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2",
+                        "error-container": "#ffdad6",
+                        "on-background": "#222222",
+                        "surface-dim": "#dadada",
+                        "background": "#f9f9f9",
+                        "on-error-container": "#410002",
+                        "on-tertiary": "#e2e2e2",
+                        "on-secondary-container": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#3b3b3c",
+                        "secondary-fixed-dim": "#acabab",
+                        "outline-variant": "#c6c6c6",
+                        "on-tertiary-fixed-variant": "#e2e2e2",
+                        "on-primary-fixed": "#ffffff",
+                        "on-primary-container": "#ffffff",
+                        "secondary": "#5e5e5e",
+                        "on-primary": "#e5e2e1",
+                        "primary-fixed-dim": "#474746",
+                        "surface-container": "#eeeeee",
+                        "secondary-fixed": "#c7c6c6",
+                        "primary-fixed": "#5f5e5e",
+                        "tertiary-fixed-dim": "#454747",
+                        "surface-tint": "#5f5e5e",
+                        "surface": "#f9f9f9",
+                        "on-tertiary-container": "#ffffff",
+                        "inverse-primary": "#c8c6c5"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "2px",
+                        "sm": "2px",
+                        "md": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            body { 
+                font-family: 'Manrope', sans-serif; 
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+        }
+        .ultra-fine-hairline {
+            border-width: 0.5px;
+            border-color: #E2E2E2;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#F9F9F9] text-on-surface flex flex-col pt-32">
+<header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+<div class="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6 w-full">
+<div class="text-xl font-bold tracking-tight text-primary uppercase">Francisco Frez</div>
+<nav class="hidden md:flex space-x-8">
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">Home</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">About</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-primary border-b border-primary pb-1 transition-colors duration-300" href="#">Blog</a>
+<a class="font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] text-secondary pb-1 hover:text-primary transition-colors duration-300" href="#">Contact</a>
+</nav>
+<button class="hidden md:inline-flex items-center justify-center bg-primary text-on-primary rounded-[2px] px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-primary-container transition-colors">Get in touch</button>
+<button class="md:hidden text-primary"><span class="material-symbols-outlined">menu</span></button>
+</div>
+</header>
+<main class="flex-grow w-full max-w-screen-2xl mx-auto px-8 md:px-20 flex flex-col gap-24 md:gap-32">
+<section class="mt-8 md:mt-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+<div class="w-full md:w-2/3">
+<h1 class="font-headline text-[3rem] md:text-[5.5rem] font-light tracking-[-0.03em] text-primary leading-[0.95]">
+                Journal &amp; <br class="hidden md:block"/>Insights
+            </h1>
+</div>
+<div class="w-full md:w-1/3 pb-1 md:pb-3">
+<p class="text-on-surface-variant text-[15px] md:text-[16px] leading-relaxed font-body font-normal max-w-sm">
+                Exploring the intersection of brutalist architecture, editorial typography, and the digital canvas. Thoughts on carving space with tone.
+            </p>
+</div>
+</section>
+<section class="border-t border-[#E2E2E2] border-b border-[#E2E2E2] py-5 -mt-12 md:-mt-16">
+<div class="flex gap-10 overflow-x-auto no-scrollbar whitespace-nowrap">
+<button class="text-primary font-bold text-[11px] tracking-[0.12em] uppercase">All</button>
+<button class="text-secondary hover:text-primary transition-colors font-medium text-[11px] tracking-[0.12em] uppercase">Design Theory</button>
+<button class="text-secondary hover:text-primary transition-colors font-medium text-[11px] tracking-[0.12em] uppercase">Typography</button>
+<button class="text-secondary hover:text-primary transition-colors font-medium text-[11px] tracking-[0.12em] uppercase">Layout</button>
+<button class="text-secondary hover:text-primary transition-colors font-medium text-[11px] tracking-[0.12em] uppercase">Case Studies</button>
+</div>
+</section>
+<section class="flex flex-col md:flex-row gap-12 lg:gap-20 items-center border-b border-[#E2E2E2] pb-24">
+<div class="w-full md:w-7/12 overflow-hidden bg-surface-container-low aspect-[4/5] md:aspect-auto">
+<img alt="Featured article image" class="w-full h-[512px] md:h-[760px] object-cover grayscale hover:scale-105 transition-transform duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc9yj3dxaXsnBkjiCZZJR3XoHS2CFA27SxOHXn9TrO8wZqOwT2ykKLmSe63BNo3qZjNhukZKmBOrq85eFeQh4_wZv8bEV75SBy5OYTenBMvvgrJiQGpRyqav3WZH1tWR31P-ICCYn_lvtFfcST8_RK_sx9KxpCjRU610IKkkOuEQ-Q3SSPIuxUqZuffV8nYb6zofLfWq5CBUc5HpI7BQZ6TfVviAkPwR33w0cwAmHaHBo7QFs9ebYOzjoqxYlPfgknp1trbNUrsQ"/>
+</div>
+<div class="w-full md:w-5/12 flex flex-col justify-center gap-8">
+<div class="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.2em] text-[#5E5E5E]">
+<span>Design Theory</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Oct 24, 2024</span>
+</div>
+<h2 class="font-headline text-3xl md:text-[42px] font-semibold tracking-tight text-primary leading-[1.1]">
+                The Architecture of Empty Space: Why 'The Breather' Matters
+            </h2>
+<p class="text-on-surface-variant text-[14px] leading-[1.7] font-body max-w-md">
+                In editorial design, negative space is not the absence of content, but an active structural element that defines rhythm and pacing. How to use whitespace intentionally.
+            </p>
+<a class="group inline-flex items-center gap-3 text-primary text-[12px] font-bold tracking-[0.1em] uppercase border-b border-primary/20 pb-2 w-fit mt-4 hover:border-primary transition-all duration-300" href="#">
+                Read Article <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</section>
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12 mb-32">
+<article class="flex flex-col gap-6 group cursor-pointer">
+<div class="overflow-hidden w-full h-[480px] bg-white border border-[#E2E2E2]/30">
+<img alt="Article 1" class="w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlS3SgG78qEKzLi_mpwaBpQkWK_ObxwyKilk5M1AD2o__ei45schxajlX6t16y683N-l1GCGs3BzKvXgc8Vy5b_8J5XIfsltQeB9vnSNmlAVv_i3p9-EZW_hNdog5fiUcZ7AaxyOdAh998tUHL2Qse4jYVDxMtsnq7d9WwiUp7Az09CmJK99szV6835DRVbV_3EEIYPMiEskKrhH9Ntf-FiJPEjMYOJjY-gVUmj_AOX3QkO5NgB5v_qfmmVMeiel1TaJldS1_L7Q"/>
+</div>
+<div class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+<span>Typography</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Oct 18, 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+                Selecting the Perfect Neo-Grotesk for Digital Displays
+            </h3>
+<p class="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+                Examining the subtle nuances between Manrope, Inter, and Helvetica Neue when applied to high-density interfaces.
+            </p>
+</article>
+<article class="flex flex-col gap-6 group cursor-pointer">
+<div class="overflow-hidden w-full h-[480px] bg-white border border-[#E2E2E2]/30">
+<img alt="Article 2" class="w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpw_eYM5m4FMQMvZBd_ux3K1uML_T-O-ZzWlrHQlZU-J-7RjlcbCfKXG3C2Hd4MRKuMFOEe5vvqjP0frPO08INKbipg0-YJEbbT9yh0MHAMNK9jIGIgGvxkU40-YtEXYzNBifyQUcoMih7QCDKYeODB0gjm0pjJEvCWyqoswXdZh627RGssynTZU8t9w-7-IZafJ64yAqgeHwKHhP5ZUmaHTR6lleHrzasXX7cY7p56SAryA6j8hvpFV0HV9z8kzxcGAKTnHMhIw"/>
+</div>
+<div class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+<span>Layout</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Oct 12, 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+                Asymmetrical Grids in Modern Portfolios
+            </h3>
+<p class="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+                Breaking the rigid 12-column structure to create visual tension and direct user focus in case study presentations.
+            </p>
+</article>
+<article class="flex flex-col gap-6 group cursor-pointer">
+<div class="overflow-hidden w-full h-[480px] bg-white border border-[#E2E2E2]/30">
+<img alt="Article 3" class="w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaiAYye4CVGJG0bi-Bh4VlC3r19fSw14ins3dHi3BXI8AZYLu3cZlJBPbZ7FUhGB5_UgitoUS7cUj5_Eing0DbVVirbCx7XtnjtnqkOKinic2okQdndbwHvqTId1CYHRtg3BstZFu5CuLtse9Io6_-ePu1LEI0aAtgzsp3Jpub5_KOxlH8wigspA6PHzUb9EHOWM1KyIf4jlHRNkpDOfTQnIE0w4k9P8qXzBbYtY04lL-avuBpQsMxZRguXyUuLEj-7qDWj8pMhg"/>
+</div>
+<div class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+<span>Design Theory</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Oct 05, 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+                Tonal Carving: Defining UI without Borders
+            </h3>
+<p class="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+                Why we abandoned 1px borders in favor of subtle background color shifts to establish hierarchy.
+            </p>
+</article>
+<article class="flex flex-col gap-6 group cursor-pointer">
+<div class="overflow-hidden w-full h-[480px] bg-white border border-[#E2E2E2]/30">
+<img alt="Article 4" class="w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgDcafJmx-iG3n_ptQMMiAcEvtHIADonluosinaUkiirk6CaRIJlS6pJF9DA6Gxe6ZUkgDdgtCMCWPA53MPVEmhGbsn7IN7C_6BqExSnm58RT1_6fp-v0AOmf4ZNea5vEN2rzLGAQhGlocnzGQsP6_a4PVhhDlUrDHjqjUwoal9_SFWBmYKq7e08DP8d0eWr_RhycB-JGweaj2ehjUeoNvMCWjNf1_J0TaEPsNB-gBZzfEZbtJlwZWmP0--7IkbNYe2_U4k1Gg-Q"/>
+</div>
+<div class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+<span>Case Studies</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Sep 28, 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+                Redesigning 'Aura' Editorial Magazine
+            </h3>
+<p class="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+                A deep dive into transitioning a heritage print publication into a fluid, tactile digital experience.
+            </p>
+</article>
+<article class="flex flex-col gap-6 group cursor-pointer">
+<div class="overflow-hidden w-full h-[480px] bg-white border border-[#E2E2E2]/30">
+<img alt="Article 5" class="w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgQP3jiLOJ0WMwi5mHHPiLagTfBvpUJUVvJkvxtJS3XUl1HTJAs4TQlZqPZH9UHT1brls4a8qs1mezOvcm3oWMBLJ0SVWGTtoU1XBjCh4YCJtBrDcdP4-2MwFpXXENBj_VGjZJ10rSFK1AFyWEX2lEjP9eoglJj4op8Ixy3UeRZGtj2fhZINqZSJTjdf_VOuiOLkMM2hat0cRrQRvxCqM7-0HhlS3zhKXdvmMN3QcK8vUGzR17Ms-N7C4HEMZXvy9QShAVwFd-9w"/>
+</div>
+<div class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+<span>Layout</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Sep 15, 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+                Glassmorphism Done Right
+            </h3>
+<p class="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+                How to use translucent overlays to create depth without making the interface look chaotic or dated.
+            </p>
+</article>
+<article class="flex flex-col gap-6 group cursor-pointer">
+<div class="overflow-hidden w-full h-[480px] bg-white border border-[#E2E2E2]/30">
+<img alt="Article 6" class="w-full h-full object-cover grayscale opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000 ease-in-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_brnL6PGhaZuzugVv5_Y_-CwEgRfXqsO7TxFRC-PzC8iPq4k5hC0bFrNVEyMAkSZZ_vH9VpP37coSlj00lIk4owk7XzmtlnlSM7AwwniVeATI6otaviGTlBk5YY4oNULp2Fcth2UeHceqgVL36WgFtn0k006Z_oItpoFaNM2lXGa3yrqrT-7CIc5LC9tfsHObPsLw0XRGSOpHvzd1I9OMubSFi8N_p43Pw3AVOuy9p6UIgwwBrlvp7CMOvFf4AkaVziTDJrroWA"/>
+</div>
+<div class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+<span>Design Theory</span>
+<span class="text-[#E2E2E2]">/</span>
+<span>Sep 02, 2024</span>
+</div>
+<h3 class="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+                The Monochromatic Canvas
+            </h3>
+<p class="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+                Stripping away color forces a designer to rely entirely on contrast, scale, and typographic hierarchy.
+            </p>
+</article>
+</section>
+</main>
+<footer class="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
+<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
+<span class="text-xl font-bold tracking-tighter text-white">Francisco Frez</span>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Github</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Medium</a>
+</div>
+<span class="text-[#555555]">&copy; 2024 Francisco Frez. All rights reserved.</span>
+</div>
+</footer>
+
+</body></html>

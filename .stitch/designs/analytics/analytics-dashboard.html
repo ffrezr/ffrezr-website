@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics Engine - Francisco Frez</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#5d5f5f",
+                        "surface-container-highest": "#e2e2e2",
+                        "secondary-fixed": "#c7c6c6",
+                        "secondary-fixed-dim": "#acabab",
+                        "secondary-container": "#d5d4d4",
+                        "on-primary-fixed": "#ffffff",
+                        "on-tertiary-fixed": "#ffffff",
+                        "surface-tint": "#5f5e5e",
+                        "tertiary-container": "#737575",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#3a3c3c",
+                        "on-surface-variant": "#474747",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#dadada",
+                        "outline": "#777777",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#e5e2e1",
+                        "inverse-primary": "#c8c6c5",
+                        "on-error": "#ffffff",
+                        "background": "#f9f9f9",
+                        "tertiary-fixed-dim": "#454747",
+                        "on-tertiary-container": "#ffffff",
+                        "primary-fixed": "#5f5e5e",
+                        "on-surface": "#222222",
+                        "on-secondary-fixed-variant": "#3b3b3c",
+                        "surface-container-high": "#e8e8e8",
+                        "on-error-container": "#410002",
+                        "inverse-surface": "#2f3131",
+                        "primary": "#222222",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-background": "#222222",
+                        "surface-container-low": "#f3f3f4",
+                        "outline-variant": "#c6c6c6",
+                        "on-secondary-container": "#1b1c1c",
+                        "on-tertiary": "#e2e2e2",
+                        "surface": "#f9f9f9",
+                        "primary-fixed-dim": "#474746",
+                        "secondary": "#5e5e5e",
+                        "primary-container": "#3c3b3b",
+                        "surface-variant": "#e2e2e2",
+                        "on-primary": "#e5e2e1",
+                        "surface-container": "#eeeeee",
+                        "on-primary-container": "#ffffff",
+                        "surface-bright": "#f9f9f9",
+                        "inverse-on-surface": "#f0f1f1",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "2px",
+                        "sm": "2px",
+                        "md": "2px",
+                        "lg": "4px",
+                        "xl": "8px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope", "sans-serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex min-h-screen">
+<!-- SideNavBar (JSON Context) -->
+<nav class="h-screen w-72 fixed left-0 top-0 flex flex-col bg-[#F3F3F4] dark:bg-[#1A1C1C] z-50">
+<div class="flex flex-col py-12 px-8 gap-y-12 h-full">
+<!-- Header/Brand -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-4">
+<img alt="Data Engineer Profile" class="w-12 h-12 rounded-full object-cover" data-alt="Black and white portrait of a professional man looking serious" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5dH4u-59UZ8l6Hd3YIMVS01gQDdbJXe_tjphMWVr10IXsEUanjlvlbCIF0CR8r3LMTwuXoKP6p8YGCMSr_U36Enzaloqu6KO0JdJx9yiqOoNscTaEYKLlPiqe3_feYP2TWpnBoS7v7shhYcWWffezkfFnTvbuNwA6pm3h1mk_SvYEKHaTBaDuFPyAOBf2zBhxHI-F-o76rk7sfb4WN6QHNZ322dFsap2mB0UZcfOZSCvc_QLGhQap2lvaII04UDAkyJCxT8J_eQ"/>
+<div class="flex flex-col">
+<span class="text-lg font-black tracking-tighter text-primary dark:text-[#F9F9F9]">Francisco Frez</span>
+<span class="text-xs text-secondary tracking-widest uppercase">Analytics Dashboard</span>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-6 font-['Manrope'] text-[0.75rem] uppercase tracking-[0.05em] flex-1">
+<!-- Active Item -->
+<li>
+<a class="flex items-center gap-4 text-primary dark:text-[#F9F9F9] font-bold border-l-2 border-primary dark:border-[#F9F9F9] pl-4 hover:bg-primary/5 dark:hover:bg-[#F9F9F9]/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                        Overview
+                    </a>
+</li>
+<!-- Inactive Items -->
+<li>
+<a class="flex items-center gap-4 text-[#5E5E5E] dark:text-[#ACABAB] pl-4 hover:bg-primary/5 dark:hover:bg-[#F9F9F9]/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                        Engagement
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-[#5E5E5E] dark:text-[#ACABAB] pl-4 hover:bg-primary/5 dark:hover:bg-[#F9F9F9]/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+                        Conversions
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-[#5E5E5E] dark:text-[#ACABAB] pl-4 hover:bg-primary/5 dark:hover:bg-[#F9F9F9]/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-4 text-[#5E5E5E] dark:text-[#ACABAB] pl-4 hover:bg-primary/5 dark:hover:bg-[#F9F9F9]/5 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+                        Documentation
+                    </a>
+</li>
+</ul>
+<!-- CTA -->
+<div class="mt-auto">
+<button class="w-full bg-primary text-on-primary rounded-[2px] py-4 px-6 text-sm font-bold tracking-widest uppercase hover:opacity-80 scale-[0.98] transition-transform">
+                    Export Report
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-72 flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar (JSON Context) -->
+<header class="sticky top-0 w-full z-40 bg-white/70 dark:bg-[#1A1C1C]/80 backdrop-blur-xl">
+<div class="flex justify-between items-center px-12 py-6 font-['Manrope'] tracking-[-0.02em]">
+<!-- Product Name -->
+<h1 class="text-xl font-light tracking-tighter text-primary dark:text-[#F9F9F9]">Analytics Engine</h1>
+<!-- Navigation / Actions -->
+<div class="flex items-center gap-8">
+<nav class="hidden md:flex gap-6">
+<a class="text-primary dark:text-[#F9F9F9] border-b border-primary dark:border-[#F9F9F9] pb-1 hover:text-black dark:hover:text-white transition-colors text-sm font-medium" href="#">Dashboard</a>
+<a class="text-[#5E5E5E] dark:text-[#ACABAB] hover:text-black dark:hover:text-white transition-colors text-sm font-medium" href="#">Logs</a>
+<a class="text-[#5E5E5E] dark:text-[#ACABAB] hover:text-black dark:hover:text-white transition-colors text-sm font-medium" href="#">API</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-[#5E5E5E] hover:text-primary transition-colors scale-100 hover:scale-[1.01]">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-[#5E5E5E] hover:text-primary transition-colors scale-100 hover:scale-[1.01]">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-12 flex flex-col gap-12 max-w-7xl mx-auto w-full">
+<!-- Context & Controls -->
+<section class="flex justify-between items-end">
+<div class="max-w-xl">
+<h2 class="text-[2.25rem] font-semibold tracking-[-0.02em] leading-tight mb-2">Performance Overview</h2>
+<p class="text-on-surface-variant text-sm">Real-time telemetry and engagement metrics across the portfolio infrastructure.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-surface-container-lowest text-on-surface px-6 py-3 rounded-[2px] text-xs font-bold uppercase tracking-widest flex items-center gap-2 shadow-[0px_24px_48px_rgba(0,0,0,0.04)] hover:bg-surface-container-low transition-colors outline outline-1 outline-outline-variant/15">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+                        Last 30 Days
+                    </button>
+</div>
+</section>
+<!-- KPIs: Tonal Carving -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- KPI 1 -->
+<div class="bg-surface-container-low p-8 rounded-DEFAULT flex flex-col gap-4">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary">Total Visits</span>
+<div class="text-[3.5rem] font-black tracking-tighter leading-none">124.5K</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span>+12.4% vs last period</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-DEFAULT flex flex-col gap-4 shadow-[0px_24px_48px_rgba(0,0,0,0.04)] outline outline-1 outline-outline-variant/15">
+<span class="text-xs font-bold uppercase tracking-widest text-secondary">Avg. Session Duration</span>
+<div class="text-[3.5rem] font-black tracking-tighter leading-none">04:12</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>Consistent engagement</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-primary text-on-primary p-8 rounded-DEFAULT flex flex-col gap-4 bg-gradient-to-br from-primary to-primary-container">
+<span class="text-xs font-bold uppercase tracking-widest text-on-primary-fixed-variant/70">Conversion Rate</span>
+<div class="text-[3.5rem] font-black tracking-tighter leading-none">3.8%</div>
+<div class="flex items-center gap-2 text-sm text-on-primary-fixed-variant">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>High intent traffic</span>
+</div>
+</div>
+</section>
+<!-- Complex Layout Area: Blog & Inquiries -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Blog Engagement (Span 7) -->
+<div class="lg:col-span-7 flex flex-col gap-8">
+<div class="flex justify-between items-baseline">
+<h3 class="text-[1.5rem] font-bold tracking-[-0.02em]">Top Articles</h3>
+<a class="text-xs font-bold uppercase tracking-widest text-primary border-b border-primary pb-0.5 hover:border-transparent transition-colors" href="#">View All</a>
+</div>
+<div class="flex flex-col gap-6">
+<!-- Article 1 -->
+<div class="group flex gap-6 p-4 -ml-4 rounded-DEFAULT hover:bg-surface-container-high transition-colors cursor-pointer">
+<img alt="Data Visualization" class="w-24 h-24 object-cover rounded-sm grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Abstract geometric data visualization with glowing lines on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQznWdrtpRU9VXYzyKQMcfF9_Ujal6fWhmHBWLvvC4N7lvVMS6areouLG9C2LZQdvh6cI3FBUotF5XW-IxzN10enykz5V8xaMsb2Ag06wN8FVhhog1bgVumXGMh1BAcK2pqXaTp57B1J1FZmsPus37pUNbA4ncIFypMBWjq9MRebQuCZYhaftG9OE6iQRPddYz11Z_kq5UMWtD3WFKQMNjjlnHSX0lOakb0y4NI9heUd7b2iJR_8evguM1Fe90R36DkLVnIwZQPg"/>
+<div class="flex flex-col justify-center gap-2 flex-1">
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary">The Future of Data Pipelines</h4>
+<div class="flex gap-6 text-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> 45.2K</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">share</span> 1.2K</span>
+</div>
+</div>
+</div>
+<!-- Article 2 -->
+<div class="group flex gap-6 p-4 -ml-4 rounded-DEFAULT hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="w-24 h-24 bg-surface-container-highest rounded-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px] text-secondary">database</span>
+</div>
+<div class="flex flex-col justify-center gap-2 flex-1">
+<h4 class="font-bold text-lg leading-tight group-hover:text-primary">Optimizing Query Performance</h4>
+<div class="flex gap-6 text-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">visibility</span> 32.8K</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">share</span> 840</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Pipeline & Health (Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-12">
+<!-- Inquiry Pipeline -->
+<div class="bg-surface-container-low p-8 rounded-DEFAULT">
+<h3 class="text-[1.5rem] font-bold tracking-[-0.02em] mb-6">Inquiry Pipeline</h3>
+<ul class="flex flex-col gap-4">
+<li class="flex justify-between items-center py-3 border-b border-surface-container-highest last:border-0">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-medium">Direct Contact Forms</span>
+</div>
+<span class="font-bold">42</span>
+</li>
+<li class="flex justify-between items-center py-3 border-b border-surface-container-highest last:border-0">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-medium">LinkedIn Referrals</span>
+</div>
+<span class="font-bold">28</span>
+</li>
+<li class="flex justify-between items-center py-3 border-b border-surface-container-highest last:border-0">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span>
+<span class="font-medium">GitHub Profile</span>
+</div>
+<span class="font-bold">15</span>
+</li>
+</ul>
+</div>
+<!-- System Health -->
+<div class="bg-tertiary p-8 rounded-DEFAULT text-on-tertiary">
+<h3 class="text-[1.5rem] font-bold tracking-[-0.02em] mb-6 text-white">System Health</h3>
+<div class="flex flex-col gap-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-secondary-fixed">API Uptime</span>
+<span class="font-bold text-white">99.99%</span>
+</div>
+<div class="h-1 w-full bg-tertiary-fixed rounded-full overflow-hidden">
+<div class="h-full bg-white w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-secondary-fixed">Frontend Latency</span>
+<span class="font-bold text-white">45ms</span>
+</div>
+<div class="h-1 w-full bg-tertiary-fixed rounded-full overflow-hidden">
+<div class="h-full bg-white w-[80%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer (JSON Context) -->
+<footer class="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
+<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
+<span class="text-xl font-bold tracking-tighter text-white">Francisco Frez</span>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">LinkedIn</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Github</a>
+<a class="text-[#ACABAB] hover:text-white transition-colors" href="#">Medium</a>
+</div>
+<span class="text-[#555555]">&copy; 2024 Francisco Frez. All rights reserved.</span>
+</div>
+</footer>
+</main>
+</body></html>
