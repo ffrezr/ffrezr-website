@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+
+  --color-primary: #222222;
+  --color-primary-container: #3c3b3b;
+  --color-surface: #f9f9f9;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f3f4;
+  --color-surface-container: #eeeeee;
+  --color-surface-container-high: #e8e8e8;
+  --color-surface-container-highest: #e2e2e2;
+  --color-on-surface: #222222;
+  --color-on-surface-variant: #474747;
+  --color-on-primary: #e5e2e1;
+  --color-on-secondary: #ffffff;
+  --color-secondary: #5e5e5e;
+  --color-secondary-fixed-dim: #acabab;
+  --color-tertiary: #3a3c3c;
+  --color-outline: #777777;
+  --color-outline-variant: #c6c6c6;
+
+  --radius-DEFAULT: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 8px;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hairline-border {
+  border: 1px solid var(--color-outline-variant);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--color-outline-variant);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.hairline-divide > * + * {
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.drop-cap::first-letter {
+  float: left;
+  font-size: 5rem;
+  line-height: 0.8;
+  padding-top: 0.1em;
+  padding-right: 0.1em;
+  padding-left: 0.05em;
+  font-weight: 800;
+  color: #222222;
+}
