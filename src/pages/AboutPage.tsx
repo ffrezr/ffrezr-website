@@ -1,4 +1,4 @@
-import { profile, skills, experiences, education, certifications, heroImage } from '../data/profile'
+import { profile, skills, experiences, education, certifications, awards, aboutHeroImage, hobbyImages, universityImages, entrepreneurshipImages } from '../data/profile'
 
 export default function AboutPage() {
   return (
@@ -7,10 +7,10 @@ export default function AboutPage() {
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <div className="lg:col-span-7 space-y-8">
           <h1 className="text-5xl md:text-6xl lg:text-[4rem] leading-tight font-headline font-light tracking-tight text-primary">
-            {profile.tagline}
+            {profile.aboutTagline}
           </h1>
           <p className="text-lg md:text-xl text-on-surface-variant font-light leading-relaxed max-w-2xl">
-            {profile.summary}
+            {profile.aboutSummary}
           </p>
           <div className="pt-8">
             <span className="inline-block px-4 py-2 rounded-full bg-surface-container-low text-secondary font-label text-xs tracking-widest uppercase">
@@ -23,7 +23,7 @@ export default function AboutPage() {
             <img
               alt="Professional portrait"
               className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
-              src={heroImage}
+              src={aboutHeroImage}
             />
           </div>
         </div>
@@ -88,6 +88,58 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Beyond the Code */}
+      <section>
+        <h2 className="text-3xl font-headline font-light text-primary tracking-tight mb-6">
+          Beyond the Code
+        </h2>
+        <p className="text-on-surface-variant font-light leading-relaxed max-w-2xl mb-12">
+          {profile.aboutPersonal}
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {hobbyImages.map((img) => (
+            <div key={img.label} className="group relative">
+              <div className="aspect-[3/4] overflow-hidden bg-surface-container-low">
+                <img
+                  alt={img.alt}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
+                  src={img.src}
+                />
+              </div>
+              <span className="absolute bottom-0 left-0 right-0 py-3 px-4 text-xs font-label uppercase tracking-widest text-white bg-gradient-to-t from-black/60 to-transparent">
+                {img.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Entrepreneurship */}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+        <div className="md:col-span-5 space-y-6">
+          <span className="text-xs font-label uppercase tracking-widest text-secondary">
+            Side Project
+          </span>
+          <h2 className="text-3xl font-headline font-light text-primary tracking-tight">
+            Astro Cold Brew
+          </h2>
+          <p className="text-on-surface-variant font-light leading-relaxed">
+            Specialty cold brew coffee crafted with 100% Arabica beans from El Salvador and Colombia. A passion project blending entrepreneurship with my love for great coffee.
+          </p>
+        </div>
+        <div className="md:col-span-7 grid grid-cols-2 gap-4">
+          {entrepreneurshipImages.map((img) => (
+            <div key={img.src} className="aspect-[4/5] overflow-hidden bg-surface-container-low">
+              <img
+                alt={img.alt}
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                src={img.src}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Education & Certifications */}
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         <div>
@@ -107,6 +159,18 @@ export default function AboutPage() {
                   {edu.degree}
                 </h3>
                 <p className="text-on-surface-variant">{edu.institution}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 mt-8">
+            {universityImages.map((img) => (
+              <div key={img.src} className="aspect-[3/4] overflow-hidden bg-surface-container-low">
+                <img
+                  alt={img.alt}
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  src={img.src}
+                />
               </div>
             ))}
           </div>
@@ -142,21 +206,35 @@ export default function AboutPage() {
             Key Milestones
           </span>
           <h2 className="text-4xl md:text-5xl font-headline font-light text-primary tracking-tight leading-tight">
-            Contributed to{' '}
-            <span className="text-secondary">several million USD in cost savings</span>{' '}
-            at LATAM Airlines.
+            Building systems that process{' '}
+            <span className="text-secondary">millions of records daily</span>{' '}
+            with near-zero margin for error.
           </h2>
           <div className="flex justify-center gap-8 text-on-surface-variant">
             <div className="text-center">
-              <span className="block text-3xl font-bold text-primary mb-2">−30%</span>
+              <span className="block text-3xl font-bold text-primary mb-2">5M+</span>
               <span className="text-sm uppercase tracking-wider text-secondary">
-                Customer Complaints
+                Records / Day
               </span>
             </div>
             <div className="text-center">
-              <span className="block text-3xl font-bold text-primary mb-2">3d→24h</span>
-              <span className="text-sm uppercase tracking-wider text-secondary">SLA Reduction</span>
+              <span className="block text-3xl font-bold text-primary mb-2">450+</span>
+              <span className="text-sm uppercase tracking-wider text-secondary">Tables Managed</span>
             </div>
+            <div className="text-center">
+              <span className="block text-3xl font-bold text-primary mb-2">~0%</span>
+              <span className="text-sm uppercase tracking-wider text-secondary">False Positives</span>
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 pt-8">
+            {awards.map((award) => (
+              <span
+                key={award}
+                className="text-xs uppercase tracking-widest text-secondary"
+              >
+                {award}
+              </span>
+            ))}
           </div>
         </div>
       </section>

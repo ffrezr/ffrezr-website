@@ -4,6 +4,8 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import BlogPage from './pages/BlogPage'
 import ArticlePage from './pages/ArticlePage'
+import ProjectsPage from './pages/ProjectsPage'
+import ProjectDetailPage from './pages/ProjectDetailPage'
 import ContactPage from './pages/ContactPage'
 
 export default function App() {
@@ -13,6 +15,8 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="projects" element={<ProjectsPage />} />
+          <Route path="projects/:slug" element={<ProjectDetailPage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="blog/:slug" element={<ArticlePage />} />
           <Route path="contact" element={<ContactPage />} />
