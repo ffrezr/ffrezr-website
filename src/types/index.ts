@@ -9,11 +9,16 @@ export interface Experience {
 }
 
 export interface Project {
+  slug: string
   title: string
   role: string
   period: string
   location: string
   description: string
+  image?: string
+  tags?: string[]
+  type?: 'venture' | 'project' | 'side-project'
+  story?: string
 }
 
 export interface SkillGroup {
