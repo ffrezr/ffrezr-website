@@ -27,12 +27,14 @@ export default function ProjectsPage() {
 
         {/* Ventures */}
         <section>
-          <div className="border-t border-[#E2E2E2] border-b border-[#E2E2E2] py-5">
-            <span className="text-[11px] tracking-[0.12em] uppercase text-primary font-bold">
-              Ventures
-            </span>
+          <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+            <div className="max-w-xl">
+              <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">01 / Ventures</span>
+              <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">The Founder Era</h2>
+              <p className="text-on-surface-variant leading-relaxed">Building from zero to scale. A focus on product-market fit and full-stack strategic execution.</p>
+            </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12 mt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12">
             {ventures.map((project) => (
               <ProjectCard key={project.slug} project={project} />
             ))}
@@ -42,12 +44,14 @@ export default function ProjectsPage() {
         {/* Projects & Collaborations */}
         {otherProjects.length > 0 && (
           <section>
-            <div className="border-t border-[#E2E2E2] border-b border-[#E2E2E2] py-5">
-              <span className="text-[11px] tracking-[0.12em] uppercase text-primary font-bold">
-                Projects & Collaborations
-              </span>
+            <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+              <div className="max-w-xl">
+                <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">02 / Collaborations</span>
+                <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">Enterprise Engineering</h2>
+                <p className="text-on-surface-variant leading-relaxed">Technical contributions to large-scale systems and cross-functional engineering initiatives.</p>
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12 mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12">
               {otherProjects.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
@@ -58,12 +62,14 @@ export default function ProjectsPage() {
         {/* Side Projects */}
         {sideProjects.length > 0 && (
           <section className="mb-32">
-            <div className="border-t border-[#E2E2E2] border-b border-[#E2E2E2] py-5">
-              <span className="text-[11px] tracking-[0.12em] uppercase text-primary font-bold">
-                Side Projects
-              </span>
+            <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+              <div className="max-w-xl">
+                <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">03 / Experimental Lab</span>
+                <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">Technical Edge</h2>
+                <p className="text-on-surface-variant leading-relaxed">Personal explorations and side projects pushing the boundaries of what's possible.</p>
+              </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12 mt-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12">
               {sideProjects.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
