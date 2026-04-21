@@ -1,9 +1,10 @@
 import { useParams, Link } from 'react-router'
-import { projects } from '../data/profile'
+import { getProjectBySlug } from '../lib/content'
+import MarkdownRenderer from '../components/ui/MarkdownRenderer'
 
 export default function ProjectDetailPage() {
   const { slug } = useParams()
-  const project = projects.find((p) => p.slug === slug)
+  const project = getProjectBySlug(slug!)
 
   if (!project) {
     return (
@@ -60,11 +61,8 @@ export default function ProjectDetailPage() {
 
       {/* Story Content */}
       <article className="w-full max-w-3xl px-6 md:px-0 font-body">
-        {project.story ? (
-          <div
-            className="text-lg md:text-xl leading-[1.8] text-on-surface-variant prose-headings:font-headline prose-headings:text-primary"
-            dangerouslySetInnerHTML={{ __html: project.story }}
-          />
+        {project.content ? (
+          <MarkdownRenderer content={project.content} />
         ) : (
           <div className="text-center py-24">
             <span className="material-symbols-outlined text-5xl text-secondary/30 mb-6 block">edit_note</span>

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import ArticleCard from '../components/ui/ArticleCard'
-import { articles } from '../data/profile'
-
-const categories = ['All', 'Design Theory', 'Typography', 'Layout', 'Case Studies']
+import { getAllArticles, getArticleCategories } from '../lib/content'
 
 export default function BlogPage() {
+  const articles = getAllArticles()
+  const categories = getArticleCategories()
   const [activeFilter, setActiveFilter] = useState('All')
   const featured = articles.find((a) => a.featured)
   const gridArticles = articles.filter((a) => !a.featured)
