@@ -1,4 +1,4 @@
-import { profile, socialLinks } from '../data/profile'
+import { socialLinks } from '../data/profile'
 
 export default function ContactPage() {
   return (
@@ -20,18 +20,7 @@ export default function ContactPage() {
             Available for data engineering consulting, architecture reviews, and collaborative projects.
           </p>
           <div className="space-y-10 mt-auto">
-            <div className="flex flex-col gap-3">
-              <span className="font-label text-[11px] uppercase tracking-[0.2em] text-secondary">
-                Direct
-              </span>
-              <a
-                className="text-primary font-semibold text-xl border-b border-gray-200 pb-2 w-fit hover:border-primary transition-colors"
-                href={`mailto:${profile.email}`}
-              >
-                {profile.email}
-              </a>
-            </div>
-            <div className="flex gap-8 pt-4">
+<div className="flex gap-8 pt-4">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
@@ -93,32 +82,7 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div className="space-y-6">
-              <span className="font-label text-[11px] uppercase tracking-[0.2em] text-secondary block">
-                Inquiry Type
-              </span>
-              <div className="flex flex-wrap gap-x-10 gap-y-6">
-                {['Data Engineering', 'Architecture Review', 'Consulting', 'Other'].map(
-                  (option, i) => (
-                    <label key={option} className="relative cursor-pointer group">
-                      <input
-                        className="peer sr-only"
-                        defaultChecked={i === 0}
-                        name="inquiry_type"
-                        type="radio"
-                        value={option.toLowerCase().replace(' ', '-')}
-                      />
-                      <span className="font-body text-sm text-secondary transition-colors group-hover:text-primary uppercase tracking-wider font-medium peer-checked:text-primary peer-checked:font-semibold">
-                        {option}
-                      </span>
-                      <div className="absolute -bottom-2 left-0 w-full border-b-2 border-transparent opacity-0 transition-all duration-300 peer-checked:border-primary peer-checked:opacity-100" />
-                    </label>
-                  )
-                )}
-              </div>
-            </div>
-
-            <div>
+<div>
               <label
                 className="block font-label text-[11px] uppercase tracking-[0.2em] text-secondary mb-2"
                 htmlFor="message"

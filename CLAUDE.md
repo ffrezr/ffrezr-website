@@ -2,144 +2,65 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Overview
-
-Personal portfolio website for Francisco Frez (Data Engineer) built with React, Vite, and TypeScript. Implements the **Nova Editorial** design system — a high-end editorial aesthetic with massive negative space, asymmetric layouts, and tonal depth inspired by premium lifestyle magazines.
-
-**Stack**: React 19 + Vite 6 + TypeScript + Tailwind v4 + React Router 7
-
-## Development Commands
+## Commands
 
 ```bash
-# Start dev server (default: http://localhost:5173)
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+npm run dev        # Start Vite dev server (http://localhost:5173)
+npm run build      # Type-check (tsc -b) then build for production
+npm run preview    # Preview production build locally
 ```
+
+No test runner or linter is configured.
 
 ## Architecture
 
-### Data-Driven Content Model
+React 19 + TypeScript + Vite SPA. Routing via React Router v7. Styling via Tailwind CSS v4 (Vite plugin, not PostCSS).
 
-All content (profile, experience, projects, articles, etc.) is centralized in `src/data/profile.ts` as typed constants. Pages consume this data rather than hardcoding content. This makes updating bio, job history, or blog articles a single-file operation.
+### Routing
 
-**Pattern**: When adding new content sections, define TypeScript interfaces in `src/types/index.ts` and export data from `profile.ts`.
+All routes defined in `src/App.tsx` inside a `<Layout>` wrapper (navbar + footer + scroll-to-top):
+- `/` → HomePage
+- `/about` → AboutPage
+- `/projects` → ProjectsPage, `/projects/:slug` → ProjectDetailPage
+- `/blog` → BlogPage, `/blog/:slug` → ArticlePage
+- `/contact` → ContactPage
 
-### Page Structure
+### Content system
 
-5 routes defined in `src/App.tsx`:
-- `/` — HomePage (hero, featured experience, projects)
-- `/about` — AboutPage (detailed bio, skills, education, hobbies)
-- `/blog` — BlogPage (article listings with filtering)
-- `/blog/:slug` — ArticlePage (article detail page)
-- `/contact` — ContactPage (contact form)
+Projects and articles are **Markdown files with YAML frontmatter** in `src/content/projects/` and `src/content/articles/`. They are loaded at build time via Vite's `import.meta.glob('.../*.md', { eager: true, query: '?raw' })`.
 
-All routes wrapped in `Layout` component (Navbar + Footer + scroll-to-top on navigation).
+`src/lib/content.ts` exposes: `getAllProjects()`, `getFeaturedProjects()`, `getProjectBySlug(slug)`, `getAllArticles()`, `getArticleBySlug(slug)`, `getArticleCategories()`.
 
-### Component Organization
+To add a new project or article, create a `.md` file in the corresponding `src/content/` subdirectory with the required frontmatter fields (see existing files for the schema). The slug in the frontmatter must match what's used in URLs.
 
-```
-src/
-├── components/
-│   ├── layout/         # Navbar, Footer, Layout wrapper
-│   └── ui/             # Reusable UI components (Button, ArticleCard, etc.)
-├── pages/              # Route-level page components
-├── data/               # Content source of truth (profile.ts)
-└── types/              # TypeScript interfaces
-```
+### Data layer
 
-**Convention**: Layout components handle site-wide structure; UI components are reusable presentation components; pages compose these for specific routes.
+- **Profile data** (name, skills, experience, education, certifications, social links) is hard-coded in `src/data/profile.ts`.
+- **Content** (projects, articles) comes from markdown files via `src/lib/content.ts`.
+- Components receive data via props — no global state or context.
 
-## Design System: Nova Editorial
+### Path alias
 
-Defined comprehensively in `DESIGN.md`. Key constraints when building/modifying UI:
+`@/*` maps to `./src/*` (configured in tsconfig and vite config).
 
-### Critical Rules
+## Design system — "Nova Editorial"
 
-1. **Primary color is `#222222`** — never pure black (`#000000`). All headlines, CTAs, and primary text use this.
-2. **No decorative borders** — boundaries defined by tonal color shifts and spacing, not lines. Borders only appear on functional elements (input fields, filter bars, blockquotes).
-3. **Button border-radius is `2px`** (sharp editorial) — never `rounded-full` for CTAs.
-4. **Typography**:
-   - Font: Manrope (all weights)
-   - Display text (hero headlines): `font-light` (300) with tight letter-spacing (`-0.03em`)
-   - CTAs/labels: ALL CAPS with `tracking-[0.1em]` and `font-bold`
-   - Body text: `on-surface-variant` (#474747) to reduce optical vibration
-5. **Cards use signature glow**: `shadow-[0px_24px_48px_rgba(0,0,0,0.04)]` — no heavy shadows.
-6. **Navigation**: Glassmorphism (`bg-white/70 backdrop-blur-xl`), no bottom border.
+Full spec in `DESIGN.md`. Key points for implementation:
 
-### Tailwind v4 Custom Theme
+- **Monochrome palette** with Material Design 3 tonal tokens defined in `src/index.css` under `@theme`.
+- **Font**: Manrope (Google Fonts), applied via `--font-headline`, `--font-body`, `--font-label` CSS variables.
+- **Border radius**: 2px default, 4px lg, 8px xl. Rounded-full only for badges.
+- **Borders are functional, not decorative**: use `hairline-*` utility classes from `src/index.css`.
+- **Images**: grayscale by default, color on hover. Project card images use glow shadow.
+- **Buttons**: primary = dark bg, ALL CAPS, sharp corners. secondary = underline style.
 
-Color tokens and design system variables defined in `src/index.css` using `@theme` directive:
-- `--color-primary`, `--color-surface`, `--color-on-surface-variant`, etc.
-- `--radius-DEFAULT: 2px` (sharp aesthetic)
-- Typography scale uses Manrope for all font families
+## Component conventions
 
-**Usage**: Reference design tokens via Tailwind utilities (e.g., `bg-primary`, `text-on-surface-variant`, `rounded-lg`).
+- `src/components/ui/` — reusable components (Button, ArticleCard, ProjectCard, MarkdownRenderer, SectionLabel, ExperienceRow).
+- `src/components/layout/` — Layout, Navbar, Footer.
+- `src/pages/` — one file per route.
+- `MarkdownRenderer` uses react-markdown with remark-gfm + rehype-raw, with custom-styled component overrides for headings, links, blockquotes, images, etc.
 
-## Stitch Design References
+## Static assets
 
-High-fidelity design mockups in `.stitch/designs/` generated by Google Labs Stitch:
-- `home/home.html` — Extended portfolio layout
-- `about/about.html` — Data engineer profile
-- `blog/blog.html` — Blog listing
-- `article/article-detail.html` — Long-form article
-- `contact/contact.html` — Contact form
-- `analytics/analytics-dashboard.html` — Portfolio analytics
-
-**Important**: Stitch-generated HTML files have inconsistent design tokens across views. **DESIGN.md is the source of truth** — use it to normalize implementation, not individual HTML files.
-
-## Common Patterns
-
-### Adding a New Article
-
-1. Add article object to `articles` array in `src/data/profile.ts`
-2. Include all required fields from `Article` interface (slug, title, excerpt, category, date, readTime, image)
-3. Set `featured: true` to display in hero section on HomePage
-4. Article route (`/blog/:slug`) will automatically render it
-
-### Modifying Profile Content
-
-Edit `src/data/profile.ts`:
-- `profile` object: name, role, taglines, summaries, contact info
-- `experiences`, `projects`, `education`, `certifications`: arrays of work history
-- `skills`: categorized skill groups
-- Image paths: `heroImage`, `aboutHeroImage`, etc.
-
-### Adding UI Components
-
-1. Create in `src/components/ui/`
-2. Follow Nova Editorial design constraints (see DESIGN.md)
-3. Use TypeScript — infer props interface or define explicitly
-4. Use Tailwind utilities with custom design tokens
-
-## Type Safety
-
-All data models typed via interfaces in `src/types/index.ts`. When adding new data structures:
-1. Define interface in `types/index.ts`
-2. Export from `profile.ts` with `as const` for literal type inference where appropriate
-3. Import type in consuming component
-
-## Routing
-
-Uses React Router 7's file-based routing approach via `BrowserRouter`. 
-
-**Scroll Behavior**: Layout component automatically scrolls to top on route change via `useEffect` watching `pathname`.
-
-## Important Files
-
-- `DESIGN.md` — Complete design system specification (colors, typography, spacing, components)
-- `src/data/profile.ts` — Single source of truth for all site content
-- `src/types/index.ts` — TypeScript interfaces for data models
-- `src/index.css` — Tailwind v4 theme configuration with Nova Editorial design tokens
-- `.stitch/designs/` — High-fidelity design references (HTML/PNG mockups)
-
-## Notes
-
-- No test infrastructure or linting currently configured
-- No custom Vite aliases configured
-- Font (Manrope) and icons (Material Symbols Outlined) loaded via Google Fonts in `index.html`
-- Images expected in `/public/img/` directory structure (referenced in profile.ts)
+Images live in `public/img/` and are referenced as `/img/...` paths in code and markdown content.

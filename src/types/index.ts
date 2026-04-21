@@ -17,8 +17,12 @@ export interface Project {
   description: string
   image?: string
   tags?: string[]
-  type?: 'venture' | 'project' | 'side-project'
-  story?: string
+  type?: 'venture' | 'project' | 'product' | 'side-project'
+  featured?: boolean
+}
+
+export interface ProjectContent extends Project {
+  content: string
 }
 
 export interface SkillGroup {
@@ -48,6 +52,10 @@ export interface Article {
   readTime: string
   image: string
   featured?: boolean
+}
+
+export interface ArticleContent extends Article {
+  content: string
 }
 
 export interface SocialLink {

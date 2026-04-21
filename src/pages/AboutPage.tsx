@@ -1,4 +1,4 @@
-import { profile, skills, experiences, education, certifications, awards, aboutHeroImage, hobbyImages, universityImages, entrepreneurshipImages } from '../data/profile'
+import { profile, skills, experiences, education, certifications, awards, aboutHeroImage, hobbyImages, universityImages } from '../data/profile'
 
 export default function AboutPage() {
   return (
@@ -34,7 +34,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="md:col-span-1">
             <h2 className="text-2xl font-headline font-light text-primary tracking-tight">
-              Technical Arsenal
+              Skills
             </h2>
           </div>
           <div className="md:col-span-3 grid grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
@@ -83,58 +83,6 @@ export default function AboutPage() {
                   ))}
                 </ul>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Beyond the Code */}
-      <section>
-        <h2 className="text-3xl font-headline font-light text-primary tracking-tight mb-6">
-          Beyond the Code
-        </h2>
-        <p className="text-on-surface-variant font-light leading-relaxed max-w-2xl mb-12">
-          {profile.aboutPersonal}
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {hobbyImages.map((img) => (
-            <div key={img.label} className="group relative">
-              <div className="aspect-[3/4] overflow-hidden bg-surface-container-low">
-                <img
-                  alt={img.alt}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
-                  src={img.src}
-                />
-              </div>
-              <span className="absolute bottom-0 left-0 right-0 py-3 px-4 text-xs font-label uppercase tracking-widest text-white bg-gradient-to-t from-black/60 to-transparent">
-                {img.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Entrepreneurship */}
-      <section className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-        <div className="md:col-span-5 space-y-6">
-          <span className="text-xs font-label uppercase tracking-widest text-secondary">
-            Side Project
-          </span>
-          <h2 className="text-3xl font-headline font-light text-primary tracking-tight">
-            Astro Cold Brew
-          </h2>
-          <p className="text-on-surface-variant font-light leading-relaxed">
-            Specialty cold brew coffee crafted with 100% Arabica beans from El Salvador and Colombia. A passion project blending entrepreneurship with my love for great coffee.
-          </p>
-        </div>
-        <div className="md:col-span-7 grid grid-cols-2 gap-4">
-          {entrepreneurshipImages.map((img) => (
-            <div key={img.src} className="aspect-[4/5] overflow-hidden bg-surface-container-low">
-              <img
-                alt={img.alt}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                src={img.src}
-              />
             </div>
           ))}
         </div>
@@ -236,6 +184,32 @@ export default function AboutPage() {
               </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Beyond the Code */}
+      <section>
+        <h2 className="text-3xl font-headline font-light text-primary tracking-tight mb-6">
+          Beyond the Code
+        </h2>
+        <p className="text-on-surface-variant font-light leading-relaxed max-w-2xl mb-12">
+          {profile.aboutPersonal}
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {hobbyImages.map((img) => (
+            <div key={img.label} className="group relative">
+              <div className="aspect-[3/4] overflow-hidden bg-surface-container-low">
+                <img
+                  alt={img.alt}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
+                  src={img.src}
+                />
+              </div>
+              <span className="absolute bottom-0 left-0 right-0 py-3 px-4 text-xs font-label uppercase tracking-widest text-white bg-gradient-to-t from-black/60 to-transparent">
+                {img.label}
+              </span>
+            </div>
+          ))}
         </div>
       </section>
     </div>

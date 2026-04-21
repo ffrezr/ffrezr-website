@@ -21,7 +21,7 @@ export default function Footer() {
           ))}
         </div>
         <span className="text-[#555555]">
-          &copy; {new Date().getFullYear()} Francisco Frez. All rights reserved.
+          &copy; {new Date().getFullYear()} Francisco Frez.
         </span>
       </div>
     </footer>

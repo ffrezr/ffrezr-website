@@ -1,10 +1,11 @@
 import ProjectCard from '../components/ui/ProjectCard'
-import { projects } from '../data/profile'
+import { getAllProjects } from '../lib/content'
 
 export default function ProjectsPage() {
+  const projects = getAllProjects()
   const ventures = projects.filter((p) => p.type === 'venture')
+  const projectsAndProducts = projects.filter((p) => p.type === 'project' || p.type === 'product' || !p.type)
   const sideProjects = projects.filter((p) => p.type === 'side-project')
-  const otherProjects = projects.filter((p) => p.type === 'project' || !p.type)
 
   return (
     <div className="pt-32 w-full">
@@ -15,7 +16,7 @@ export default function ProjectsPage() {
             <h1 className="font-headline text-[3rem] md:text-[5.5rem] font-light tracking-[-0.03em] text-primary leading-[0.95]">
               Projects &amp;
               <br className="hidden md:block" />
-              Ventures
+              Entrepreneurship
             </h1>
           </div>
           <div className="w-full md:w-1/3 pb-1 md:pb-3">
@@ -29,7 +30,7 @@ export default function ProjectsPage() {
         <section>
           <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
             <div className="max-w-xl">
-              <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">01 / Ventures</span>
+              <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">01 / Entrepreneurship</span>
               <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">The Founder Era</h2>
               <p className="text-on-surface-variant leading-relaxed">Building from zero to scale. A focus on product-market fit and full-stack strategic execution.</p>
             </div>
@@ -41,18 +42,18 @@ export default function ProjectsPage() {
           </div>
         </section>
 
-        {/* Projects & Collaborations */}
-        {otherProjects.length > 0 && (
+        {/* Projects & Products */}
+        {projectsAndProducts.length > 0 && (
           <section>
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
               <div className="max-w-xl">
-                <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">02 / Collaborations</span>
-                <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">Enterprise Engineering</h2>
-                <p className="text-on-surface-variant leading-relaxed">Technical contributions to large-scale systems and cross-functional engineering initiatives.</p>
+                <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">02 / Projects & Products</span>
+                <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">From Idea to Value</h2>
+                <p className="text-on-surface-variant leading-relaxed">Digital products and technical projects designed to solve real problems and deliver value.</p>
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-12">
-              {otherProjects.map((project) => (
+              {projectsAndProducts.map((project) => (
                 <ProjectCard key={project.slug} project={project} />
               ))}
             </div>
@@ -64,7 +65,7 @@ export default function ProjectsPage() {
           <section className="mb-32">
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
               <div className="max-w-xl">
-                <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">03 / Experimental Lab</span>
+                <span className="text-[0.75rem] tracking-[0.2em] uppercase text-secondary font-bold">03 / Side Projects</span>
                 <h2 className="text-4xl font-bold tracking-tight mt-4 mb-6">Technical Edge</h2>
                 <p className="text-on-surface-variant leading-relaxed">Personal explorations and side projects pushing the boundaries of what's possible.</p>
               </div>
