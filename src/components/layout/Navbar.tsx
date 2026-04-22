@@ -21,7 +21,7 @@ export default function Navbar() {
           aria-label="Francisco Frez home"
           className="text-primary transition-opacity duration-300 hover:opacity-75"
         >
-          <BrandLogo markClassName="h-7 md:h-8" />
+          <BrandLogo showWordmark={false} className="h-10 md:h-12" />
         </Link>
 
         <nav className="hidden md:flex space-x-8">

@@ -11,7 +11,7 @@ export default function Footer() {
           aria-label="Francisco Frez home"
           className="text-white transition-opacity duration-300 hover:opacity-75"
         >
-          <BrandLogo markClassName="h-9" />
+          <BrandLogo showWordmark={false} className="h-14 md:h-16" />
         </Link>
         <div className="flex flex-wrap justify-center gap-10">
           {socialLinks.map((link) => (
