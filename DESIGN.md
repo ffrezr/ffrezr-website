@@ -54,25 +54,36 @@ The palette uses sophisticated grays and a refined dark primary to define space 
 - Use `#222222` as primary for all high-impact elements (headlines, CTAs, brand)
 - Layer surfaces for depth (Level 0: `surface`, Level 1: `surface-container-low`, Level 2: `surface-container-lowest`)
 - Use glassmorphism for navigation: `white/70` opacity + `backdrop-blur-xl`
+- Apply `grayscale` filter to all images by default for visual consistency
+- Add subtle hover effects to images (scale, opacity, or color) with smooth transitions (700-1000ms)
 
 #### ❌ DON'T:
-- Never use borders to section content or separate cards — use tonal shifts and spacing
+- Never use heavy borders — use hairline (1px) borders only
 - Never use pure `#000000` anywhere — `#222222` is the darkest value in the system
-- Avoid heavy drop shadows (use signature glow instead)
+- Avoid heavy drop shadows (use signature glow or hairline borders instead)
+- Never use `rounded-full` on buttons or CTAs — only on badges/pills
 
 ### Border Philosophy: Functional-Line
 
-Borders exist only where they serve a usability function, never as decoration.
+Borders exist only where they serve a usability function, never as decoration. The design system uses **hairline borders** (`hairline-border`, `hairline-t`, `hairline-b`, `hairline-divide`) for subtle, functional boundaries.
 
 | Context | Border | Reason |
 |---------|--------|--------|
-| Content sections | ❌ None | Tonal shifts + spacing |
-| Project/article cards | ❌ None | Signature glow + white background |
+| Content sections | ✅ `border-y border-neutral-100` | Section separation (portfolio section) |
+| Project/article cards | ✅ `hairline-border` | Defines card boundaries on white backgrounds |
+| Card images | ✅ `hairline-border` | Contains image within card layout |
 | Navigation header | ❌ None | Glassmorphism defines the boundary |
 | Footer separation | ❌ None | `tertiary` (#3A3C3C) background shift |
 | Input fields | ✅ `border-b` | Affordance: user needs to see where to type |
 | Filter bars / tabs | ✅ `border-t` + `border-b` | Contains functional controls |
 | Blockquotes | ✅ Left accent line | Strong editorial convention |
+| Experience rows | ✅ `hairline-divide` + `hairline-t` | Separates timeline entries |
+
+**Hairline Utilities** (defined in `src/index.css`):
+- `hairline-border` — Full border using `outline-variant` color (#C6C6C6)
+- `hairline-t` — Top border only
+- `hairline-b` — Bottom border only
+- `hairline-divide` — Divider between sibling elements
 
 ### Special Effects
 
@@ -85,6 +96,38 @@ backdrop-filter: blur(24px); /* backdrop-blur-xl */
 **Signature Glow (Cards, Images):**
 ```css
 box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.04);
+```
+
+**Image Treatments:**
+
+All images use grayscale filter by default. Hover effects vary by context:
+
+```css
+/* HomePage cards — scale only */
+.grayscale {
+  filter: grayscale(100%);
+}
+.group-hover\:scale-\[1\.02\] {
+  transform: scale(1.02);
+  transition: transform 1000ms ease-out;
+}
+
+/* AboutPage portraits — color reveal */
+.grayscale:hover {
+  filter: grayscale(0%);
+  transition: all 700ms;
+}
+
+/* Article cards (grid) — opacity + scale */
+.grayscale.opacity-90 {
+  filter: grayscale(100%);
+  opacity: 0.9;
+}
+.group-hover\:opacity-100.group-hover\:scale-105 {
+  opacity: 1;
+  transform: scale(1.05);
+  transition: all 1000ms ease-in-out;
+}
 ```
 
 **Input Fields (Bottom-border style):**
@@ -103,18 +146,40 @@ border-bottom: 1px solid #d4d4d8;
 
 ### Type Scale
 
-| Level | Size | Weight | Line Height | Letter Spacing | Usage |
-|-------|------|--------|-------------|----------------|-------|
-| **Display Large** | 3.5rem (56px) | 300 (light) | 1.1 | -0.03em | Hero statements |
-| **Display Medium** | 2.75rem (44px) | 300 (light) | 1.15 | -0.03em | Page titles |
-| **Display Small** | 2.25rem (36px) | 300 (light) | 1.2 | -0.02em | Feature headers |
-| **Headline Large** | 2rem (32px) | 600 (semibold) | 1.25 | -0.01em | Section titles |
-| **Headline Medium** | 1.5rem (24px) | 600 (semibold) | 1.3 | 0 | Subsection titles |
-| **Headline Small** | 1.25rem (20px) | 700 (bold) | 1.4 | 0 | Card headers |
-| **Body Large** | 1rem (16px) | 400 | 1.5 | 0 | Primary body text |
-| **Body Medium** | 0.875rem (14px) | 400 | 1.5 | 0 | Secondary text |
-| **Body Small** | 0.75rem (12px) | 400 | 1.4 | 0 | Captions |
-| **Label** | 0.75rem (12px) | 500 | 1.2 | +0.05em | ALL CAPS metadata |
+| Level | Size | Weight | Line Height | Letter Spacing | CSS Class | Usage |
+|-------|------|--------|-------------|----------------|-----------|-------|
+| **Display Large** | 3.5rem (56px) | 300 (light) | 1.1 | -0.03em | `type-display-large` | Hero statements |
+| **Display Medium** | 2.75rem (44px) | 300 (light) | 1.15 | -0.03em | `type-display-medium` | Page/section titles |
+| **Display Small** | 2.25rem (36px) | 300 (light) | 1.2 | -0.02em | `type-display-small` | Feature headers |
+| **Headline Large** | 2rem (32px) | 300 (light) | 1.25 | -0.01em | `type-headline-large` | Stats, large numbers |
+| **Headline Medium** | 1.5rem (24px) | 600 (semibold) | 1.3 | 0 | `type-headline-medium` | Subsection titles |
+| **Headline Small** | 1.25rem (20px) | 700 (bold) | 1.4 | 0 | `type-headline-small` | Card headers |
+| **Headline XSmall** | 1rem (16px) | 700 (bold) | 1.4 | 0 | `type-headline-xsmall` | Small headers |
+| **Body Large** | 1.125rem (18px) | 300 (light) | 1.5 | 0 | `type-body-large` | Primary body text |
+| **Body Medium** | 0.95rem (15.2px) | 300 (light) | 1.5 | 0 | `type-body-medium` | Secondary text |
+| **Body Small** | 0.775rem (12.4px) | 400 (regular) | 1.4 | 0 | `type-body-small` | Captions |
+| **Label** | 0.775rem (12.4px) | 400 (regular) | 1.2 | +0.05em | `type-label` | ALL CAPS metadata |
+
+### Specialized Type Styles
+
+| Component | CSS Class | Size | Weight | Letter Spacing | Usage |
+|-----------|-----------|------|--------|----------------|-------|
+| **Skill Category** | `type-skill-category` | 0.75rem (12px) | 400 | 0.1em | Skill section headers |
+| **Skill Item** | `type-skill-item` | 1rem (16px) | 400 | 0 | Individual skill names |
+| **Project Title** | `type-project-title` | 0.9375rem (15px) | 500 | 0.1em | Project card titles (uppercase) |
+| **Article Category** | `type-article-category` | 0.65rem (10.4px) | 700 | 0.1em | Article category badges |
+| **Article Meta** | `type-article-meta` | 0.75rem (12px) | 400 | 0 | Article metadata (read time) |
+| **Article Title Compact** | `type-article-title-compact` | 1.25rem (20px) | 300 | 0 | Article titles in compact cards |
+| **Article Meta Grid** | `type-article-meta-grid` | 9px | 700 | 0.25em | Article metadata in grid layout |
+| **Article Title Grid** | `type-article-title-grid` | 1.25rem (20px) | 700 | -0.025em | Article titles in grid cards |
+| **Article Excerpt** | `type-article-excerpt` | 13px | 400 | 0 | Article description previews |
+| **Experience Title** | `type-experience-title` | 1.19rem (19px) | 500 | 0 | Job/company names |
+| **Experience Meta** | `type-experience-meta` | 0.69rem (11px) | 400 | 0.1em | Experience metadata |
+| **Experience Period** | `type-experience-period` | 0.875rem (14px) | 400 | 0.1em | Date ranges |
+| **Experience Role** | `type-experience-role` | 0.925rem (15px) | 300 | 0 | Job descriptions |
+| **Experience Tag** | `type-experience-tag` | 0.69rem (11px) | 400 | 0.1em | Technology tags |
+
+**Implementation:** All type scale levels are defined as CSS classes in `src/index.css`. Use `type-*` classes instead of inline Tailwind size/weight/spacing utilities to keep typography centralized.
 
 ### Typography Rules
 
@@ -203,38 +268,117 @@ border-bottom: 1px solid #d4d4d8;
 
 ### Buttons
 
+The `Button` component (`src/components/ui/Button.tsx`) supports internal routing (React Router), external links, and button actions.
+
 #### Primary Button (Sharp Editorial)
 ```tsx
+<Button to="/about">Get to Know Me</Button>
+<Button href="https://example.com">External Link</Button>
+<Button onClick={handleClick}>Action Button</Button>
+
+// Renders:
 className="bg-primary text-on-primary rounded-[2px] px-10 py-5 
-           font-label font-bold text-xs uppercase tracking-[0.1em] 
-           hover:bg-primary-container transition-colors"
+           font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] 
+           hover:bg-primary-container transition-colors 
+           inline-flex items-center justify-center gap-3"
 ```
 
 #### Secondary Button (Underline Style)
 ```tsx
-className="text-primary font-label font-bold text-xs uppercase 
-           tracking-[0.1em] border-b border-primary/20 pb-2 
-           hover:border-primary transition-all"
+<Button to="/blog" variant="secondary">Read Blog</Button>
+
+// Renders:
+className="text-primary font-label font-bold text-[0.75rem] uppercase 
+           tracking-[0.1em] border-b border-primary pb-2 
+           hover:text-primary/70 transition-all 
+           inline-flex items-center gap-3"
+```
+
+#### Text Links (Navigation Style)
+For inline text links with arrow icons (not using Button component):
+```tsx
+<Link
+  to="/contact"
+  className="text-primary font-label type-label hover:text-secondary transition-colors 
+             inline-flex items-center gap-3 border-b border-primary pb-1"
+>
+  Say Hello
+  <span className="material-symbols-outlined text-sm" 
+        style={{ fontVariationSettings: "'wght' 200" }}>
+    arrow_forward
+  </span>
+</Link>
 ```
 
 #### Button Rules
 - All CTAs use `rounded-[2px]` — never `rounded-full`
 - Always uppercase with `tracking-[0.1em]`
-- Hover transitions to `primary-container` (#3C3B3B)
+- Primary hover transitions to `primary-container` (#3C3B3B)
+- Secondary hover transitions to `primary/70` (70% opacity)
+- Use `inline-flex items-center gap-3` for icons
+- Material Symbols icons inherit size and color from parent
 
 ### Cards
 
 #### Project Card
-- **Background:** `surface-container-lowest` (#FFFFFF)
-- **Border:** None — no borders, no outlines
-- **Border Radius:** `lg` (4px) for images
-- **Shadow:** Signature Glow (0px 24px 48px rgba(0,0,0,0.04))
-- **Image Treatment:** `grayscale` default, full color on hover
+- **Background:** `bg-surface-container-low`
+- **Border:** `hairline-border` — subtle 1px outline
+- **Border Radius:** None on container, `lg` (4px) on images
+- **Image Treatment:** `grayscale` filter, `group-hover:scale-[1.02]` with 1s ease-out transition
+- **Title:** `type-project-title`, uppercase, centered
 
-#### Article Card
-- **Background:** White with subtle `border border-[#E2E2E2]/30` (exception for image containers)
-- **Image Height:** Fixed `h-[480px]` for grid consistency
-- **Hover:** `scale-105` on image with 1s ease-in-out transition
+#### Article Card — Grid Variant (default)
+- **Container:** `flex flex-col gap-6`
+- **Image:** `h-[480px]` fixed height, white background with `border border-[#E2E2E2]/30`
+- **Image Effects:** `grayscale opacity-90`, hover to `opacity-100 scale-105` (1s ease-in-out)
+- **Metadata:** `type-article-meta-grid` (category + date separated by "/")
+- **Title:** `type-article-title-grid`
+- **Excerpt:** `type-article-excerpt` with `line-clamp-3`
+
+#### Article Card — Compact Variant
+- **Container:** `flex flex-col`
+- **Image:** `aspect-[16/10]` with `bg-surface-container-low hairline-border`
+- **Image Effects:** `grayscale` only (no hover effects)
+- **Metadata:** `type-article-category` + `type-article-meta` (read time) with dot separator
+- **Title:** `type-article-title-compact`, hover underline with `underline-offset-8`
+
+### Section Label
+
+A decorative component used to introduce major sections.
+
+```tsx
+<span className="font-label type-label text-secondary flex items-center gap-3 mb-6">
+  <span className="w-1 h-1 bg-secondary rounded-full" />
+  {children}
+</span>
+```
+
+**Features:**
+- Includes a small dot (1px × 1px, `bg-secondary`) before the text
+- Uppercase via `type-label` class
+- Optional `centered` prop for center alignment
+
+### Experience Row
+
+Timeline-style component for work history displayed in a 12-column grid.
+
+```tsx
+<div className="hairline-divide hairline-t">
+  <div className="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+    <div className="md:col-span-5"><!-- Company + Location --></div>
+    <div className="md:col-span-3"><!-- Role --></div>
+    <div className="md:col-span-4"><!-- Technology tags --></div>
+  </div>
+</div>
+```
+
+**Structure:**
+- **Container:** `hairline-divide` class adds borders between sibling items, `hairline-t` adds top border
+- **Grid Layout:** 12 columns on desktop (5 + 3 + 4 split)
+- **Company/Location (col-span-5):** `type-experience-title` for company name
+- **Period:** `type-experience-meta` in `text-secondary`
+- **Role (col-span-3):** `type-experience-role` in `text-on-surface-variant`
+- **Tags (col-span-4):** `type-experience-tag` with `hairline-border rounded-[2px]`, right-aligned on desktop
 
 ### Input Fields (Bottom-border style)
 
@@ -246,6 +390,85 @@ className="w-full bg-transparent border-0 border-b border-gray-200
 ```
 
 **Rule:** Inputs use bottom-border only, no boxed inputs. Labels above in `font-label text-[11px] uppercase tracking-[0.2em] text-secondary`.
+
+### Badges & Pills
+
+Status badges and category tags use fully rounded corners (`rounded-full`).
+
+```tsx
+<span className="inline-block px-4 py-2 rounded-full bg-surface-container-low text-secondary type-label">
+  {text}
+</span>
+```
+
+**Features:**
+- `rounded-full` (9999px) — reserved for non-interactive pills/badges only
+- Background: `bg-surface-container-low` or similar surface tokens
+- Typography: `type-label` for uppercase styling
+- **Never** use on buttons or CTAs
+
+### Education Cards
+
+Card variant used for academic credentials.
+
+```tsx
+<div className="p-8 bg-surface-container-lowest rounded-sm shadow-[0px_24px_48px_rgba(0,0,0,0.04)] outline outline-1 outline-outline-variant/15">
+  <span className="type-label text-secondary mb-2 block">{date}</span>
+  <h3 className="type-headline-small font-headline text-primary mb-1">{degree}</h3>
+  <p className="type-body-medium text-on-surface-variant">{institution}</p>
+</div>
+```
+
+**Features:**
+- Uses `outline` instead of `border` for subtle boundary
+- Signature glow shadow for depth
+- White background (`surface-container-lowest`)
+
+### Certification List Items
+
+Interactive list items with hover states.
+
+```tsx
+<div className="flex items-center gap-4 p-6 bg-surface-container-low rounded-sm group hover:bg-surface-container-highest transition-colors">
+  <span className="material-symbols-outlined text-secondary group-hover:text-primary transition-colors">
+    workspace_premium
+  </span>
+  <div>
+    <h4 className="type-headline-xsmall font-headline text-primary">{name}</h4>
+    <span className="type-body-small text-secondary">{issuer}</span>
+  </div>
+</div>
+```
+
+**Features:**
+- Uses tonal shift on hover (container-low → container-highest)
+- Icon changes color on hover
+- Material Symbols icon for visual accent
+
+### Image Grids with Overlays
+
+Photo grids with text overlays for labeling.
+
+```tsx
+<div className="group relative">
+  <div className="aspect-[3/4] overflow-hidden bg-surface-container-low">
+    <img
+      alt={alt}
+      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
+      src={src}
+    />
+  </div>
+  <span className="absolute bottom-0 left-0 right-0 py-3 px-4 type-label text-white bg-gradient-to-t from-black/60 to-transparent">
+    {label}
+  </span>
+</div>
+```
+
+**Features:**
+- Grayscale by default, color on hover (700ms transition)
+- Subtle scale effect (1.03x) on hover
+- Gradient overlay at bottom for label readability
+- Fixed aspect ratio (`aspect-[3/4]` or `aspect-[4/5]`)
 
 ### Navigation Bar
 
@@ -264,11 +487,11 @@ className="w-full bg-transparent border-0 border-b border-gray-200
 **Container:** `max-w-screen-2xl mx-auto px-8 py-6`  
 **Brand:** "Francisco Frez" at `text-xl font-bold tracking-tight text-primary uppercase`  
 **Links:** `font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem]`  
-**Menu Items:** Home, About, Blog, Contact  
+**Menu Items:** Home, About, Projects, Blog, Contact  
 **Active Link:** `text-primary border-b border-primary pb-1`  
 **Inactive Link:** `text-secondary pb-1 hover:text-primary transition-colors duration-300`  
 **CTA Button:** `bg-primary text-on-primary rounded-[2px] px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-primary-container`  
-**Mobile:** Hamburger icon via Material Symbols
+**Mobile:** Hamburger icon via Material Symbols, opens drawer with `bg-white/95 backdrop-blur-xl border-t border-surface-container-high`
 
 ### Footer
 
@@ -276,89 +499,108 @@ className="w-full bg-transparent border-0 border-b border-gray-200
 <footer class="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
 <div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
 <span class="text-xl font-bold tracking-tighter text-white">Francisco Frez</span>
-<div class="flex flex-wrap justify-center gap-10"><!-- links --></div>
-<span class="text-[#555555]">&copy; 2024 Francisco Frez. All rights reserved.</span>
+<div class="flex flex-wrap justify-center gap-10"><!-- social links --></div>
+<span class="text-[#555555]">&copy; {year} Francisco Frez.</span>
 </div>
 </footer>
 ```
 
 **Style:** Dark section using `#1A1A1A` background — no top border  
+**Layout:** Three-column flex layout (brand, links, copyright) with `gap-10`  
 **Brand:** "Francisco Frez" at `text-xl font-bold tracking-tighter text-white`  
-**Links:** LinkedIn, Github, Medium — `text-[#ACABAB] hover:text-white transition-colors`  
-**Copyright:** `text-[#555555]`, uppercase with wide tracking
+**Social Links:** Dynamic from `profile.ts` data — `text-[#ACABAB] hover:text-white transition-colors`  
+**Copyright:** `text-[#555555]`, uses dynamic year via `new Date().getFullYear()`  
+**Typography:** `text-[10px] uppercase tracking-[0.2em]` for base text
 
 ---
 
 ## Implementation Guidelines
 
-### Tailwind Configuration
+### Tailwind CSS v4 Configuration
 
-The design system is implemented using Tailwind CDN with inline configuration (see `.stitch/designs/home/home.html` for reference):
+The design system is implemented using **Tailwind CSS v4** via the Vite plugin (`@tailwindcss/vite`). Design tokens are defined using the `@theme` directive in `src/index.css`.
 
-```html
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+**Vite Config:**
+```ts
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
 ```
 
-```js
-tailwind.config = {
-  darkMode: "class",
-  theme: {
-    extend: {
-      colors: {
-        'primary': '#222222',
-        'primary-container': '#3c3b3b',
-        'surface': '#f9f9f9',
-        'surface-container-lowest': '#ffffff',
-        'surface-container-low': '#f3f3f4',
-        'surface-container': '#eeeeee',
-        'surface-container-high': '#e8e8e8',
-        'surface-container-highest': '#e2e2e2',
-        'on-surface': '#222222',
-        'on-surface-variant': '#474747',
-        'on-primary': '#e5e2e1',
-        'on-secondary': '#ffffff',
-        'secondary': '#5e5e5e',
-        'secondary-fixed-dim': '#acabab',
-        'tertiary': '#3a3c3c',
-        'outline': '#777777',
-        'outline-variant': '#c6c6c6',
-      },
-      borderRadius: {
-        'DEFAULT': '2px',
-        'sm': '2px',
-        'md': '2px',
-        'lg': '4px',
-        'xl': '8px',
-        'full': '9999px'
-      },
-      spacing: {
-        '72': '18rem',
-        '80': '20rem',
-        '96': '24rem'
-      },
-      fontFamily: {
-        'headline': ['Manrope', 'sans-serif'],
-        'body': ['Manrope', 'sans-serif'],
-        'label': ['Manrope', 'sans-serif']
-      }
-    }
-  }
+**Design Tokens (`src/index.css`):**
+```css
+@import "tailwindcss";
+
+@theme {
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+
+  --color-primary: #222222;
+  --color-primary-container: #3c3b3b;
+  --color-surface: #f9f9f9;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f3f3f4;
+  --color-surface-container: #eeeeee;
+  --color-surface-container-high: #e8e8e8;
+  --color-surface-container-highest: #e2e2e2;
+  --color-on-surface: #222222;
+  --color-on-surface-variant: #474747;
+  --color-on-primary: #e5e2e1;
+  --color-on-secondary: #ffffff;
+  --color-secondary: #5e5e5e;
+  --color-secondary-fixed-dim: #acabab;
+  --color-tertiary: #3a3c3c;
+  --color-outline: #777777;
+  --color-outline-variant: #c6c6c6;
+
+  --radius-DEFAULT: 2px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
+  --radius-xl: 8px;
 }
+```
+
+**Typography Scales & Utilities:**
+
+All type scales (`type-display-large`, `type-headline-medium`, `type-body-large`, etc.) and component-specific styles (`type-project-title`, `type-article-*`, `type-experience-*`) are defined as CSS classes in `src/index.css`. Use these classes instead of inline Tailwind utilities for typography.
+
+**Hairline Borders:**
+
+Functional border utilities are defined as custom classes:
+```css
+.hairline-border { border: 1px solid var(--color-outline-variant); }
+.hairline-b { border-bottom: 1px solid var(--color-outline-variant); }
+.hairline-t { border-top: 1px solid var(--color-outline-variant); }
+.hairline-divide > * + * { border-top: 1px solid var(--color-outline-variant); }
+```
+
+**External Resources:**
+```html
+<!-- index.html -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 ```
 
 ### Base Styles
 
 ```css
 body {
-  font-family: 'Manrope', sans-serif;
-  background-color: theme('colors.surface');
-  color: theme('colors.on-surface');
+  font-family: "Manrope", sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 ```
+
+**Note:** The Stitch-generated HTML files in `.stitch/designs/` use Tailwind CDN with inline configuration for standalone viewing. The actual React implementation uses Tailwind v4 with the Vite plugin and `@theme` directive as shown above.
 
 ---
 
@@ -367,19 +609,21 @@ body {
 When building a new page, ensure:
 
 - [ ] **Primary Color:** All headlines and CTAs use `#222222`, never `#000000`
-- [ ] **Hero Section:** Display typography (4rem+) with -0.03em spacing, `font-light` (300)
-- [ ] **Section Spacing:** Minimum 80px between major sections
+- [ ] **Hero Section:** Display typography (3.5rem+) with -0.03em spacing, `font-light` (300)
+- [ ] **Section Spacing:** Minimum 80px between major sections (use `mb-56` for 14rem/224px spacing)
 - [ ] **Tonal Layers:** Content uses at least 2 surface levels for depth
-- [ ] **No Decorative Lines:** Borders only on inputs, filter bars, and blockquotes
+- [ ] **Functional Borders:** Use hairline borders for card boundaries and section separators
 - [ ] **Asymmetry:** Layout breaks grid intentionally (e.g., 7-5 column split on hero)
-- [ ] **Navigation:** `bg-white/70 backdrop-blur-xl`, no bottom border
+- [ ] **Navigation:** `bg-white/70 backdrop-blur-xl`, no bottom border, includes Projects link
 - [ ] **Brand:** "Francisco Frez" in `font-bold tracking-tight uppercase`
 - [ ] **Body Text:** Uses `on-surface-variant` (#474747) for reduced optical vibration
 - [ ] **Labels/CTAs:** ALL CAPS with `tracking-[0.1em]` or `tracking-widest`
 - [ ] **Buttons:** `rounded-[2px]` sharp editorial — never `rounded-full`
-- [ ] **Cards:** No borders, signature glow shadow, `grayscale` images
+- [ ] **Cards:** `hairline-border` on images and containers, `grayscale` images with subtle hover effects
+- [ ] **Section Labels:** Include decorative dot before text
 - [ ] **Footer:** `#1A1A1A` dark background, links to LinkedIn/Github/Medium
 - [ ] **Icons:** Material Symbols Outlined
+- [ ] **Type Classes:** Use specialized `type-*` classes for components (project-title, article-*, experience-*, etc.)
 
 ---
 

@@ -15,10 +15,10 @@ export default function HomePage() {
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-56">
         <div className="lg:col-span-7 space-y-10">
-          <h1 className="font-headline font-light text-[4rem] leading-[1.05] tracking-[-0.03em] text-primary">
+          <h1 className="font-headline type-display-large text-primary">
             {profile.tagline}
           </h1>
-          <p className="font-body text-[1.125rem] leading-relaxed text-on-surface-variant max-w-xl font-light">
+          <p className="font-body type-body-large text-on-surface-variant max-w-xl">
             {profile.heroSummary}
           </p>
           <div className="flex items-center gap-8 pt-6">
@@ -49,24 +49,24 @@ export default function HomePage() {
           </div>
         </div>
         <div className="md:col-span-7 space-y-8">
-          <h2 className="font-headline font-light text-[3.5rem] tracking-tight text-primary">
+          <h2 className="font-headline type-display-medium text-primary">
             A Bit About Me
           </h2>
-          <p className="font-body text-[0.95rem] text-on-surface-variant leading-relaxed font-light">
+          <p className="font-body type-body-medium text-on-surface-variant">
             I studied Electronic Engineering, got hooked on data, co-founded a few startups along the way, and somehow ended up collaborating with LATAM Airlines. These days I lead a data team — but I'm just as likely to find me gaming, playing guitar at church, or running somewhere outdoors.
           </p>
           <div className="flex gap-12 pt-4">
             <div>
-              <span className="block font-headline font-light text-3xl text-primary tracking-tight">+5y</span>
-              <span className="font-body text-[0.75rem] text-on-surface-variant uppercase tracking-widest">Experience</span>
+              <span className="block font-headline type-headline-large text-primary">+5y</span>
+              <span className="font-body type-label text-on-surface-variant">Experience</span>
             </div>
             <div>
-              <span className="block font-headline font-light text-3xl text-primary tracking-tight">5</span>
-              <span className="font-body text-[0.75rem] text-on-surface-variant uppercase tracking-widest">New Businesses Founded</span>
+              <span className="block font-headline type-headline-large text-primary">5</span>
+              <span className="font-body type-label text-on-surface-variant">New Businesses Founded</span>
             </div>
             <div>
-              <span className="block font-headline font-light text-3xl text-primary tracking-tight">1st</span>
-              <span className="font-body text-[0.75rem] text-on-surface-variant uppercase tracking-widest">Marathon Soon</span>
+              <span className="block font-headline type-headline-large text-primary">1st</span>
+              <span className="font-body type-label text-on-surface-variant">Marathon Soon</span>
             </div>
           </div>
         </div>
@@ -77,18 +77,21 @@ export default function HomePage() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
           <div>
             <SectionLabel>Experience</SectionLabel>
-            <h2 className="font-headline font-light text-[3.5rem] tracking-tight text-primary leading-none max-w-md">
-              Explore My Journey
+            <h2 className="font-headline type-display-medium text-primary max-w-md">
+              Explore My Data Journey
             </h2>
           </div>
           <div className="max-w-md">
-            <p className="font-body text-[0.95rem] text-on-surface-variant leading-relaxed mb-8 font-light">
+            <p className="font-body type-body-medium text-on-surface-variant mb-8">
               Banks, airlines, research labs, my own startups — each chapter taught me something different about building things that deliver value.
             </p>
-            <Button to="/contact" variant="secondary">
+            <Link
+              to="/contact"
+              className="text-primary font-label type-label hover:text-secondary transition-colors inline-flex items-center gap-3 border-b border-primary pb-1"
+            >
               Say Hello
-              <span className="material-symbols-outlined text-sm">arrow_forward</span>
-            </Button>
+              <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'wght' 200" }}>arrow_forward</span>
+            </Link>
           </div>
         </div>
         <div className="hairline-divide hairline-t">
@@ -103,8 +106,8 @@ export default function HomePage() {
       <section className="mb-56 bg-white py-40 border-y border-neutral-100">
         <div className="max-w-7xl mx-auto px-8">
           <div className="text-center mb-24">
-            <SectionLabel centered>Projects & Entrepreneurship</SectionLabel>
-            <h2 className="font-headline font-light text-[3.5rem] tracking-tight text-primary">
+            <SectionLabel centered>Projects</SectionLabel>
+            <h2 className="font-headline type-display-medium text-primary">
               Things I've Built
             </h2>
           </div>
@@ -120,13 +123,13 @@ export default function HomePage() {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center">
-                      <span className="text-[0.75rem] uppercase tracking-[0.3em] text-neutral-400">
+                      <span className="type-label text-neutral-400">
                         {project.title}
                       </span>
                     </div>
                   )}
                 </div>
-                <h3 className="font-headline text-[0.95rem] font-medium text-primary text-center uppercase tracking-widest">
+                <h3 className="font-headline type-project-title text-primary text-center">
                   {project.title}
                 </h3>
               </Link>
@@ -135,10 +138,10 @@ export default function HomePage() {
           <div className="text-center mt-24">
             <Link
               to="/projects"
-              className="text-primary font-label text-[0.75rem] uppercase tracking-[0.2em] hover:text-secondary transition-colors inline-flex items-center gap-3 border-b border-primary pb-1"
+              className="text-primary font-label type-label hover:text-secondary transition-colors inline-flex items-center gap-3 border-b border-primary pb-1"
             >
               Explore All
-              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'wght' 200" }}>arrow_forward</span>
             </Link>
           </div>
         </div>
@@ -148,7 +151,7 @@ export default function HomePage() {
       <section className="mb-56 max-w-7xl mx-auto px-8">
         <div className="text-center mb-24">
           <SectionLabel centered>Blog</SectionLabel>
-          <h2 className="font-headline font-light text-[3.5rem] tracking-tight text-primary">
+          <h2 className="font-headline type-display-medium text-primary">
             What I've Been Learning
           </h2>
         </div>
@@ -157,17 +160,26 @@ export default function HomePage() {
             <ArticleCard key={article.slug} article={article} variant="compact" />
           ))}
         </div>
+        <div className="text-center mt-24">
+          <Link
+            to="/blog"
+            className="text-primary font-label type-label hover:text-secondary transition-colors inline-flex items-center gap-3 border-b border-primary pb-1"
+          >
+            Read All Articles
+            <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'wght' 200" }}>arrow_forward</span>
+          </Link>
+        </div>
       </section>
 
       {/* CTA */}
       <section className="mb-24 text-center bg-white py-40 mx-8 hairline-border">
-        <h2 className="font-headline font-light text-[3.5rem] text-primary mb-8 tracking-tight">
-          Want to Connect?
+        <h2 className="font-headline type-display-medium text-primary mb-8">
+          What Are You Working On?
         </h2>
-        <p className="font-body text-[0.95rem] text-on-surface-variant max-w-lg mx-auto mb-16 leading-relaxed font-light">
-          Whether it's about data, coffee, startups, or just to say hi — I'm always happy to meet new people.
+        <p className="font-body type-body-medium text-on-surface-variant max-w-lg mx-auto mb-16">
+          I like hearing about interesting problems. If you're building something, wrestling with data, or just want to swap ideas — reach out.
         </p>
-        <Button to="/contact">Say Hello</Button>
+        <Button to="/contact">Let's Talk</Button>
       </section>
     </div>
   )

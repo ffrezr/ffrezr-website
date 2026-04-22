@@ -8,24 +8,24 @@ export default function ExperienceRow({ experience }: ExperienceRowProps) {
   return (
     <div className="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
       <div className="md:col-span-5">
-        <h3 className="font-headline font-medium text-[1.19rem] text-primary">
+        <h3 className="font-headline type-experience-title text-primary">
           {experience.company}
-          {experience.client && ` (${experience.client})`}
+          {experience.location && `, ${experience.location}`}
         </h3>
-        <p className="font-body text-[0.74rem] uppercase tracking-widest text-secondary mt-2">
+        <p className="font-body type-experience-meta text-secondary mt-2">
           {experience.period}
         </p>
       </div>
-      <div className="md:col-span-4">
-        <p className="font-body text-[0.925rem] text-on-surface-variant font-light">
+      <div className="md:col-span-3 text-left">
+        <p className="font-body type-experience-role text-on-surface-variant">
           {experience.role}
         </p>
       </div>
-      <div className="md:col-span-3 flex gap-4 justify-start md:justify-end flex-wrap">
+      <div className="md:col-span-4 flex gap-4 justify-start md:justify-end flex-wrap">
         {experience.tags.map((tag) => (
           <span
             key={tag}
-            className="px-4 py-1 hairline-border rounded-[2px] text-[0.69rem] font-label uppercase tracking-widest text-primary"
+            className="px-4 py-1 hairline-border rounded-[2px] type-experience-tag font-label text-primary"
           >
             {tag}
           </span>
