@@ -21,19 +21,19 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-4">
               <span className="material-symbols-outlined text-4xl text-secondary/20">rocket_launch</span>
-              <span className="text-[0.6rem] uppercase tracking-[0.3em] text-secondary/40">{typeLabel}</span>
+              <span className="font-label type-project-card-placeholder text-secondary/40">{typeLabel}</span>
             </div>
           )}
         </div>
-        <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+        <div className="flex items-center gap-3 font-label type-project-card-meta text-[#888888]">
           <span>{project.role}</span>
           <span className="text-[#E2E2E2]">/</span>
           <span>{project.period}</span>
         </div>
-        <h3 className="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-secondary transition-colors">
+        <h3 className="font-headline type-project-card-title text-primary group-hover:text-secondary transition-colors">
           {project.title}
         </h3>
-        <p className="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+        <p className="font-body type-project-card-description text-on-surface-variant line-clamp-3">
           {project.description}
         </p>
         {project.tags && (
@@ -41,7 +41,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 bg-surface-container-low text-secondary font-label text-[0.6rem] uppercase tracking-widest"
+                className="px-3 py-1 bg-surface-container-low text-secondary font-label type-project-card-tag"
               >
                 {tag}
               </span>

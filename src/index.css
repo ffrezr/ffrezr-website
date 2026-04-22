@@ -137,6 +137,44 @@
   text-transform: uppercase;
 }
 
+.type-project-card-placeholder {
+  font-size: 0.6rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.type-project-card-meta {
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.type-project-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.type-project-card-description {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0;
+}
+
+.type-project-card-tag {
+  font-size: 0.6rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 /* Article Card */
 
 .type-article-category {
@@ -162,7 +200,7 @@
 }
 
 .type-article-meta-grid {
-  font-size: 9px;
+  font-size: 0.5625rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: 0.25em;
@@ -177,7 +215,7 @@
 }
 
 .type-article-excerpt {
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 400;
   line-height: 1.7;
   letter-spacing: 0;

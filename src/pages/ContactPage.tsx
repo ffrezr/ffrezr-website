@@ -6,21 +6,17 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
         {/* Left Column */}
         <div className="lg:col-span-5 flex flex-col justify-start lg:pr-20 mb-16 lg:mb-0">
-          <p className="font-label text-[11px] uppercase tracking-[0.2em] text-secondary mb-8">
-            Inquiries & Collaborations
+          <p className="font-label type-label tracking-[0.1em] text-secondary mb-8">
+            Work & Conversations
           </p>
-          <h1 className="font-headline text-5xl md:text-6xl lg:text-[4.5rem] leading-[1.05] tracking-[-0.03em] text-primary font-light mb-10">
-            Let's create
-            <br />
-            something
-            <br />
-            extraordinary.
+          <h1 className="font-headline type-display-large text-primary mb-10">
+            Want to say hi?
           </h1>
-          <p className="font-body text-secondary text-lg md:text-xl max-w-sm leading-relaxed mb-16">
-            Available for data engineering consulting, architecture reviews, and collaborative projects.
+          <p className="font-body type-body-large text-on-surface-variant max-w-sm mb-16">
+            If you're building something interesting, stuck on a data problem, or just feel like swapping ideas, send me a note.
           </p>
           <div className="space-y-10 mt-auto">
-<div className="flex gap-8 pt-4">
+            <div className="flex gap-8 pt-4">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
@@ -29,7 +25,7 @@ export default function ContactPage() {
                   rel="noopener noreferrer"
                   className="text-secondary hover:text-primary transition-colors flex items-center gap-2 group"
                 >
-                  <span className="font-label text-[11px] uppercase tracking-widest font-semibold">
+                  <span className="font-label type-label tracking-[0.1em] font-semibold">
                     {link.label}
                   </span>
                   <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
@@ -50,13 +46,13 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
                 <label
-                  className="block font-label text-[11px] uppercase tracking-[0.2em] text-secondary mb-2"
+                  className="block font-label type-label tracking-[0.1em] text-secondary mb-2"
                   htmlFor="name"
                 >
                   Full Name
                 </label>
                 <input
-                  className="w-full bg-transparent border-0 border-b border-gray-200 text-primary font-body text-lg py-3 px-0 focus:outline-none focus:ring-0 focus:border-primary transition-colors placeholder:text-gray-300"
+                  className="w-full bg-transparent border-0 border-b border-outline-variant text-primary font-body type-body-large py-3 px-0 focus:outline-none focus:ring-0 focus:border-primary transition-colors placeholder:text-outline-variant"
                   id="name"
                   name="name"
                   placeholder="John Doe"
@@ -66,13 +62,13 @@ export default function ContactPage() {
               </div>
               <div>
                 <label
-                  className="block font-label text-[11px] uppercase tracking-[0.2em] text-secondary mb-2"
+                  className="block font-label type-label tracking-[0.1em] text-secondary mb-2"
                   htmlFor="email"
                 >
                   Email Address
                 </label>
                 <input
-                  className="w-full bg-transparent border-0 border-b border-gray-200 text-primary font-body text-lg py-3 px-0 focus:outline-none focus:ring-0 focus:border-primary transition-colors placeholder:text-gray-300"
+                  className="w-full bg-transparent border-0 border-b border-outline-variant text-primary font-body type-body-large py-3 px-0 focus:outline-none focus:ring-0 focus:border-primary transition-colors placeholder:text-outline-variant"
                   id="email"
                   name="email"
                   placeholder="john@example.com"
@@ -82,25 +78,25 @@ export default function ContactPage() {
               </div>
             </div>
 
-<div>
+            <div>
               <label
-                className="block font-label text-[11px] uppercase tracking-[0.2em] text-secondary mb-2"
+                className="block font-label type-label tracking-[0.1em] text-secondary mb-2"
                 htmlFor="message"
               >
-                Project Details
+                What's on your mind?
               </label>
               <textarea
-                className="w-full bg-transparent border-0 border-b border-gray-200 text-primary font-body text-lg py-3 px-0 focus:outline-none focus:ring-0 focus:border-primary transition-colors placeholder:text-gray-300 resize-none min-h-[120px]"
+                className="w-full bg-transparent border-0 border-b border-outline-variant text-primary font-body type-body-large py-3 px-0 focus:outline-none focus:ring-0 focus:border-primary transition-colors placeholder:text-outline-variant resize-none min-h-[120px]"
                 id="message"
                 name="message"
-                placeholder="Briefly describe your project or question..."
+                placeholder="A question, a project, or just a hello..."
                 required
               />
             </div>
 
             <div className="pt-6">
               <button
-                className="bg-primary text-white w-full md:w-auto px-12 py-5 rounded-[2px] font-semibold text-[12px] uppercase tracking-[0.2em] flex items-center justify-center gap-4 hover:bg-zinc-800 transition-all duration-300 group"
+                className="bg-primary text-on-primary w-full md:w-auto px-12 py-5 rounded-[2px] font-label type-label font-bold tracking-[0.1em] flex items-center justify-center gap-4 hover:bg-primary-container transition-all duration-300 group"
                 type="submit"
               >
                 Send Message

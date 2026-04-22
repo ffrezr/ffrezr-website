@@ -196,6 +196,30 @@ These details matter when writing copy so it sounds like him, not a generic pers
 - Don't suggest "optimizing for SEO" or "improving conversion". This site isn't a funnel.
 - Don't recommend analytics/tracking additions unless explicitly asked.
 
+## Collaboration Preferences
+
+These are stable working preferences learned while collaborating on this site. Follow them unless the user explicitly asks otherwise.
+
+### Content approval
+- Do not change copy, titles, descriptions, labels, or any other written content without explicit user approval.
+- If the user wants help with content, propose alternatives in chat first and wait for approval before editing files.
+- If the user picks an option, apply it exactly as approved unless they ask for adaptation.
+
+### Style vs content
+- Style-only changes can be made directly when they do not alter wording or meaning.
+- This includes typography, spacing classes, design token alignment, CSS cleanup, and moving repeated styles into centralized CSS classes.
+- When a task mixes content and styling, separate the two clearly and confirm the content portion before editing it.
+
+### Tone calibration
+- Do not assume the site must always sound informal.
+- Aim for a mixed tone: personal and human, but capable of being more sober and professional when the section is about business, ventures, or more serious work.
+- Do not flag more formal copy as wrong by default. First check whether it still fits the site's balance and the user's intent.
+
+### Implementation preferences
+- Prefer centralized typography in `src/index.css` through semantic `type-*` classes rather than inline Tailwind font-size or tracking utilities.
+- Prefer dedicated CSS classes for component-specific typography instead of reusing unrelated classes just because they look similar.
+- Prefer `rem` for all `font-size` values in the typography system.
+
 ## When in doubt
 
 Ask: *"Would Francisco say this to a friend over coffee?"* If no, rewrite it. If the content sounds like it belongs on LinkedIn, it doesn't belong here.
