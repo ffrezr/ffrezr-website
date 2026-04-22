@@ -59,6 +59,7 @@ export interface ArticleContent extends Article {
 }
 
 export interface SocialLink {
+  icon: 'linkedin' | 'github' | 'medium'
   label: string
   url: string
 }

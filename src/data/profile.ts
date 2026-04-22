@@ -18,9 +18,9 @@ export const profile = {
 } as const
 
 export const socialLinks: SocialLink[] = [
-  { label: 'LinkedIn', url: 'https://linkedin.com/in/francisco-frez-rojas' },
-  { label: 'GitHub', url: 'https://github.com/ffrezr' },
-  { label: 'Medium', url: 'https://medium.com/@franciscofrez' },
+  { icon: 'linkedin', label: 'LinkedIn', url: 'https://linkedin.com/in/francisco-frez-rojas' },
+  { icon: 'github', label: 'GitHub', url: 'https://github.com/ffrezr' },
+  { icon: 'medium', label: 'Medium', url: 'https://medium.com/@franciscofrez' },
 ]
 
 export const skills: SkillGroup[] = [
