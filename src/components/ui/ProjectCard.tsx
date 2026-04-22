@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import type { Project } from '../../types'
+import Tag from './Tag'
 
 interface ProjectCardProps {
   project: Project
@@ -20,7 +21,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-              <span className="material-symbols-outlined text-4xl text-secondary/20">rocket_launch</span>
+              <span className="material-symbols-outlined type-display-small text-secondary/20">rocket_launch</span>
               <span className="font-label type-project-card-placeholder text-secondary/40">{typeLabel}</span>
             </div>
           )}
@@ -37,12 +38,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {project.tags && (
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-3 py-1 bg-surface-container-low text-secondary font-label type-project-card-tag hover:bg-accent-violet hover:text-white transition-colors"
-              >
-                {tag}
-              </span>
+              <Tag key={tag} label={tag} size="sm" />
             ))}
           </div>
         )}

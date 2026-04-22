@@ -44,7 +44,7 @@ export default function Button({
 export function InlineTerminalButton({
   children,
   symbol = '→',
-  symbolClassName = 'text-[1.35em] leading-none',
+  symbolClassName = 'button-symbol-inline',
   ...buttonProps
 }: PatternButtonProps) {
   return (
@@ -60,7 +60,7 @@ export function InlineTerminalButton({
 export function TerminalCommandButton({
   children,
   symbol = '>',
-  symbolClassName = 'text-[1.7em] leading-none',
+  symbolClassName = 'button-symbol-command',
   ...buttonProps
 }: PatternButtonProps) {
   return (
@@ -76,7 +76,7 @@ export function TerminalCommandButton({
 export function PrimaryCTAButton({
   children,
   symbol = '→',
-  symbolClassName = 'text-[1.5em] leading-none',
+  symbolClassName = 'button-symbol-cta',
   ...buttonProps
 }: PatternButtonProps) {
   return (

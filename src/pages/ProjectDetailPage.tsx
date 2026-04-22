@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router'
 import { getProjectBySlug } from '../lib/content'
 import MarkdownRenderer from '../components/ui/MarkdownRenderer'
+import Tag from '../components/ui/Tag'
 
 export default function ProjectDetailPage() {
   const { slug } = useParams()
@@ -39,12 +40,7 @@ export default function ProjectDetailPage() {
         {project.tags && (
           <div className="flex flex-wrap justify-center gap-3 mt-10">
             {project.tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-4 py-1.5 bg-surface-container-low text-secondary font-label text-[0.65rem] uppercase tracking-widest"
-              >
-                {tag}
-              </span>
+              <Tag key={tag} label={tag} size="lg" />
             ))}
           </div>
         )}

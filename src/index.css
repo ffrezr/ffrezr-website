@@ -26,6 +26,10 @@
   --color-accent-green: #1f8f73;
   --color-accent-violet: #7029d9;
   --color-accent-coral: #d06d55;
+  --color-accent-violet-muted: #6c4ea1;
+  --color-accent-violet-dark: #5a20b8;
+  --color-footer-bg: #1a1a1a;
+  --color-muted: #555555;
 
   --radius-DEFAULT: 2px;
   --radius-sm: 2px;
@@ -288,6 +292,51 @@
   text-transform: uppercase;
 }
 
+/* Nav & Footer */
+
+.type-nav-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.type-footer-text {
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Button Symbols */
+
+.button-symbol-inline {
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+.button-symbol-command {
+  font-size: 1.7em;
+  line-height: 1;
+}
+
+.button-symbol-cta {
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+/* Icon Sizing */
+
+.icon-sm {
+  font-size: 1rem;
+}
+
+.icon-md {
+  font-size: 1.125rem;
+}
+
 body {
   font-family: "Manrope", sans-serif;
   background-color: var(--color-surface);
@@ -297,13 +346,13 @@ body {
 }
 
 ::selection {
-  background-color: #222222;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-on-secondary);
 }
 
 ::-moz-selection {
-  background-color: #222222;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-on-secondary);
 }
 
 .hairline-border {
@@ -323,7 +372,7 @@ body {
 }
 
 .hero-index-row {
-  color: #6c4ea1;
+  color: var(--color-accent-violet-muted);
 }
 
 .hero-index-marker {
@@ -335,7 +384,7 @@ body {
 }
 
 .hero-index-text {
-  color: #6c4ea1;
+  color: var(--color-accent-violet-muted);
 }
 
 .hero-name-accent {
@@ -343,7 +392,7 @@ body {
 }
 
 .hero-skills-label-row {
-  color: #6c4ea1;
+  color: var(--color-accent-violet-muted);
 }
 
 .hero-skills-rule {
@@ -353,7 +402,7 @@ body {
 }
 
 .hero-skills-label {
-  color: #6c4ea1;
+  color: var(--color-accent-violet-muted);
 }
 
 .hero-link {
@@ -363,7 +412,7 @@ body {
 }
 
 .hero-link:hover {
-  color: #5a20b8;
+  color: var(--color-accent-violet-dark);
   border-color: var(--color-accent-violet);
 }
 
@@ -468,10 +517,7 @@ body {
 }
 
 .hero-image-frame {
-  border: 1px solid var(--color-outline-variant);
-  box-shadow:
-    0 26px 48px rgb(34 34 34 / 6%),
-    0 18px 36px rgb(34 34 34 / 4%);
+  box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.04);
 }
 
 .social-icon-link {
@@ -497,7 +543,7 @@ body {
   padding-right: 0.1em;
   padding-left: 0.05em;
   font-weight: 800;
-  color: #222222;
+  color: var(--color-primary);
 }
 
 .markdown-body > p:first-child::first-letter {
@@ -508,7 +554,7 @@ body {
   padding-right: 0.1em;
   padding-left: 0.05em;
   font-weight: 800;
-  color: #222222;
+  color: var(--color-primary);
 }
 
 @keyframes hero-wave {

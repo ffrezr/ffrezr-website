@@ -57,7 +57,7 @@ export default function Navbar() {
               to={item.to}
               end={item.to === '/'}
               className={({ isActive }) =>
-                `font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem] pb-1 transition-colors duration-300 ${
+                `font-body type-nav-link pb-1 transition-colors duration-300 ${
                   isActive
                     ? 'text-primary border-b border-primary'
                     : 'text-secondary hover:text-primary'
@@ -103,7 +103,7 @@ export default function Navbar() {
               end={item.to === '/'}
               onClick={() => setMobileOpen(false)}
               className={({ isActive }) =>
-                `block font-['Manrope'] tracking-tight font-medium uppercase text-sm ${
+                `block font-body type-nav-link ${
                   isActive ? 'text-primary' : 'text-secondary'
                 }`
               }
