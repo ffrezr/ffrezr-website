@@ -3,34 +3,100 @@ import Button from '../components/ui/Button'
 import SectionLabel from '../components/ui/SectionLabel'
 import ExperienceRow from '../components/ui/ExperienceRow'
 import ArticleCard from '../components/ui/ArticleCard'
-import { profile, experiences, heroImage } from '../data/profile'
+import { profile, experiences, heroImage, skills } from '../data/profile'
 import { getAllArticles, getFeaturedProjects } from '../lib/content'
+
+function HeroSkillLogo({ skill }: { skill: string }) {
+  if (skill === 'Python') {
+    return (
+      <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0" aria-hidden="true">
+        <path fill="#3776AB" d="M11.9 2.2c-4.7 0-4.4 2-4.4 2v2.1h4.5v.7H5.7S2.6 6.6 2.6 12c0 5.4 2.7 5.2 2.7 5.2h1.6v-2.3s-.1-2.7 2.7-2.7h4.7s2.7 0 2.7-2.6V4.8s.4-2.6-4.9-2.6Z" />
+        <circle cx="9.5" cy="4.5" r="1" fill="#F9F9F9" />
+        <path fill="#FFD43B" d="M12.1 21.8c4.7 0 4.4-2 4.4-2v-2.1H12v-.7h6.3s3.1.4 3.1-5c0-5.4-2.7-5.2-2.7-5.2h-1.6v2.3s.1 2.7-2.7 2.7H9.7S7 11.8 7 14.4v4.8s-.4 2.6 5.1 2.6Z" />
+        <circle cx="14.5" cy="19.5" r="1" fill="#222222" />
+      </svg>
+    )
+  }
+
+  if (skill === 'SQL') {
+    return (
+      <img
+        alt=""
+        aria-hidden="true"
+        className="hero-skill-logo hero-skill-logo-sql"
+        src="/img/logos/sql-database.png"
+      />
+    )
+  }
+
+  return (
+    <img
+      alt=""
+      aria-hidden="true"
+      className="hero-skill-logo hero-skill-logo-gcp"
+      src="/img/logos/google-cloud-icons8.png"
+    />
+  )
+}
 
 export default function HomePage() {
   const articles = getAllArticles()
   const projects = getFeaturedProjects()
+  const heroCoreGroup = skills.find((group) => group.category === 'Core')
+  const heroToolset = heroCoreGroup?.items ?? []
+  const heroSkillLabels: Record<string, string> = {
+    'Google Cloud Platform': 'GCP',
+  }
 
   return (
     <div className="pt-40 w-full">
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center mb-56">
         <div className="lg:col-span-7 space-y-10">
-          <h1 className="font-headline type-display-large text-primary">
-            {profile.tagline}
-          </h1>
+          <div className="space-y-6">
+            <div className="hero-index-row inline-flex items-center gap-4">
+              <span className="hero-index-marker" aria-hidden="true" />
+              <span className="type-hero-terminal hero-index-text">
+                initial commit
+              </span>
+            </div>
+            <h1 className="font-headline type-display-large text-primary">
+              Hey! I&apos;m{' '}
+              <span className="hero-name-accent">Francisco</span>
+            </h1>
+          </div>
           <p className="font-body type-body-large text-on-surface-variant max-w-xl">
             {profile.heroSummary}
           </p>
-          <div className="flex items-center gap-8 pt-6">
-            <Button to="/about">Get to Know Me</Button>
-            <Button to="/blog" variant="secondary">Read Blog</Button>
+          <div className="space-y-5 pt-6">
+            <div className="hero-skills-label-row inline-flex items-center gap-4">
+              <span className="hero-skills-rule" aria-hidden="true" />
+              <span className="type-hero-terminal hero-skills-label">
+                {heroCoreGroup?.category ?? 'Core'} skills
+              </span>
+            </div>
+            <div className="hero-skills-strip max-w-4xl">
+              <div className="hero-skills-inline">
+                {heroToolset.map((skill) => (
+                  <div
+                    key={skill}
+                    className="hero-skill-inline inline-flex items-center gap-4"
+                  >
+                    <HeroSkillLogo skill={skill} />
+                    <span className="type-tech-pill hero-skill-name text-primary">
+                      {heroSkillLabels[skill] ?? skill}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         <div className="lg:col-span-5">
-          <div className="aspect-[4/5] bg-surface-container-low overflow-hidden">
+          <div className="hero-image-frame aspect-[4/5] bg-surface-container-low overflow-hidden">
             <img
               alt="Professional portrait"
-              className="w-full h-full object-cover grayscale"
+              className="w-full h-full object-cover"
               src={heroImage}
             />
           </div>

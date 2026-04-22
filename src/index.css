@@ -22,6 +22,10 @@
   --color-tertiary: #3a3c3c;
   --color-outline: #777777;
   --color-outline-variant: #c6c6c6;
+  --color-accent-blue: #4869d6;
+  --color-accent-green: #1f8f73;
+  --color-accent-violet: #6f59c5;
+  --color-accent-coral: #d06d55;
 
   --radius-DEFAULT: 2px;
   --radius-sm: 2px;
@@ -108,6 +112,21 @@
   line-height: 1.2;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.type-hero-terminal {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.type-tech-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
 }
 
 /* Skill Category */
@@ -295,6 +314,120 @@ body {
   border-top: 1px solid var(--color-outline-variant);
 }
 
+.hero-index-row {
+  color: #6a6590;
+}
+
+.hero-index-marker {
+  width: 0.56rem;
+  height: 0.56rem;
+  flex-shrink: 0;
+  background: var(--color-accent-violet);
+  box-shadow: 0 0 0 6px rgb(111 89 197 / 8%);
+}
+
+.hero-index-text {
+  color: #6a6590;
+  text-transform: uppercase;
+}
+
+.hero-name-accent {
+  color: var(--color-accent-violet);
+}
+
+.hero-skills-label-row {
+  color: #6a6590;
+}
+
+.hero-skills-rule {
+  width: 2.5rem;
+  height: 1px;
+  background: rgb(111 89 197 / 40%);
+}
+
+.hero-skills-label {
+  color: #6a6590;
+  text-transform: uppercase;
+}
+
+.hero-skills-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.hero-skills-topline {
+  width: 100%;
+  height: 1px;
+  background: var(--color-outline-variant);
+}
+
+.hero-skills-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2.5rem;
+}
+
+.hero-skill-inline {
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.hero-skill-inline:hover {
+  transform: translateY(-1px);
+  opacity: 0.82;
+}
+
+.hero-skill-logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.hero-skill-logo-bigquery {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.hero-skill-logo-sql {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+}
+
+.hero-skill-logo-gcp {
+  width: 1.15rem;
+  height: 1.15rem;
+  object-fit: contain;
+}
+
+.hero-skill-name {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.hero-image-frame {
+  border: 1px solid var(--color-outline-variant);
+  box-shadow:
+    0 26px 48px rgb(34 34 34 / 6%),
+    0 18px 36px rgb(34 34 34 / 4%);
+}
+
+.social-icon-link {
+  color: var(--color-primary);
+  transition:
+    transform 220ms ease,
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.social-icon-link:hover {
+  color: var(--color-primary-container);
+  transform: translateY(-2px);
+}
+
 .drop-cap::first-letter {
   float: left;
   font-size: 5rem;
@@ -315,4 +448,42 @@ body {
   padding-left: 0.05em;
   font-weight: 800;
   color: #222222;
+}
+
+@keyframes hero-wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(14deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(14deg);
+  }
+
+  40% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+.hero-wave {
+  transform-origin: 70% 70%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-wave {
+    animation: hero-wave 2.8s ease-in-out infinite;
+  }
 }
