@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" fill="none">
+  <g fill="#222222">
+    <rect x="200" y="80" width="200" height="12" />
+    <rect x="200" y="80" width="12" height="200" />
+    <rect x="200" y="268" width="200" height="12" />
+    <rect x="388" y="80" width="12" height="45" />
+    <rect x="388" y="235" width="12" height="45" />
+
+    <g transform="translate(300 180)">
+      <g transform="scale(0.82)">
+        <g transform="translate(-300 -180)">
+          <rect x="250" y="120" width="14" height="95" />
+          <rect x="250" y="120" width="60" height="12" />
+          <rect x="250" y="160" width="40" height="12" />
+
+          <rect x="290" y="145" width="14" height="95" />
+          <rect x="290" y="145" width="60" height="12" />
+          <rect x="290" y="190" width="45" height="12" />
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <text
+    x="300"
+    y="335"
+    text-anchor="middle"
+    fill="#222222"
+    font-family="'Helvetica Neue', Helvetica, Arial, sans-serif"
+    font-size="30"
+    font-weight="600"
+    letter-spacing="2"
+  >
+    FRANCISCO FREZ
+  </text>
+</svg>

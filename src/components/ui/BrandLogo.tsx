@@ -7,7 +7,11 @@ function joinClasses(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(' ')
 }
 
-export function BrandMark({ className }: { className?: string }) {
+export function BrandMark({
+  className,
+}: {
+  className?: string
+}) {
   return (
     <svg
       viewBox="0 0 200 200"
