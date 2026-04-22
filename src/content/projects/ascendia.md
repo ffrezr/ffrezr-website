@@ -12,6 +12,6 @@ tags:
   - Product
   - EdTech
   - SaaS
-type: product
+type: venture
 featured: true
 ---

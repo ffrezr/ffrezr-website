@@ -1,7 +1,7 @@
 ---
 slug: electroveja-labs
 title: Electroveja Labs
-role: CEO, Co-Founder & Data Scientist
+role: Data Scientist, Founder
 period: Aug 2019 — Sep 2023
 location: Valparaíso, Chile
 description: >

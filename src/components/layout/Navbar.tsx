@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router'
+import BrandLogo from '../ui/BrandLogo'
 
 const navItems = [
   { label: 'Home', to: '/' },
@@ -15,8 +16,12 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl">
       <div className="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6 w-full">
-        <Link to="/" className="text-xl font-bold tracking-tight text-primary uppercase">
-          Francisco Frez
+        <Link
+          to="/"
+          aria-label="Francisco Frez home"
+          className="text-primary transition-opacity duration-300 hover:opacity-75"
+        >
+          <BrandLogo markClassName="h-7 md:h-8" />
         </Link>
 
         <nav className="hidden md:flex space-x-8">

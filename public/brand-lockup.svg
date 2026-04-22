@@ -1,0 +1,14 @@
+<svg width="286" height="84" viewBox="0 0 286 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="18" width="6" height="36" rx="1.5" fill="#222222"/>
+  <rect x="8" y="18" width="28" height="6" rx="1.5" fill="#222222"/>
+  <rect x="8" y="33" width="20" height="6" rx="1.5" fill="#222222"/>
+  <rect x="28" y="24" width="6" height="30" rx="1.5" fill="#222222"/>
+  <rect x="28" y="24" width="24" height="6" rx="1.5" fill="#222222"/>
+  <rect x="28" y="39" width="16" height="6" rx="1.5" fill="#222222"/>
+  <text x="76" y="35" fill="#222222" font-family="Manrope, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3.2">
+    FRANCISCO
+  </text>
+  <text x="76" y="56" fill="#222222" font-family="Manrope, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3.2">
+    FREZ
+  </text>
+</svg>
