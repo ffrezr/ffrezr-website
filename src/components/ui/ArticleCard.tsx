@@ -19,15 +19,15 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
             />
           </div>
           <div className="flex items-center gap-4 mb-6">
-            <span className="text-[0.6rem] uppercase tracking-widest font-label font-bold text-primary">
+            <span className="type-article-category font-label text-primary">
               {article.category}
             </span>
             <span className="w-1 h-1 bg-neutral-300 rounded-full" />
-            <span className="text-[0.7rem] text-secondary font-body">
+            <span className="type-article-meta text-secondary font-body">
               {article.readTime}
             </span>
           </div>
-          <h3 className="font-headline text-[1.25rem] font-light text-primary group-hover:underline decoration-1 underline-offset-8 transition-all leading-snug">
+          <h3 className="font-headline type-article-title-compact text-primary group-hover:underline decoration-1 underline-offset-8 transition-all">
             {article.title}
           </h3>
         </article>
@@ -45,15 +45,15 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
             src={article.image}
           />
         </div>
-        <div className="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.25em] text-[#888888]">
+        <div className="flex items-center gap-3 type-article-meta-grid text-[#888888]">
           <span>{article.category}</span>
           <span className="text-[#E2E2E2]">/</span>
           <span>{article.date}</span>
         </div>
-        <h3 className="font-headline text-xl font-bold tracking-tight text-primary leading-tight group-hover:text-primary transition-colors">
+        <h3 className="font-headline type-article-title-grid text-primary group-hover:text-primary transition-colors">
           {article.title}
         </h3>
-        <p className="text-on-surface-variant text-[13px] leading-[1.7] font-body line-clamp-3">
+        <p className="text-on-surface-variant type-article-excerpt font-body line-clamp-3">
           {article.excerpt}
         </p>
       </article>

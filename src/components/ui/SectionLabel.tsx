@@ -6,7 +6,7 @@ interface SectionLabelProps {
 export default function SectionLabel({ children, centered }: SectionLabelProps) {
   return (
     <span
-      className={`font-label text-[0.7rem] uppercase tracking-[0.2em] text-secondary flex items-center gap-3 mb-6 ${
+      className={`font-label type-label text-secondary flex items-center gap-3 mb-6 ${
         centered ? 'justify-center' : ''
       }`}
     >

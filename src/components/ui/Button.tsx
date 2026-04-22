@@ -22,7 +22,7 @@ export default function Button({
   const base =
     variant === 'primary'
       ? 'bg-primary text-on-primary rounded-[2px] px-10 py-5 font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] hover:bg-primary-container transition-colors inline-flex items-center justify-center gap-3'
-      : 'text-primary font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] border-b border-primary/20 pb-2 hover:border-primary transition-all inline-flex items-center gap-3'
+      : 'text-primary font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] border-b border-primary pb-2 hover:text-primary/70 transition-all inline-flex items-center gap-3'
 
   const classes = `${base} ${className}`
 
