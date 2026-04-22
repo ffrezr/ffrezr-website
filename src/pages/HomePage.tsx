@@ -63,6 +63,10 @@ export default function HomePage() {
             <h1 className="font-headline type-display-large text-primary">
               Hey! I&apos;m{' '}
               <span className="hero-name-accent">Francisco</span>
+              <span className="hero-wave ml-3 inline-block text-[0.78em]" aria-hidden="true">
+                👋
+              </span>
+              .
             </h1>
           </div>
           <p className="font-body type-body-large text-on-surface-variant max-w-xl">
