@@ -24,7 +24,7 @@
   --color-outline-variant: #c6c6c6;
   --color-accent-blue: #4869d6;
   --color-accent-green: #1f8f73;
-  --color-accent-violet: #6f59c5;
+  --color-accent-violet: #7029d9;
   --color-accent-coral: #d06d55;
 
   --radius-DEFAULT: 2px;
@@ -315,7 +315,7 @@ body {
 }
 
 .hero-index-row {
-  color: #6a6590;
+  color: #6c4ea1;
 }
 
 .hero-index-marker {
@@ -323,11 +323,11 @@ body {
   height: 0.56rem;
   flex-shrink: 0;
   background: var(--color-accent-violet);
-  box-shadow: 0 0 0 6px rgb(111 89 197 / 8%);
+  box-shadow: 0 0 0 6px rgb(112 41 217 / 10%);
 }
 
 .hero-index-text {
-  color: #6a6590;
+  color: #6c4ea1;
   text-transform: uppercase;
 }
 
@@ -336,17 +336,17 @@ body {
 }
 
 .hero-skills-label-row {
-  color: #6a6590;
+  color: #6c4ea1;
 }
 
 .hero-skills-rule {
   width: 2.5rem;
   height: 1px;
-  background: rgb(111 89 197 / 40%);
+  background: rgb(112 41 217 / 42%);
 }
 
 .hero-skills-label {
-  color: #6a6590;
+  color: #6c4ea1;
   text-transform: uppercase;
 }
 
