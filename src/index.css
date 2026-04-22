@@ -114,6 +114,14 @@
   text-transform: uppercase;
 }
 
+.type-button-editorial {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .type-hero-terminal {
   font-size: 0.72rem;
   font-weight: 500;
@@ -328,7 +336,6 @@ body {
 
 .hero-index-text {
   color: #6c4ea1;
-  text-transform: uppercase;
 }
 
 .hero-name-accent {
@@ -347,7 +354,61 @@ body {
 
 .hero-skills-label {
   color: #6c4ea1;
-  text-transform: uppercase;
+}
+
+.hero-link {
+  color: var(--color-accent-violet);
+  border-color: rgb(112 41 217 / 32%);
+  transition: color 220ms ease, border-color 220ms ease;
+}
+
+.hero-link:hover {
+  color: #5a20b8;
+  border-color: var(--color-accent-violet);
+}
+
+.button-editorial-primary,
+.button-editorial-secondary,
+.button-editorial-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition:
+    color 220ms ease,
+    background-color 220ms ease;
+}
+
+.button-editorial-primary {
+  gap: 1.25rem;
+  padding: 1.25rem 2.5rem;
+  border-radius: 2px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.button-editorial-primary:hover {
+  background: var(--color-accent-violet);
+}
+
+.button-editorial-secondary {
+  gap: 0.28rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 0.13em solid currentColor;
+  color: var(--color-primary);
+}
+
+.button-editorial-secondary:hover {
+  color: var(--color-accent-violet);
+}
+
+.button-editorial-inline {
+  gap: 0.42rem;
+  color: var(--color-primary);
+}
+
+.button-editorial-inline:hover {
+  color: var(--color-accent-violet);
 }
 
 .hero-skills-strip {
@@ -424,7 +485,7 @@ body {
 }
 
 .social-icon-link:hover {
-  color: var(--color-primary-container);
+  color: var(--color-accent-violet);
   transform: translateY(-2px);
 }
 

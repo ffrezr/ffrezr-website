@@ -11,10 +11,10 @@ export default function ArticleCard({ article, variant = 'grid' }: ArticleCardPr
     return (
       <Link to={`/blog/${article.slug}`} className="group cursor-pointer">
         <article>
-          <div className="aspect-[16/10] overflow-hidden mb-10 bg-surface-container-low hairline-border">
+          <div className="hero-image-frame aspect-[16/10] overflow-hidden mb-10 bg-surface-container-low">
             <img
               alt={article.title}
-              className="w-full h-full object-cover grayscale"
+              className="w-full h-full object-cover"
               src={article.image}
             />
           </div>

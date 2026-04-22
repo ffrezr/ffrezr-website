@@ -11,7 +11,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   return (
     <Link to={`/projects/${project.slug}`} className="group cursor-pointer">
       <article className="flex flex-col gap-6">
-        <div className="overflow-hidden w-full h-[480px] bg-surface-container-low border border-[#E2E2E2]/30">
+        <div className="overflow-hidden w-full h-[340px] bg-surface-container-low border border-[#E2E2E2]/30">
           {project.image ? (
             <img
               alt={project.title}
