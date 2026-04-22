@@ -28,7 +28,7 @@ export default function ContactPage() {
                   <span className="font-label type-label tracking-[0.1em] font-semibold">
                     {link.label}
                   </span>
-                  <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+                  <span className="material-symbols-outlined icon-md group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
                     arrow_outward
                   </span>
                 </a>
@@ -38,7 +38,7 @@ export default function ContactPage() {
         </div>
 
         {/* Divider */}
-        <div className="hidden lg:block lg:col-span-1 border-l border-gray-100 h-full" />
+        <div className="hidden lg:block lg:col-span-1 border-l border-surface-container-highest h-full" />
 
         {/* Right Column - Form */}
         <div className="lg:col-span-6">
@@ -100,7 +100,7 @@ export default function ContactPage() {
                 type="submit"
               >
                 Send Message
-                <span className="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">
+                <span className="material-symbols-outlined icon-md group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
               </button>

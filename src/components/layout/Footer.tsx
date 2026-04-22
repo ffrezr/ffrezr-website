@@ -4,7 +4,7 @@ import BrandLogo from '../ui/BrandLogo'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
+    <footer className="bg-footer-bg text-white w-full font-body type-footer-text">
       <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
         <Link
           to="/"
@@ -20,13 +20,13 @@ export default function Footer() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#ACABAB] hover:text-white transition-colors"
+              className="text-secondary-fixed-dim hover:text-white transition-colors"
             >
               {link.label}
             </a>
           ))}
         </div>
-        <span className="text-[#555555]">
+        <span className="text-muted">
           &copy; {new Date().getFullYear()} Francisco Frez.
         </span>
       </div>

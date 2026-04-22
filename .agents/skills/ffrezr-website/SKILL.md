@@ -91,10 +91,13 @@ When creating new pages, sections, or views, think **before** coding. Commit to 
 
 - **Typography with intention** — Manrope is fixed, but type scale choices carry meaning. Display-large for emotional moments, body-large for reading, label for metadata. Don't default to Body-medium everywhere.
 - **Tonal depth over lines** — Use the surface-container-* layers to create structure. Stack tonal planes instead of drawing borders. A section can "breathe differently" just by shifting one level.
+- **Violet accent thread** — `accent-violet` (#7029D9) runs through the entire design as the signature highlight: hero markers, name accents, button hovers, tag interactions, social icon hovers. This creates cohesion against the monochrome base.
 - **Asymmetric composition** — Break the grid intentionally. 7/5 column splits, offset images, content that bleeds past canvas edges. Symmetry is a last resort.
 - **Negative space is content** — Minimum 80–120px between major sections. Empty space communicates confidence and editorial restraint.
+- **Hero-index section pattern** — Every major section starts with the hero-index pattern: a violet marker dot with glow ring + monospace terminal label (`type-hero-terminal`) + headline with one `hero-name-accent` word. Subsections use `hero-skills-rule` (horizontal line) instead of the marker dot. Terminal labels must be **real Linux/git commands** (e.g., `whoami`, `cat skills.yml`, `git log --oneline`, `top`, `~/life`) — never made-up words.
+- **Reuse existing visual patterns** — When building new sections (stats, highlights, metrics), prefer reusing CSS classes and layout patterns already established in other pages (e.g., `hero-name-accent` for big numbers, `type-tech-pill hero-skill-name` for labels, `hero-skills-inline` for inline strips) rather than inventing new styles.
 - **Motion with purpose** — CSS-only where possible. One well-orchestrated staggered reveal on page load beats five scattered micro-interactions. Use `prefers-reduced-motion`. When React-side motion is needed, reach for Motion (framer-motion) if available, not homemade transitions.
-- **Atmosphere in details** — Signature glow shadows, glassmorphism on nav, grayscale→color image transitions. Small details compound.
+- **Atmosphere in details** — `hero-image-frame` (subtle shadow, no border), glassmorphism on nav, violet hover transitions, wave animation on hero emoji. Small details compound.
 - **Grain and texture** — Can add subtle noise overlays or textured backgrounds to break up flat surfaces, but only if they reinforce the editorial feel. Never decorative for decoration's sake.
 
 ### Anti-patterns when designing new views
@@ -114,9 +117,13 @@ When creating new pages, sections, or views, think **before** coding. Commit to 
 - [ ] Used at least 2 surface tonal levels for depth
 - [ ] No decorative borders
 - [ ] Sections have 80px+ vertical breathing room
+- [ ] Every section opens with the hero-index pattern (violet marker + terminal label + accented headline)
 - [ ] Hero uses `font-light` display typography with tight letter-spacing
-- [ ] Images start `grayscale`, gain color on interaction
-- [ ] Labels/CTAs are ALL CAPS with wide tracking
+- [ ] Image containers use `hero-image-frame` for subtle shadow (no border)
+- [ ] Labels/CTAs are ALL CAPS — primary uses `type-button-editorial`, secondary uses `type-hero-terminal`
+- [ ] All interactive hover states use `accent-violet`
+- [ ] Tags use the `Tag` component with appropriate size (`sm`/`md`/`lg`)
+- [ ] Buttons use pattern components (`PrimaryCTAButton`, `TerminalCommandButton`, `InlineTerminalButton`)
 - [ ] Buttons use `rounded-[2px]`, never `rounded-full`
 - [ ] Checked the copy tone — does it sound like Francisco, not LinkedIn?
 
@@ -136,14 +143,20 @@ When creating new pages, sections, or views, think **before** coding. Commit to 
 All visual work must follow `DESIGN.md` (Nova Editorial). Quick reminders of non-obvious rules:
 
 - Primary color is `#222222` — never pure `#000000`
-- Borders only on inputs (bottom), blockquotes (left accent), filter bars. **No borders on cards or sections** — use tonal shifts
+- Accent color is `accent-violet` (`#7029D9`) — used for all interactive highlights, hovers, markers, and name accents
+- All button hovers transition to `accent-violet` (not `primary-container`)
+- Brand is a custom SVG monogram (`BrandLogo` component), not text — used in navbar and footer
+- Navbar has social icon links (LinkedIn, Medium, GitHub) on the right — no CTA button
+- Section labels use the hero-index pattern (violet marker + `type-hero-terminal` monospace label), not the old SectionLabel dot
+- Image containers use `hero-image-frame` (subtle shadow, no border) — all images display in full color (no grayscale anywhere on the site)
+- Tags use the reusable `Tag` component (`sm`/`md`/`lg` sizes) with violet hover
+- Buttons use pattern components: `PrimaryCTAButton`, `TerminalCommandButton`, `InlineTerminalButton`
 - `rounded-[2px]` on buttons — never `rounded-full` on CTAs
-- Images: `grayscale` by default, color on hover
 - Typography: use `type-*` CSS classes (in `src/index.css`), not raw Tailwind sizes
 - Font-light (300) for hero headlines with `-0.03em` letter-spacing
 - Body text: `on-surface-variant` (#474747), not the primary color
 - Min section spacing: 80px
-- Labels/CTAs: ALL CAPS with `tracking-[0.1em]` or `tracking-widest`
+- Labels/CTAs: ALL CAPS — primary uses `type-button-editorial`, secondary/inline use `type-hero-terminal`
 
 ## Stack Context
 
@@ -189,7 +202,13 @@ These details matter when writing copy so it sounds like him, not a generic pers
 - ❌ `rounded-full` on buttons
 - ❌ Generic fonts — Manrope only
 - ❌ Centered body paragraphs
-- ❌ Heavy drop shadows (use signature glow)
+- ❌ Heavy drop shadows (use `hero-image-frame` or signature glow)
+- ❌ Grayscale on images — all images must be full color
+- ❌ Using Material Symbols for certifications — use the issuer's color logo instead (stored in `public/img/logos/`)
+- ❌ Using text brand name instead of `BrandLogo` SVG component
+- ❌ Inline tag styling instead of the `Tag` component
+- ❌ Inline button styling instead of pattern components (`PrimaryCTAButton`, etc.)
+- ❌ Using old SectionLabel dot pattern instead of the hero-index pattern
 
 ### Behavior
 - Don't over-polish. If the user says "this is rough", keep it rough if that's the vibe.
