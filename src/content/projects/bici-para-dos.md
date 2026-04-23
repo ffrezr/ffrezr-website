@@ -8,7 +8,7 @@ description: >
   An experimental project merging artificial intelligence with music composition
   — using OpenAI's Jukebox neural network to co-create a cinematic soundtrack
   with a human composer. Presented at FECI 2021.
-image: /img/entrepreneurship/electroveja/electrovejalabs_cover.jpeg
+image: /img/projects/bici-para-dos/OG-image.png
 tags:
   - AI
   - Deep Learning

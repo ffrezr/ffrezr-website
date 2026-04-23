@@ -7,7 +7,7 @@ location: Valparaíso, Chile
 description: >
   Specialty cold brew coffee crafted with 100% Arabica beans from El Salvador and
   Colombia. A passion project blending entrepreneurship with my love for great coffee.
-image: /img/side-projects/cold-brew/astro-bottle-balcony.jpeg
+image: /img/side-projects/cold-brew/cold_brew_blog.webp
 tags:
   - Coffee
   - Entrepreneurship

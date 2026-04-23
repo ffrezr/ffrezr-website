@@ -3,42 +3,13 @@ import type { Article } from '../../types'
 
 interface ArticleCardProps {
   article: Article
-  variant?: 'grid' | 'compact'
 }
 
-export default function ArticleCard({ article, variant = 'grid' }: ArticleCardProps) {
-  if (variant === 'compact') {
-    return (
-      <Link to={`/blog/${article.slug}`} className="group cursor-pointer">
-        <article>
-          <div className="hero-image-frame aspect-[16/10] overflow-hidden mb-10 bg-surface-container-low">
-            <img
-              alt={article.title}
-              className="w-full h-full object-cover"
-              src={article.image}
-            />
-          </div>
-          <div className="flex items-center gap-4 mb-6">
-            <span className="type-article-category font-label text-primary">
-              {article.category}
-            </span>
-            <span className="w-1 h-1 bg-secondary-fixed-dim rounded-full" />
-            <span className="type-article-meta text-secondary font-body">
-              {article.readTime}
-            </span>
-          </div>
-          <h3 className="font-headline type-article-title-compact text-primary group-hover:underline decoration-1 underline-offset-8 transition-all">
-            {article.title}
-          </h3>
-        </article>
-      </Link>
-    )
-  }
-
+export default function ArticleCard({ article }: ArticleCardProps) {
   return (
     <Link to={`/blog/${article.slug}`} className="group cursor-pointer">
       <article className="flex flex-col gap-6">
-        <div className="hero-image-frame overflow-hidden w-full h-[320px] bg-surface-container-low">
+        <div className="hero-image-frame overflow-hidden w-full aspect-[1.91/1] bg-surface-container-low">
           <img
             alt={article.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-in-out"

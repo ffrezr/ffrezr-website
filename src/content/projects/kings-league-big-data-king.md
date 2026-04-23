@@ -8,7 +8,7 @@ description: >
   Joined a small Computer Vision team to automate the capture of match performance
   metrics from Kings League game recordings using deep learning — turning raw video
   into structured sports analytics.
-image: /img/side-projects/big-data-kings/big-data-kings-banner.jpeg
+image: /img/side-projects/big-data-kings/banner.png
 tags:
   - Deep Learning
   - Computer Vision
