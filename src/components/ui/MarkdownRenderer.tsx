@@ -16,17 +16,17 @@ function extractText(node: ReactNode): string {
 
 const components: Components = {
   h2: ({ children, className }) => (
-    <h2 className={className || 'text-3xl md:text-4xl font-semibold text-primary mb-8 tracking-[-0.02em] font-headline'}>
+    <h2 className={className || 'type-headline-large font-semibold font-headline text-primary mb-8'}>
       {children}
     </h2>
   ),
   h3: ({ children, className }) => (
-    <h3 className={className || 'text-xl font-bold text-primary mb-4 tracking-[-0.01em]'}>
+    <h3 className={className || 'type-headline-small font-headline text-primary mb-4'}>
       {children}
     </h3>
   ),
   p: ({ children, className }) => (
-    <p className={className || 'text-lg md:text-xl leading-relaxed text-on-surface-variant mb-12'}>
+    <p className={className || 'type-body-large text-on-surface-variant mb-12'}>
       {children}
     </p>
   ),
@@ -43,12 +43,12 @@ const components: Components = {
     </a>
   ),
   ul: ({ children }) => (
-    <ul className="list-disc list-outside ml-6 mb-12 space-y-2 text-lg text-on-surface-variant">
+    <ul className="list-disc list-outside ml-6 mb-12 space-y-2 type-body-large text-on-surface-variant">
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="list-decimal list-outside ml-6 mb-12 space-y-2 text-lg text-on-surface-variant">
+    <ol className="list-decimal list-outside ml-6 mb-12 space-y-2 type-body-large text-on-surface-variant">
       {children}
     </ol>
   ),
@@ -70,13 +70,13 @@ const components: Components = {
 
     return (
       <div className="w-full bg-surface-container-low p-12 md:p-16 mb-16 rounded-sm shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
-        <blockquote className="text-[1.6875rem] md:text-[1.875rem] font-bold text-primary leading-snug tracking-[-0.01em]">
+        <blockquote className="type-headline-large font-bold text-primary">
           {quoteLines.join(' ')}
         </blockquote>
         {attribution && (
           <div className="mt-8 flex items-center gap-4">
             <div className="w-12 h-[2px] bg-primary" />
-            <span className="text-[0.75rem] uppercase tracking-[0.05em] font-bold text-secondary">
+            <span className="type-label font-bold text-secondary">
               {attribution}
             </span>
           </div>

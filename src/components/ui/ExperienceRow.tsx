@@ -1,4 +1,5 @@
 import type { Experience } from '../../types'
+import Tag from './Tag'
 
 interface ExperienceRowProps {
   experience: Experience
@@ -21,14 +22,9 @@ export default function ExperienceRow({ experience }: ExperienceRowProps) {
           {experience.role}
         </p>
       </div>
-      <div className="md:col-span-4 flex gap-4 justify-start md:justify-end flex-wrap">
+      <div className="md:col-span-4 flex gap-3 justify-start md:justify-end flex-wrap">
         {experience.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-4 py-1 hairline-border rounded-[2px] type-experience-tag font-label text-primary"
-          >
-            {tag}
-          </span>
+          <Tag key={tag} label={tag} size="md" />
         ))}
       </div>
     </div>

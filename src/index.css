@@ -22,6 +22,14 @@
   --color-tertiary: #3a3c3c;
   --color-outline: #777777;
   --color-outline-variant: #c6c6c6;
+  --color-accent-blue: #4869d6;
+  --color-accent-green: #1f8f73;
+  --color-accent-violet: #7029d9;
+  --color-accent-coral: #d06d55;
+  --color-accent-violet-muted: #6c4ea1;
+  --color-accent-violet-dark: #5a20b8;
+  --color-footer-bg: #1a1a1a;
+  --color-muted: #555555;
 
   --radius-DEFAULT: 2px;
   --radius-sm: 2px;
@@ -108,6 +116,29 @@
   line-height: 1.2;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.type-button-editorial {
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.type-hero-terminal {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.type-tech-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
 }
 
 /* Skill Category */
@@ -261,6 +292,51 @@
   text-transform: uppercase;
 }
 
+/* Nav & Footer */
+
+.type-nav-link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+
+.type-footer-text {
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Button Symbols */
+
+.button-symbol-inline {
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+.button-symbol-command {
+  font-size: 1.7em;
+  line-height: 1;
+}
+
+.button-symbol-cta {
+  font-size: 1.5em;
+  line-height: 1;
+}
+
+/* Icon Sizing */
+
+.icon-sm {
+  font-size: 1rem;
+}
+
+.icon-md {
+  font-size: 1.125rem;
+}
+
 body {
   font-family: "Manrope", sans-serif;
   background-color: var(--color-surface);
@@ -270,13 +346,13 @@ body {
 }
 
 ::selection {
-  background-color: #222222;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-on-secondary);
 }
 
 ::-moz-selection {
-  background-color: #222222;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-on-secondary);
 }
 
 .hairline-border {
@@ -295,6 +371,170 @@ body {
   border-top: 1px solid var(--color-outline-variant);
 }
 
+.hero-index-row {
+  color: var(--color-accent-violet-muted);
+}
+
+.hero-index-marker {
+  width: 0.56rem;
+  height: 0.56rem;
+  flex-shrink: 0;
+  background: var(--color-accent-violet);
+  box-shadow: 0 0 0 6px rgb(112 41 217 / 10%);
+}
+
+.hero-index-text {
+  color: var(--color-accent-violet-muted);
+}
+
+.hero-name-accent {
+  color: var(--color-accent-violet);
+}
+
+.hero-skills-label-row {
+  color: var(--color-accent-violet-muted);
+}
+
+.hero-skills-rule {
+  width: 2.5rem;
+  height: 1px;
+  background: rgb(112 41 217 / 42%);
+}
+
+.hero-skills-label {
+  color: var(--color-accent-violet-muted);
+}
+
+.hero-link {
+  color: var(--color-accent-violet);
+  border-color: rgb(112 41 217 / 32%);
+  transition: color 220ms ease, border-color 220ms ease;
+}
+
+.hero-link:hover {
+  color: var(--color-accent-violet-dark);
+  border-color: var(--color-accent-violet);
+}
+
+.button-editorial-primary,
+.button-editorial-secondary,
+.button-editorial-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition:
+    color 220ms ease,
+    background-color 220ms ease;
+}
+
+.button-editorial-primary {
+  gap: 1.25rem;
+  padding: 1.25rem 2.5rem;
+  border-radius: 2px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+.button-editorial-primary:hover {
+  background: var(--color-accent-violet);
+}
+
+.button-editorial-secondary {
+  gap: 0.28rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 0.13em solid currentColor;
+  color: var(--color-primary);
+}
+
+.button-editorial-secondary:hover {
+  color: var(--color-accent-violet);
+}
+
+.button-editorial-inline {
+  gap: 0.42rem;
+  color: var(--color-primary);
+}
+
+.button-editorial-inline:hover {
+  color: var(--color-accent-violet);
+}
+
+.hero-skills-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.hero-skills-topline {
+  width: 100%;
+  height: 1px;
+  background: var(--color-outline-variant);
+}
+
+.hero-skills-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2.5rem;
+}
+
+.hero-skill-inline {
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.hero-skill-inline:hover {
+  transform: translateY(-1px);
+  opacity: 0.82;
+}
+
+.hero-skill-logo {
+  display: block;
+  flex-shrink: 0;
+}
+
+.hero-skill-logo-bigquery {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.hero-skill-logo-sql {
+  width: 1.2rem;
+  height: 1.2rem;
+  object-fit: contain;
+}
+
+.hero-skill-logo-gcp {
+  width: 1.15rem;
+  height: 1.15rem;
+  object-fit: contain;
+}
+
+.hero-skill-name {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: "SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.hero-image-frame {
+  box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.04);
+}
+
+.social-icon-link {
+  color: var(--color-primary);
+  transition:
+    transform 220ms ease,
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.social-icon-link:hover {
+  color: var(--color-accent-violet);
+  transform: translateY(-2px);
+}
+
 .drop-cap::first-letter {
   float: left;
   font-size: 5rem;
@@ -303,7 +543,7 @@ body {
   padding-right: 0.1em;
   padding-left: 0.05em;
   font-weight: 800;
-  color: #222222;
+  color: var(--color-primary);
 }
 
 .markdown-body > p:first-child::first-letter {
@@ -314,5 +554,43 @@ body {
   padding-right: 0.1em;
   padding-left: 0.05em;
   font-weight: 800;
-  color: #222222;
+  color: var(--color-primary);
+}
+
+@keyframes hero-wave {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(14deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(14deg);
+  }
+
+  40% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+}
+
+.hero-wave {
+  transform-origin: 70% 70%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-wave {
+    animation: hero-wave 2.8s ease-in-out infinite;
+  }
 }
