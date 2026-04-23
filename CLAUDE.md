@@ -10,7 +10,7 @@ npm run build      # Type-check (tsc -b) then build for production
 npm run preview    # Preview production build locally
 ```
 
-No test runner or linter is configured.
+No test runner or linter is configured. Playwright is a dev dependency but has no test suites.
 
 ## Architecture
 
@@ -31,17 +31,25 @@ Projects and articles are **Markdown files with YAML frontmatter** in `src/conte
 
 `src/lib/content.ts` exposes: `getAllProjects()`, `getFeaturedProjects()`, `getProjectBySlug(slug)`, `getAllArticles()`, `getArticleBySlug(slug)`, `getArticleCategories()`.
 
-To add a new project or article, create a `.md` file in the corresponding `src/content/` subdirectory with the required frontmatter fields (see existing files for the schema). The slug in the frontmatter must match what's used in URLs.
+To add a new project or article, create a `.md` file in the corresponding `src/content/` subdirectory. The slug in the frontmatter must match what's used in URLs.
+
+**Project frontmatter** (`src/types/index.ts → Project`):
+- Required: `slug`, `title`, `role`, `period`, `location`, `description`
+- Optional: `image`, `tags[]`, `type` (`venture` | `project` | `product` | `side-project`), `featured`
+
+**Article frontmatter** (`src/types/index.ts → Article`):
+- Required: `slug`, `title`, `excerpt`, `category`, `date`, `readTime`, `image`
+- Optional: `featured`
 
 ### Data layer
 
-- **Profile data** (name, skills, experience, education, certifications, social links) is hard-coded in `src/data/profile.ts`.
+- **Profile data** (name, skills, experience, education, certifications, awards, social links, image paths) is hard-coded in `src/data/profile.ts`.
 - **Content** (projects, articles) comes from markdown files via `src/lib/content.ts`.
 - Components receive data via props — no global state or context.
 
 ### Path alias
 
-`@/*` maps to `./src/*` (configured in tsconfig and vite config).
+`@/*` maps to `./src/*` (configured in `tsconfig.app.json`). Not currently used — all imports use relative paths.
 
 ## Design system — "Nova Editorial"
 
@@ -56,7 +64,7 @@ Full spec in `DESIGN.md`. Key points for implementation:
 
 ## Component conventions
 
-- `src/components/ui/` — reusable components (Button, ArticleCard, ProjectCard, MarkdownRenderer, SectionLabel, ExperienceRow).
+- `src/components/ui/` — reusable components (ArticleCard, BrandLogo, Button, ExperienceRow, MarkdownRenderer, ProjectCard, SectionLabel, Tag).
 - `src/components/layout/` — Layout, Navbar, Footer.
 - `src/pages/` — one file per route.
 - `MarkdownRenderer` uses react-markdown with remark-gfm + rehype-raw, with custom-styled component overrides for headings, links, blockquotes, images, etc.
