@@ -1,4 +1,5 @@
 import { profile, skills, experiences, education, certifications, awards, aboutHeroImage, hobbyImages, universityImages } from '../data/profile'
+import Tag from '../components/ui/Tag'
 
 const certLogos: Record<string, string> = {
   Google: '/img/logos/google.svg',
@@ -29,9 +30,7 @@ export default function AboutPage() {
             {profile.aboutSummary}
           </p>
           <div className="pt-4">
-            <span className="inline-block px-4 py-2 rounded-full bg-surface-container-low text-secondary type-label">
-              {profile.role}
-            </span>
+            <Tag label={profile.role} size="xl" />
           </div>
         </div>
         <div className="lg:col-span-5">

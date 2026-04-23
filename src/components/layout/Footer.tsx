@@ -5,11 +5,11 @@ import BrandLogo from '../ui/BrandLogo'
 export default function Footer() {
   return (
     <footer className="bg-footer-bg text-white w-full font-body type-footer-text">
-      <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
+      <div className="flex flex-col md:grid md:grid-cols-3 items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
         <Link
           to="/"
           aria-label="Francisco Frez home"
-          className="text-white transition-opacity duration-300 hover:opacity-75"
+          className="text-white transition-opacity duration-300 hover:opacity-75 md:justify-self-start"
         >
           <BrandLogo showWordmark={false} className="h-14 md:h-16" />
         </Link>
@@ -20,13 +20,13 @@ export default function Footer() {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-secondary-fixed-dim hover:text-white transition-colors"
+              className="text-white hover:opacity-75 transition-opacity"
             >
               {link.label}
             </a>
           ))}
         </div>
-        <span className="text-muted">
+        <span className="text-white md:justify-self-end">
           &copy; {new Date().getFullYear()} Francisco Frez.
         </span>
       </div>

@@ -26,7 +26,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </div>
           )}
         </div>
-        <div className="type-hero-terminal text-secondary group-hover:text-accent-violet transition-colors">
+        <div className="type-hero-terminal text-secondary">
           <span>{project.period}</span>
         </div>
         <h3 className="font-headline type-project-card-title text-primary group-hover:text-accent-violet transition-colors">

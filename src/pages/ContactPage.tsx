@@ -1,4 +1,5 @@
 import { socialLinks } from '../data/profile'
+import { ExternalTerminalButton, PrimaryCTAButton } from '../components/ui/Button'
 
 export default function ContactPage() {
   return (
@@ -6,11 +7,14 @@ export default function ContactPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
         {/* Left Column */}
         <div className="lg:col-span-5 flex flex-col justify-start lg:pr-20 mb-16 lg:mb-0">
-          <p className="font-label type-label tracking-[0.1em] text-secondary mb-8">
-            Work & Conversations
-          </p>
+          <div className="hero-index-row inline-flex items-center gap-4 mb-8">
+            <span className="hero-index-marker" aria-hidden="true" />
+            <span className="type-hero-terminal hero-index-text">
+              git push
+            </span>
+          </div>
           <h1 className="font-headline type-display-large text-primary mb-10">
-            Want to say hi?
+            Want to say <span className="hero-name-accent">hi</span>?
           </h1>
           <p className="font-body type-body-large text-on-surface-variant max-w-sm mb-16">
             If you're building something interesting, stuck on a data problem, or just feel like swapping ideas, send me a note.
@@ -18,20 +22,9 @@ export default function ContactPage() {
           <div className="space-y-10 mt-auto">
             <div className="flex gap-8 pt-4">
               {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-secondary hover:text-primary transition-colors flex items-center gap-2 group"
-                >
-                  <span className="font-label type-label tracking-[0.1em] font-semibold">
-                    {link.label}
-                  </span>
-                  <span className="material-symbols-outlined icon-md group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
-                    arrow_outward
-                  </span>
-                </a>
+                <ExternalTerminalButton key={link.label} href={link.url}>
+                  {link.label}
+                </ExternalTerminalButton>
               ))}
             </div>
           </div>
@@ -95,15 +88,9 @@ export default function ContactPage() {
             </div>
 
             <div className="pt-6">
-              <button
-                className="bg-primary text-on-primary w-full md:w-auto px-12 py-5 rounded-[2px] font-label type-label font-bold tracking-[0.1em] flex items-center justify-center gap-4 hover:bg-primary-container transition-all duration-300 group"
-                type="submit"
-              >
+              <PrimaryCTAButton type="submit" className="w-full md:w-auto">
                 Send Message
-                <span className="material-symbols-outlined icon-md group-hover:translate-x-1 transition-transform">
-                  arrow_forward
-                </span>
-              </button>
+              </PrimaryCTAButton>
             </div>
           </form>
         </div>

@@ -217,7 +217,7 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16">
           {articles.slice(0, 3).map((article) => (
-            <ArticleCard key={article.slug} article={article} variant="compact" />
+            <ArticleCard key={article.slug} article={article} />
           ))}
         </div>
         <div className="text-center mt-24">
