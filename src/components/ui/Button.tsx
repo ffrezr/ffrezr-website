@@ -73,6 +73,30 @@ export function TerminalCommandButton({
   )
 }
 
+export function ExternalTerminalButton({
+  href,
+  children,
+  className = '',
+}: {
+  href: string
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`text-secondary hover:text-accent-violet transition-colors flex items-center gap-2 group ${className}`.trim()}
+    >
+      <span className="type-hero-terminal uppercase">{children}</span>
+      <span className="material-symbols-outlined icon-md group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
+        arrow_outward
+      </span>
+    </a>
+  )
+}
+
 export function PrimaryCTAButton({
   children,
   symbol = '→',

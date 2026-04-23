@@ -486,8 +486,8 @@ import Tag from './Tag'
 
 #### Article Card — Grid Variant (default)
 - **Container:** `flex flex-col gap-6`
-- **Image:** `h-[480px]` fixed height, white background with `border border-surface-container-highest/30`
-- **Image Effects:** `grayscale opacity-90`, hover to `opacity-100 scale-105` (1s ease-in-out)
+- **Image:** `h-[320px]` fixed height, `hero-image-frame` (border + layered shadow), `bg-surface-container-low`
+- **Image Effects:** Full color always (no grayscale), hover `scale-105` (1s ease-in-out)
 - **Metadata:** `type-article-meta-grid` (category + date separated by "/")
 - **Title:** `type-article-title-grid`
 - **Excerpt:** `type-article-excerpt` with `line-clamp-3`
