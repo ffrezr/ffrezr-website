@@ -3,7 +3,7 @@
 **Author:** Francisco Frez Rojas  
 **Brand Name:** Francisco Frez  
 **Design Tool:** Google Labs Stitch (MCP Server Integration)  
-**Last Updated:** April 19, 2026
+**Last Updated:** April 22, 2026
 
 ---
 
@@ -14,29 +14,43 @@ This design system is a framework for showcasing creative authority through high
 ### Core Principle: "The Breather"
 Massive negative space, asymmetrical content balancing, and typographic hierarchy that feels like a printed masthead. Tonal depth takes priority over structural lines, creating a fluid, expansive interface where portfolio projects remain the undisputed focal point.
 
+### Violet Accent Thread
+A violet accent color (`#7029D9`) runs through the entire design as a signature highlight — hero markers, name accents, button hovers, tag interactions, and social icon hovers all use it. This creates a cohesive thread of energy against the monochrome base palette.
+
 ---
 
 ## Color System: Tonal Architecture
 
-The palette uses sophisticated grays and a refined dark primary to define space through color rather than lines.
+The palette uses sophisticated grays with a violet accent thread to define space through color rather than lines.
 
 ### Primary Palette (Material Design 3)
 
 | Token | Hex | Usage |
 |-------|-----|-------|
 | `primary` | `#222222` | Headlines, primary CTAs, brand text |
-| `primary-container` | `#3C3B3B` | Hover states, gradient endpoints |
+| `primary-container` | `#3C3B3B` | Fallback hover states |
 | `surface` | `#F9F9F9` | Primary canvas (softer than pure white) |
 | `surface-container-lowest` | `#FFFFFF` | Floating cards, interactive elements |
-| `surface-container-low` | `#F3F3F4` | Large content blocks, skill sections |
+| `surface-container-low` | `#F3F3F4` | Large content blocks, tag backgrounds, image placeholders |
 | `surface-container` | `#EEEEEE` | Default containers |
 | `surface-container-high` | `#E8E8E8` | Hover states |
 | `surface-container-highest` | `#E2E2E2` | Active states, filter borders |
 | `secondary` | `#5E5E5E` | Supporting text, labels, metadata |
-| `secondary-fixed-dim` | `#ACABAB` | Decorative elements, footer links |
-| `tertiary` | `#3A3C3C` | Footer background |
+| `secondary-fixed-dim` | `#ACABAB` | Decorative elements, footer links, dot separators |
+| `tertiary` | `#3A3C3C` | Dark backgrounds |
 | `outline` | `#777777` | Focus states |
-| `outline-variant` | `#C6C6C6` | Functional borders (inputs, filters) |
+| `outline-variant` | `#C6C6C6` | Functional borders (inputs, filters, image frames) |
+
+### Accent Palette
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `accent-violet` | `#7029D9` | Primary accent — hero markers, name highlights, hover states |
+| `accent-violet-muted` | `#6C4EA1` | Section labels, terminal text |
+| `accent-violet-dark` | `#5A20B8` | Link hover states |
+| `accent-blue` | `#4869D6` | Reserved |
+| `accent-green` | `#1F8F73` | Reserved |
+| `accent-coral` | `#D06D55` | Reserved |
 
 ### Text Colors
 
@@ -47,15 +61,22 @@ The palette uses sophisticated grays and a refined dark primary to define space 
 | `on-primary` | `#E5E2E1` | Text on dark backgrounds |
 | `on-secondary` | `#FFFFFF` | Text on secondary backgrounds |
 
+### Utility Colors
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `footer-bg` | `#1A1A1A` | Footer background |
+| `muted` | `#555555` | Footer copyright text |
+
 ### Design Rules
 
 #### ✅ DO:
 - Define boundaries through background color shifts (tonal carving)
 - Use `#222222` as primary for all high-impact elements (headlines, CTAs, brand)
+- Use `accent-violet` (`#7029D9`) as the signature accent for interactive states and highlights
 - Layer surfaces for depth (Level 0: `surface`, Level 1: `surface-container-low`, Level 2: `surface-container-lowest`)
 - Use glassmorphism for navigation: `white/70` opacity + `backdrop-blur-xl`
-- Apply `grayscale` filter to all images by default for visual consistency
-- Add subtle hover effects to images (scale, opacity, or color) with smooth transitions (700-1000ms)
+- Add subtle hover effects to images (scale, opacity) with smooth transitions (700-1000ms)
 
 #### ❌ DON'T:
 - Never use heavy borders — use hairline (1px) borders only
@@ -70,10 +91,9 @@ Borders exist only where they serve a usability function, never as decoration. T
 | Context | Border | Reason |
 |---------|--------|--------|
 | Content sections | ✅ `border-y border-neutral-100` | Section separation (portfolio section) |
-| Project/article cards | ✅ `hairline-border` | Defines card boundaries on white backgrounds |
-| Card images | ✅ `hairline-border` | Contains image within card layout |
+| Image frames | ✅ `hero-image-frame` | Border + layered shadow for editorial depth |
 | Navigation header | ❌ None | Glassmorphism defines the boundary |
-| Footer separation | ❌ None | `tertiary` (#3A3C3C) background shift |
+| Footer separation | ❌ None | `footer-bg` (#1A1A1A) background shift |
 | Input fields | ✅ `border-b` | Affordance: user needs to see where to type |
 | Filter bars / tabs | ✅ `border-t` + `border-b` | Contains functional controls |
 | Blockquotes | ✅ Left accent line | Strong editorial convention |
@@ -93,48 +113,53 @@ background: rgba(255, 255, 255, 0.7);
 backdrop-filter: blur(24px); /* backdrop-blur-xl */
 ```
 
-**Signature Glow (Cards, Images):**
+**Hero Image Frame (`hero-image-frame`):**
+```css
+border: 1px solid var(--color-outline-variant);
+box-shadow:
+  0 26px 48px rgb(34 34 34 / 6%),
+  0 18px 36px rgb(34 34 34 / 4%);
+```
+Used on portrait images, article card images (compact variant), and project card images.
+
+**Signature Glow (Detail pages):**
 ```css
 box-shadow: 0px 24px 48px rgba(0, 0, 0, 0.04);
 ```
 
-**Image Treatments:**
-
-All images use grayscale filter by default. Hover effects vary by context:
-
+**Hero Marker Glow:**
 ```css
-/* HomePage cards — scale only */
-.grayscale {
-  filter: grayscale(100%);
-}
-.group-hover\:scale-\[1\.02\] {
-  transform: scale(1.02);
-  transition: transform 1000ms ease-out;
-}
+background: var(--color-accent-violet);
+box-shadow: 0 0 0 6px rgb(112 41 217 / 10%);
+```
 
-/* AboutPage portraits — color reveal */
-.grayscale:hover {
-  filter: grayscale(0%);
-  transition: all 700ms;
-}
-
-/* Article cards (grid) — opacity + scale */
-.grayscale.opacity-90 {
-  filter: grayscale(100%);
-  opacity: 0.9;
-}
-.group-hover\:opacity-100.group-hover\:scale-105 {
-  opacity: 1;
-  transform: scale(1.05);
-  transition: all 1000ms ease-in-out;
+**Selection Highlight:**
+```css
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-on-secondary);
 }
 ```
+
+**Drop Cap (Markdown articles):**
+```css
+.markdown-body > p:first-child::first-letter {
+  float: left;
+  font-size: 5rem;
+  line-height: 0.8;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+```
+
+**Wave Emoji Animation (Hero):**
+Animated hand wave on the hero greeting, respects `prefers-reduced-motion`.
 
 **Input Fields (Bottom-border style):**
 ```css
 border: 0;
-border-bottom: 1px solid #d4d4d8;
-/* focus: */ border-color: #222222;
+border-bottom: 1px solid var(--color-outline-variant);
+/* focus: */ border-color: var(--color-primary);
 ```
 
 ---
@@ -164,20 +189,44 @@ border-bottom: 1px solid #d4d4d8;
 
 | Component | CSS Class | Size | Weight | Letter Spacing | Usage |
 |-----------|-----------|------|--------|----------------|-------|
+| **Hero Terminal** | `type-hero-terminal` | 0.72rem (11.5px) | 500 | 0.12em | Monospace section labels (SF Mono) |
+| **Tech Pill** | `type-tech-pill` | 0.8rem (12.8px) | 600 | 0.04em | Skill names in hero strip |
+| **Button Editorial** | `type-button-editorial` | 0.75rem (12px) | 700 | 0.1em | Primary CTA text |
 | **Skill Category** | `type-skill-category` | 0.75rem (12px) | 400 | 0.1em | Skill section headers |
 | **Skill Item** | `type-skill-item` | 1rem (16px) | 400 | 0 | Individual skill names |
-| **Project Title** | `type-project-title` | 0.9375rem (15px) | 500 | 0.1em | Project card titles (uppercase) |
+| **Nav Link** | `type-nav-link` | 0.75rem (12px) | 500 | -0.025em | Navigation links (uppercase) |
+| **Footer Text** | `type-footer-text` | 0.625rem (10px) | 400 | 0.2em | Footer content (uppercase) |
+
+### Project Card Type Styles
+
+| Component | CSS Class | Size | Weight | Letter Spacing | Usage |
+|-----------|-----------|------|--------|----------------|-------|
+| **Card Title** | `type-project-card-title` | 1.25rem (20px) | 700 | -0.025em | Project card heading |
+| **Card Description** | `type-project-card-description` | 0.8125rem (13px) | 400 | 0 | Project card body text |
+| **Card Tag** | `type-project-card-tag` | 0.6rem (9.6px) | 400 | 0.1em | Tag size in project cards (uppercase) |
+| **Card Meta** | `type-project-card-meta` | 0.6rem (9.6px) | 700 | 0.25em | Period/date metadata (uppercase) |
+| **Card Placeholder** | `type-project-card-placeholder` | 0.6rem (9.6px) | 400 | 0.3em | Empty image placeholder label |
+
+### Article Card Type Styles
+
+| Component | CSS Class | Size | Weight | Letter Spacing | Usage |
+|-----------|-----------|------|--------|----------------|-------|
 | **Article Category** | `type-article-category` | 0.65rem (10.4px) | 700 | 0.1em | Article category badges |
 | **Article Meta** | `type-article-meta` | 0.75rem (12px) | 400 | 0 | Article metadata (read time) |
 | **Article Title Compact** | `type-article-title-compact` | 1.25rem (20px) | 300 | 0 | Article titles in compact cards |
 | **Article Meta Grid** | `type-article-meta-grid` | 9px | 700 | 0.25em | Article metadata in grid layout |
 | **Article Title Grid** | `type-article-title-grid` | 1.25rem (20px) | 700 | -0.025em | Article titles in grid cards |
 | **Article Excerpt** | `type-article-excerpt` | 13px | 400 | 0 | Article description previews |
+
+### Experience Row Type Styles
+
+| Component | CSS Class | Size | Weight | Letter Spacing | Usage |
+|-----------|-----------|------|--------|----------------|-------|
 | **Experience Title** | `type-experience-title` | 1.19rem (19px) | 500 | 0 | Job/company names |
-| **Experience Meta** | `type-experience-meta` | 0.69rem (11px) | 400 | 0.1em | Experience metadata |
-| **Experience Period** | `type-experience-period` | 0.875rem (14px) | 400 | 0.1em | Date ranges |
+| **Experience Meta** | `type-experience-meta` | 0.69rem (11px) | 400 | 0.1em | Experience metadata (uppercase) |
+| **Experience Period** | `type-experience-period` | 0.875rem (14px) | 400 | 0.1em | Date ranges (uppercase) |
 | **Experience Role** | `type-experience-role` | 0.925rem (15px) | 300 | 0 | Job descriptions |
-| **Experience Tag** | `type-experience-tag` | 0.69rem (11px) | 400 | 0.1em | Technology tags |
+| **Experience Tag** | `type-experience-tag` | 0.69rem (11px) | 400 | 0.1em | Technology tags (uppercase) |
 
 **Implementation:** All type scale levels are defined as CSS classes in `src/index.css`. Use `type-*` classes instead of inline Tailwind size/weight/spacing utilities to keep typography centralized.
 
@@ -189,7 +238,7 @@ border-bottom: 1px solid #d4d4d8;
 - Give section titles significant top padding (80-120px) to let them breathe
 - Use `on-surface-variant` (#474747) for body text to reduce optical vibration
 - Set CTAs/labels in ALL CAPS with `tracking-[0.1em]` and `font-bold`
-- Use `tracking-tight` on navigation links for clean, professional look
+- Use monospace (`type-hero-terminal`) for section index labels to create a developer-editorial feel
 
 #### ❌ DON'T:
 - Never center-align body paragraphs (maintain editorial grid-edge feel)
@@ -218,9 +267,9 @@ border-bottom: 1px solid #d4d4d8;
 
 #### ✅ DO:
 - **Asymmetric Balancing:** Offset large images with small text blocks vertically
-- **Large Margins:** Minimum 80-120px padding between major sections
-- **Break the Grid:** Use odd column counts (5 instead of 6) for visual interest
-- **Bleed Content:** Let images extend beyond canvas for dynamic feel
+- **Large Margins:** Minimum 80-120px padding between major sections (use `mb-56` for 14rem/224px)
+- **Break the Grid:** Use odd column counts (7-5 split) for visual interest
+- **Section Grouping:** Group related content with section headers using the hero-index pattern
 
 #### ❌ DON'T:
 - Avoid "grid lock" where everything perfectly aligns to 12-column grid
@@ -238,14 +287,11 @@ border-bottom: 1px solid #d4d4d8;
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 ```
 
-**Usage:**
-```html
-<span class="material-symbols-outlined">menu</span>
-<span class="material-symbols-outlined">arrow_forward</span>
-<span class="material-symbols-outlined">close</span>
-```
+**Icon Size Classes:**
+- `icon-sm` — 1rem (16px)
+- `icon-md` — 1.125rem (18px)
 
-**Integration:** Icons inherit text color and size from parent. Use with navigation, buttons, and interactive elements for consistent visual language.
+**Social Icons:** LinkedIn, Medium, and GitHub use inline SVGs (not Material Symbols) for brand accuracy. They are rendered via the `SocialIcon` component in the navbar and use `social-icon-link` styling with violet hover + translateY(-2px) lift.
 
 ---
 
@@ -258,105 +304,200 @@ border-bottom: 1px solid #d4d4d8;
 | `md` | 2px | Medium elements |
 | `lg` | 4px | Card images, content blocks |
 | `xl` | 8px | Modal dialogs |
-| `full` | 9999px | Status badges, tag pills only |
+| `full` | 9999px | Dot separators only |
 
-**Note:** Buttons use `rounded-[2px]` (sharp editorial). `full` (9999px) is reserved for non-interactive pills like status badges or category tags — never for CTAs.
+**Note:** Buttons use `rounded-[2px]` (sharp editorial). `full` (9999px) is reserved for dot separators — never for CTAs.
 
 ---
 
 ## Components
 
+### Brand Logo (`BrandLogo`)
+
+Custom SVG monogram with interlocking "F" letterforms inside a geometric frame. Replaces the previous text-based brand name throughout the site.
+
+```tsx
+<BrandLogo showWordmark={false} className="h-10 md:h-12" />
+```
+
+**Variants:**
+- `showWordmark={false}` — Monogram only (`BrandMark`). Used in navbar and footer.
+- `showWordmark={true}` — Monogram + "FRANCISCO FREZ" wordmark below.
+
+**Sizing:**
+- Navbar: `h-10 md:h-12`
+- Footer: `h-14 md:h-16`
+
+### Hero Index Pattern
+
+A consistent pattern used to introduce every major section across the site. Combines a violet marker dot, monospace label, and accent-highlighted headline.
+
+```tsx
+{/* Section label */}
+<div className="hero-index-row inline-flex items-center gap-4">
+  <span className="hero-index-marker" aria-hidden="true" />
+  <span className="type-hero-terminal hero-index-text">
+    git log
+  </span>
+</div>
+
+{/* Section title */}
+<h2 className="font-headline type-display-medium text-primary">
+  Explore My Data <span className="hero-name-accent">Journey</span>.
+</h2>
+```
+
+**Elements:**
+- `hero-index-row` — Container with `accent-violet-muted` color
+- `hero-index-marker` — Small violet square (0.56rem) with violet glow ring
+- `hero-index-text` — Monospace terminal-style label in `accent-violet-muted`
+- `hero-name-accent` — Violet-highlighted word in headlines (`accent-violet`)
+
+**Subsection variant** uses `hero-skills-rule` (a 2.5rem horizontal line) instead of the marker dot:
+```tsx
+<div className="hero-index-row inline-flex items-center gap-4">
+  <span className="hero-skills-rule" aria-hidden="true" />
+  <span className="type-hero-terminal hero-index-text">
+    01 / Entrepreneurship
+  </span>
+</div>
+```
+
+### Hero Skills Strip
+
+Displays core skills with optional logos in a wrapping inline layout.
+
+```tsx
+<div className="hero-skills-strip max-w-4xl">
+  <div className="hero-skills-inline">
+    {skills.map((skill) => (
+      <div key={skill} className="hero-skill-inline inline-flex items-center gap-4">
+        <img className="hero-skill-logo h-5 w-5 shrink-0 object-contain" src={logoSrc} />
+        <span className="type-tech-pill hero-skill-name text-primary">{skill}</span>
+      </div>
+    ))}
+  </div>
+</div>
+```
+
+**Style:** Monospace uppercase labels with logos. Subtle hover lift (-1px translateY) and opacity change.
+
 ### Buttons
 
-The `Button` component (`src/components/ui/Button.tsx`) supports internal routing (React Router), external links, and button actions.
+The button system uses CSS classes defined in `src/index.css` and is exposed through pattern components in `src/components/ui/Button.tsx`.
 
-#### Primary Button (Sharp Editorial)
+#### Button Variants
+
+| Variant | CSS Classes | Hover | Usage |
+|---------|------------|-------|-------|
+| **Primary** | `button-editorial-primary` + `type-button-editorial` | `accent-violet` bg | Main CTAs |
+| **Secondary** | `button-editorial-secondary` + `type-hero-terminal` | `accent-violet` text | Underline-style links |
+| **Inline** | `button-editorial-inline` + `type-hero-terminal` | `accent-violet` text | Inline navigation |
+
+#### Pattern Components
+
 ```tsx
-<Button to="/about">Get to Know Me</Button>
-<Button href="https://example.com">External Link</Button>
-<Button onClick={handleClick}>Action Button</Button>
+{/* Primary CTA with arrow */}
+<PrimaryCTAButton to="/contact">Let's Talk</PrimaryCTAButton>
 
-// Renders:
-className="bg-primary text-on-primary rounded-[2px] px-10 py-5 
-           font-label font-bold text-[0.75rem] uppercase tracking-[0.1em] 
-           hover:bg-primary-container transition-colors 
-           inline-flex items-center justify-center gap-3"
+{/* Terminal-style command link */}
+<TerminalCommandButton to="/projects">EXPLORE ALL</TerminalCommandButton>
+
+{/* Inline arrow link */}
+<InlineTerminalButton to="/contact">SAY HELLO</InlineTerminalButton>
 ```
 
-#### Secondary Button (Underline Style)
-```tsx
-<Button to="/blog" variant="secondary">Read Blog</Button>
-
-// Renders:
-className="text-primary font-label font-bold text-[0.75rem] uppercase 
-           tracking-[0.1em] border-b border-primary pb-2 
-           hover:text-primary/70 transition-all 
-           inline-flex items-center gap-3"
+**Primary (`button-editorial-primary`):**
+```css
+padding: 1.25rem 2.5rem;
+border-radius: 2px;
+background: var(--color-primary);
+color: var(--color-on-primary);
+/* hover: */ background: var(--color-accent-violet);
 ```
 
-#### Text Links (Navigation Style)
-For inline text links with arrow icons (not using Button component):
-```tsx
-<Link
-  to="/contact"
-  className="text-primary font-label type-label hover:text-secondary transition-colors 
-             inline-flex items-center gap-3 border-b border-primary pb-1"
->
-  Say Hello
-  <span className="material-symbols-outlined text-sm" 
-        style={{ fontVariationSettings: "'wght' 200" }}>
-    arrow_forward
-  </span>
-</Link>
+**Secondary (`button-editorial-secondary`):**
+```css
+padding-bottom: 0.55rem;
+border-bottom: 0.13em solid currentColor;
+color: var(--color-primary);
+/* hover: */ color: var(--color-accent-violet);
 ```
+
+**Inline (`button-editorial-inline`):**
+```css
+color: var(--color-primary);
+/* hover: */ color: var(--color-accent-violet);
+```
+
+#### Button Symbol Classes
+
+| Class | Size | Usage |
+|-------|------|-------|
+| `button-symbol-inline` | 1.35em | InlineTerminalButton arrow |
+| `button-symbol-command` | 1.7em | TerminalCommandButton ">" prefix |
+| `button-symbol-cta` | 1.5em | PrimaryCTAButton arrow |
 
 #### Button Rules
 - All CTAs use `rounded-[2px]` — never `rounded-full`
-- Always uppercase with `tracking-[0.1em]`
-- Primary hover transitions to `primary-container` (#3C3B3B)
-- Secondary hover transitions to `primary/70` (70% opacity)
-- Use `inline-flex items-center gap-3` for icons
-- Material Symbols icons inherit size and color from parent
+- Primary and secondary buttons use terminal-style monospace typography
+- All hover states transition to `accent-violet` (not `primary-container`)
+- Use `inline-flex items-center` for icon alignment
+- Transition duration: 220ms ease
+
+### Tag (`Tag`)
+
+Reusable component for technology labels and category tags. Used in `ProjectCard`, `ExperienceRow`, and `ProjectDetailPage`.
+
+```tsx
+import Tag from './Tag'
+
+<Tag label="BigQuery" size="sm" />    {/* Project cards */}
+<Tag label="BigQuery" size="md" />    {/* Experience rows */}
+<Tag label="BigQuery" size="lg" />    {/* Project detail page */}
+```
+
+**Sizes:**
+
+| Size | Padding | Type Class | Usage |
+|------|---------|-----------|-------|
+| `sm` | `px-3 py-1` | `type-project-card-tag` | Project cards |
+| `md` | `px-4 py-1.5` | `type-experience-tag` | Experience timeline |
+| `lg` | `px-4 py-1.5` | `text-[0.65rem] uppercase tracking-widest` | Project detail headers |
+
+**Shared styles (all sizes):**
+- Background: `bg-surface-container-low`
+- Text color: `text-secondary`
+- Font: `font-label`
+- Hover: `bg-accent-violet` + `text-white` with color transition
 
 ### Cards
 
 #### Project Card
-- **Background:** `bg-surface-container-low`
-- **Border:** `hairline-border` — subtle 1px outline
-- **Border Radius:** None on container, `lg` (4px) on images
-- **Image Treatment:** `grayscale` filter, `group-hover:scale-[1.02]` with 1s ease-out transition
-- **Title:** `type-project-title`, uppercase, centered
+
+- **Image Container:** `hero-image-frame` — border + layered shadow
+- **Image Height:** Fixed `h-[340px]` with `object-cover`
+- **Image Hover:** `scale-105` with 1s ease-in-out transition (no grayscale)
+- **Empty State:** Centered icon (`rocket_launch`) + type label placeholder
+- **Period:** `type-hero-terminal text-secondary`, turns violet on group hover
+- **Title:** `type-project-card-title font-headline`, turns violet on group hover
+- **Description:** `type-project-card-description text-on-surface-variant` with `line-clamp-3`
+- **Tags:** `Tag` component with `size="sm"`
 
 #### Article Card — Grid Variant (default)
 - **Container:** `flex flex-col gap-6`
-- **Image:** `h-[480px]` fixed height, white background with `border border-[#E2E2E2]/30`
-- **Image Effects:** `grayscale opacity-90`, hover to `opacity-100 scale-105` (1s ease-in-out)
+- **Image:** `h-[320px]` fixed height, `hero-image-frame` (border + layered shadow), `bg-surface-container-low`
+- **Image Effects:** Full color always (no grayscale), hover `scale-105` (1s ease-in-out)
 - **Metadata:** `type-article-meta-grid` (category + date separated by "/")
 - **Title:** `type-article-title-grid`
 - **Excerpt:** `type-article-excerpt` with `line-clamp-3`
 
 #### Article Card — Compact Variant
 - **Container:** `flex flex-col`
-- **Image:** `aspect-[16/10]` with `bg-surface-container-low hairline-border`
-- **Image Effects:** `grayscale` only (no hover effects)
+- **Image:** `aspect-[16/10]` with `hero-image-frame` (border + shadow)
+- **Image Effects:** None (no grayscale, no hover effects)
 - **Metadata:** `type-article-category` + `type-article-meta` (read time) with dot separator
 - **Title:** `type-article-title-compact`, hover underline with `underline-offset-8`
-
-### Section Label
-
-A decorative component used to introduce major sections.
-
-```tsx
-<span className="font-label type-label text-secondary flex items-center gap-3 mb-6">
-  <span className="w-1 h-1 bg-secondary rounded-full" />
-  {children}
-</span>
-```
-
-**Features:**
-- Includes a small dot (1px × 1px, `bg-secondary`) before the text
-- Uppercase via `type-label` class
-- Optional `centered` prop for center alignment
 
 ### Experience Row
 
@@ -364,11 +505,7 @@ Timeline-style component for work history displayed in a 12-column grid.
 
 ```tsx
 <div className="hairline-divide hairline-t">
-  <div className="py-10 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-    <div className="md:col-span-5"><!-- Company + Location --></div>
-    <div className="md:col-span-3"><!-- Role --></div>
-    <div className="md:col-span-4"><!-- Technology tags --></div>
-  </div>
+  <ExperienceRow experience={exp} />
 </div>
 ```
 
@@ -378,34 +515,58 @@ Timeline-style component for work history displayed in a 12-column grid.
 - **Company/Location (col-span-5):** `type-experience-title` for company name
 - **Period:** `type-experience-meta` in `text-secondary`
 - **Role (col-span-3):** `type-experience-role` in `text-on-surface-variant`
-- **Tags (col-span-4):** `type-experience-tag` with `hairline-border rounded-[2px]`, right-aligned on desktop
+- **Tags (col-span-4):** `Tag` component with `size="md"`, right-aligned on desktop
 
 ### Input Fields (Bottom-border style)
 
 ```tsx
-className="w-full bg-transparent border-0 border-b border-gray-200 
-           text-primary font-body text-lg py-3 px-0 
-           focus:outline-none focus:ring-0 focus:border-primary 
-           transition-colors placeholder:text-gray-300"
+className="w-full bg-transparent border-0 border-b border-outline-variant
+           text-primary font-body type-body-large py-3 px-0
+           focus:outline-none focus:ring-0 focus:border-primary
+           transition-colors placeholder:text-outline-variant"
 ```
 
-**Rule:** Inputs use bottom-border only, no boxed inputs. Labels above in `font-label text-[11px] uppercase tracking-[0.2em] text-secondary`.
+**Rule:** Inputs use bottom-border only, no boxed inputs. Labels above in `font-label type-label tracking-[0.1em] text-secondary`.
 
-### Badges & Pills
-
-Status badges and category tags use fully rounded corners (`rounded-full`).
+### Navigation Bar
 
 ```tsx
-<span className="inline-block px-4 py-2 rounded-full bg-surface-container-low text-secondary type-label">
-  {text}
-</span>
+<header className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl">
+  <div className="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6 w-full">
+    <BrandLogo showWordmark={false} className="h-10 md:h-12" />
+    <nav>{/* NavLinks */}</nav>
+    <div>{/* Social icons */}</div>
+  </div>
+</header>
 ```
 
-**Features:**
-- `rounded-full` (9999px) — reserved for non-interactive pills/badges only
-- Background: `bg-surface-container-low` or similar surface tokens
-- Typography: `type-label` for uppercase styling
-- **Never** use on buttons or CTAs
+**Style:** Full-width glassmorphism, no border  
+**Brand:** `BrandLogo` SVG monogram (not text)  
+**Links:** `type-nav-link` class (0.75rem, weight 500, uppercase, tight tracking)  
+**Menu Items:** Home, About, Projects, Blog, Contact  
+**Active Link:** `text-primary border-b border-primary pb-1`  
+**Inactive Link:** `text-secondary hover:text-primary transition-colors duration-300`  
+**Right Side:** Social icon links (LinkedIn, Medium, GitHub) with `social-icon-link` class — hover turns `accent-violet` with -2px translateY lift  
+**Mobile:** Hamburger icon via Material Symbols, opens drawer with `bg-white/95 backdrop-blur-xl border-t border-surface-container-high`. Social icons appear at the bottom of the drawer.
+
+### Footer
+
+```tsx
+<footer className="bg-footer-bg text-white w-full font-body type-footer-text">
+  <div className="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
+    <BrandLogo showWordmark={false} className="h-14 md:h-16" />
+    <div className="flex flex-wrap justify-center gap-10">{/* social links */}</div>
+    <span className="text-muted">&copy; {year} Francisco Frez.</span>
+  </div>
+</footer>
+```
+
+**Style:** Dark section using `footer-bg` (#1A1A1A) token — no top border  
+**Layout:** Three-column flex layout (brand logo, links, copyright) with `gap-10`  
+**Brand:** `BrandLogo` SVG monogram in white  
+**Social Links:** Dynamic from `profile.ts` data — `text-secondary-fixed-dim hover:text-white transition-colors`  
+**Copyright:** `text-muted` (#555555), uses dynamic year  
+**Typography:** `type-footer-text` (0.625rem, uppercase, tracking 0.2em)
 
 ### Education Cards
 
@@ -418,11 +579,6 @@ Card variant used for academic credentials.
   <p className="type-body-medium text-on-surface-variant">{institution}</p>
 </div>
 ```
-
-**Features:**
-- Uses `outline` instead of `border` for subtle boundary
-- Signature glow shadow for depth
-- White background (`surface-container-lowest`)
 
 ### Certification List Items
 
@@ -440,11 +596,6 @@ Interactive list items with hover states.
 </div>
 ```
 
-**Features:**
-- Uses tonal shift on hover (container-low → container-highest)
-- Icon changes color on hover
-- Material Symbols icon for visual accent
-
 ### Image Grids with Overlays
 
 Photo grids with text overlays for labeling.
@@ -453,7 +604,6 @@ Photo grids with text overlays for labeling.
 <div className="group relative">
   <div className="aspect-[3/4] overflow-hidden bg-surface-container-low">
     <img
-      alt={alt}
       className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-[1.03]"
       src={src}
     />
@@ -464,53 +614,31 @@ Photo grids with text overlays for labeling.
 </div>
 ```
 
-**Features:**
-- Grayscale by default, color on hover (700ms transition)
-- Subtle scale effect (1.03x) on hover
-- Gradient overlay at bottom for label readability
-- Fixed aspect ratio (`aspect-[3/4]` or `aspect-[4/5]`)
+---
 
-### Navigation Bar
+## Page Patterns
 
-```html
-<header class="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-xl">
-<div class="max-w-screen-2xl mx-auto flex justify-between items-center px-8 py-6 w-full">
-<div class="text-xl font-bold tracking-tight text-primary uppercase">Francisco Frez</div>
-<nav class="hidden md:flex space-x-8"><!-- links --></nav>
-<button class="hidden md:inline-flex ... rounded-[2px] ...">Get in touch</button>
-<button class="md:hidden text-primary"><span class="material-symbols-outlined">menu</span></button>
-</div>
-</header>
-```
+### HomePage Structure
 
-**Style:** Full-width glassmorphism, no border  
-**Container:** `max-w-screen-2xl mx-auto px-8 py-6`  
-**Brand:** "Francisco Frez" at `text-xl font-bold tracking-tight text-primary uppercase`  
-**Links:** `font-['Manrope'] tracking-tight font-medium uppercase text-[0.75rem]`  
-**Menu Items:** Home, About, Projects, Blog, Contact  
-**Active Link:** `text-primary border-b border-primary pb-1`  
-**Inactive Link:** `text-secondary pb-1 hover:text-primary transition-colors duration-300`  
-**CTA Button:** `bg-primary text-on-primary rounded-[2px] px-6 py-3 font-label text-xs uppercase tracking-widest hover:bg-primary-container`  
-**Mobile:** Hamburger icon via Material Symbols, opens drawer with `bg-white/95 backdrop-blur-xl border-t border-surface-container-high`
+The home page follows a repeating pattern of **hero-index-labeled sections** separated by large margins (`mb-56`):
 
-### Footer
+1. **Hero** (7-5 grid) — Greeting with wave emoji, headline with `hero-name-accent`, body text, skills strip with logos
+2. **About Summary** (5-7 grid, reversed) — Portrait image + headline + stat highlights
+3. **Experience** — Section header + `ExperienceRow` list inside `hairline-divide`
+4. **Portfolio** — White background section (`bg-white py-40 border-y`) with `ProjectCard` grid (3 columns)
+5. **Blog** — `ArticleCard` compact grid (3 columns)
+6. **CTA** — Centered call-to-action with `PrimaryCTAButton`
 
-```html
-<footer class="bg-[#1A1A1A] text-white w-full font-body text-[10px] uppercase tracking-[0.2em]">
-<div class="flex flex-col md:flex-row justify-between items-center w-full max-w-screen-2xl mx-auto px-8 md:px-20 py-20 gap-10">
-<span class="text-xl font-bold tracking-tighter text-white">Francisco Frez</span>
-<div class="flex flex-wrap justify-center gap-10"><!-- social links --></div>
-<span class="text-[#555555]">&copy; {year} Francisco Frez.</span>
-</div>
-</footer>
-```
+### ProjectsPage Structure
 
-**Style:** Dark section using `#1A1A1A` background — no top border  
-**Layout:** Three-column flex layout (brand, links, copyright) with `gap-10`  
-**Brand:** "Francisco Frez" at `text-xl font-bold tracking-tighter text-white`  
-**Social Links:** Dynamic from `profile.ts` data — `text-[#ACABAB] hover:text-white transition-colors`  
-**Copyright:** `text-[#555555]`, uses dynamic year via `new Date().getFullYear()`  
-**Typography:** `text-[10px] uppercase tracking-[0.2em]` for base text
+Projects are grouped by type with numbered subsection labels:
+
+1. **Header** — Hero-index pattern + display title + description (2/3 + 1/3 layout)
+2. **Ventures** — `01 / Entrepreneurship` subsection with `ProjectCard` grid
+3. **Projects & Products** — `02 / Projects` subsection (conditionally rendered)
+4. **Side Projects** — `03 / Side Projects` subsection (conditionally rendered)
+
+Each subsection uses the `hero-skills-rule` variant of the index pattern.
 
 ---
 
@@ -558,6 +686,14 @@ export default defineConfig({
   --color-tertiary: #3a3c3c;
   --color-outline: #777777;
   --color-outline-variant: #c6c6c6;
+  --color-accent-blue: #4869d6;
+  --color-accent-green: #1f8f73;
+  --color-accent-violet: #7029d9;
+  --color-accent-coral: #d06d55;
+  --color-accent-violet-muted: #6c4ea1;
+  --color-accent-violet-dark: #5a20b8;
+  --color-footer-bg: #1a1a1a;
+  --color-muted: #555555;
 
   --radius-DEFAULT: 2px;
   --radius-sm: 2px;
@@ -565,20 +701,6 @@ export default defineConfig({
   --radius-lg: 4px;
   --radius-xl: 8px;
 }
-```
-
-**Typography Scales & Utilities:**
-
-All type scales (`type-display-large`, `type-headline-medium`, `type-body-large`, etc.) and component-specific styles (`type-project-title`, `type-article-*`, `type-experience-*`) are defined as CSS classes in `src/index.css`. Use these classes instead of inline Tailwind utilities for typography.
-
-**Hairline Borders:**
-
-Functional border utilities are defined as custom classes:
-```css
-.hairline-border { border: 1px solid var(--color-outline-variant); }
-.hairline-b { border-bottom: 1px solid var(--color-outline-variant); }
-.hairline-t { border-top: 1px solid var(--color-outline-variant); }
-.hairline-divide > * + * { border-top: 1px solid var(--color-outline-variant); }
 ```
 
 **External Resources:**
@@ -600,8 +722,6 @@ body {
 }
 ```
 
-**Note:** The Stitch-generated HTML files in `.stitch/designs/` use Tailwind CDN with inline configuration for standalone viewing. The actual React implementation uses Tailwind v4 with the Vite plugin and `@theme` directive as shown above.
-
 ---
 
 ## Visual Hierarchy Checklist
@@ -609,56 +729,23 @@ body {
 When building a new page, ensure:
 
 - [ ] **Primary Color:** All headlines and CTAs use `#222222`, never `#000000`
+- [ ] **Accent Color:** Interactive highlights and hover states use `accent-violet` (`#7029D9`)
 - [ ] **Hero Section:** Display typography (3.5rem+) with -0.03em spacing, `font-light` (300)
+- [ ] **Section Labels:** Use the hero-index pattern (violet marker + monospace terminal label)
+- [ ] **Headline Accents:** One word per headline highlighted with `hero-name-accent` (violet)
 - [ ] **Section Spacing:** Minimum 80px between major sections (use `mb-56` for 14rem/224px spacing)
 - [ ] **Tonal Layers:** Content uses at least 2 surface levels for depth
-- [ ] **Functional Borders:** Use hairline borders for card boundaries and section separators
+- [ ] **Functional Borders:** Use `hero-image-frame` for images, `hairline-*` for section separators
 - [ ] **Asymmetry:** Layout breaks grid intentionally (e.g., 7-5 column split on hero)
-- [ ] **Navigation:** `bg-white/70 backdrop-blur-xl`, no bottom border, includes Projects link
-- [ ] **Brand:** "Francisco Frez" in `font-bold tracking-tight uppercase`
+- [ ] **Navigation:** `bg-white/70 backdrop-blur-xl`, BrandLogo monogram, social icons (no CTA button)
 - [ ] **Body Text:** Uses `on-surface-variant` (#474747) for reduced optical vibration
-- [ ] **Labels/CTAs:** ALL CAPS with `tracking-[0.1em]` or `tracking-widest`
-- [ ] **Buttons:** `rounded-[2px]` sharp editorial — never `rounded-full`
-- [ ] **Cards:** `hairline-border` on images and containers, `grayscale` images with subtle hover effects
-- [ ] **Section Labels:** Include decorative dot before text
-- [ ] **Footer:** `#1A1A1A` dark background, links to LinkedIn/Github/Medium
-- [ ] **Icons:** Material Symbols Outlined
-- [ ] **Type Classes:** Use specialized `type-*` classes for components (project-title, article-*, experience-*, etc.)
-
----
-
-## Reference Files
-
-All Stitch-generated designs are preserved in `.stitch/designs/` with organized subdirectories:
-
-```
-.stitch/designs/
-├── README.md                           # Screen inventory with IDs and dimensions
-├── home/
-│   ├── home.html                       # Extended portfolio (2560 × 11090px)
-│   └── home.png
-├── about/
-│   ├── about.html                      # Data engineer profile (2560 × 6170px)
-│   └── about.png
-├── blog/
-│   ├── blog.html                       # Blog listing (2560 × 6696px)
-│   └── blog.png
-├── article/
-│   ├── article-detail.html             # Long-form article (2560 × 7740px)
-│   └── article-detail.png
-├── contact/
-│   ├── contact.html                    # Contact form (2560 × 2390px)
-│   └── contact.png
-└── analytics/
-    ├── analytics-dashboard.html        # Portfolio insights (2560 × 2410px)
-    └── analytics-dashboard.png
-```
-
-**Usage:** Open any `.html` file in a browser to see the high-fidelity design reference.
-
-**Important:** The Stitch-generated HTML files contain inconsistent configurations across views (varying border-radius, primary colors, button styles). This DESIGN.md is the source of truth — use it to normalize implementation, not individual HTML files.
-
-**See:** `.stitch/designs/README.md` for screen IDs and detailed dimensions
+- [ ] **Labels/CTAs:** ALL CAPS — primary uses `type-button-editorial`, secondary uses `type-hero-terminal`
+- [ ] **Buttons:** All hover to `accent-violet`, sharp `rounded-[2px]` — never `rounded-full`
+- [ ] **Tags:** Use the `Tag` component with appropriate size (`sm`/`md`/`lg`)
+- [ ] **Cards:** `hero-image-frame` on images, violet hover accents on text
+- [ ] **Footer:** `footer-bg` (#1A1A1A) dark background, BrandLogo monogram, social links
+- [ ] **Icons:** Material Symbols Outlined for UI, inline SVGs for brand social icons
+- [ ] **Type Classes:** Use specialized `type-*` classes — never inline typography utilities
 
 ---
 
@@ -671,9 +758,9 @@ All Stitch-generated designs are preserved in `.stitch/designs/` with organized 
 - **Canvas Width:** 2560px (desktop-first design)
 - **Max Content Width:** `max-w-screen-2xl` (1536px)
 - **Color Mode:** Light (Dark mode variant not yet implemented)
-- **Color Variant:** Monochrome (`#222222` primary)
+- **Color Variant:** Monochrome + Violet accent (`#222222` primary, `#7029D9` accent)
 - **Spacing Scale:** 3 (8px base × 3 = 24px rhythm)
-- **Icon System:** Material Symbols Outlined
+- **Icon System:** Material Symbols Outlined + inline SVGs for social brands
 
 ---
 
@@ -683,5 +770,5 @@ All Stitch-generated designs are preserved in `.stitch/designs/` with organized 
 **Framework:** React + Vite + TypeScript  
 **Styling:** Tailwind CSS with custom design tokens  
 **Typography:** Manrope (Google Fonts)  
-**Icons:** Material Symbols Outlined (Google Fonts)  
-**Design Philosophy:** High-end editorial, sharp aesthetic with functional minimalism
+**Icons:** Material Symbols Outlined (Google Fonts) + inline SVGs  
+**Design Philosophy:** High-end editorial, sharp aesthetic with functional minimalism and violet accent thread

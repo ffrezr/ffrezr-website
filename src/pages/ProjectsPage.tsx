@@ -8,15 +8,21 @@ export default function ProjectsPage() {
   const sideProjects = projects.filter((p) => p.type === 'side-project')
 
   return (
-    <div className="pt-32 w-full">
-      <div className="max-w-screen-2xl mx-auto px-8 md:px-20 flex flex-col gap-24 md:gap-32">
+    <div className="pt-40 w-full">
+      <div className="max-w-7xl mx-auto px-8 flex flex-col gap-24 md:gap-32">
         {/* Header */}
         <section className="mt-8 md:mt-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
-          <div className="w-full md:w-2/3">
+          <div className="w-full md:w-2/3 space-y-6">
+            <div className="hero-index-row inline-flex items-center gap-4">
+              <span className="hero-index-marker" aria-hidden="true" />
+              <span className="type-hero-terminal hero-index-text">
+                ls projects/
+              </span>
+            </div>
             <h1 className="font-headline type-display-large text-primary">
               Projects &amp;
               <br className="hidden md:block" />
-              Entrepreneurship
+              <span className="hero-name-accent">Entrepreneurship</span>
             </h1>
           </div>
           <div className="w-full md:w-1/3 pb-1 md:pb-3">
@@ -29,9 +35,16 @@ export default function ProjectsPage() {
         {/* Ventures */}
         <section>
           <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-            <div className="max-w-xl">
-              <span className="font-label type-label tracking-[0.1em] text-secondary">01 / Entrepreneurship</span>
-              <h2 className="font-headline type-display-small text-primary mt-4 mb-6">The Founder Era</h2>
+            <div className="max-w-xl space-y-6">
+              <div className="hero-index-row inline-flex items-center gap-4">
+                <span className="hero-skills-rule" aria-hidden="true" />
+                <span className="type-hero-terminal hero-index-text">
+                  01 / Entrepreneurship
+                </span>
+              </div>
+              <h2 className="font-headline type-display-small text-primary">
+                The <span className="hero-name-accent">Founder</span> Era
+              </h2>
               <p className="font-body type-body-medium text-on-surface-variant">Building from zero to scale. A focus on product-market fit and full-stack strategic execution.</p>
             </div>
           </div>
@@ -46,9 +59,16 @@ export default function ProjectsPage() {
         {projectsAndProducts.length > 0 && (
           <section>
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-              <div className="max-w-xl">
-                <span className="font-label type-label tracking-[0.1em] text-secondary">02 / Projects</span>
-                <h2 className="font-headline type-display-small text-primary mt-4 mb-6">Ideas Worth Testing</h2>
+              <div className="max-w-xl space-y-6">
+                <div className="hero-index-row inline-flex items-center gap-4">
+                  <span className="hero-skills-rule" aria-hidden="true" />
+                  <span className="type-hero-terminal hero-index-text">
+                    02 / Projects
+                  </span>
+                </div>
+                <h2 className="font-headline type-display-small text-primary">
+                  Ideas Worth <span className="hero-name-accent">Testing</span>
+                </h2>
                 <p className="font-body type-body-medium text-on-surface-variant">Not every project needed to become a business. Some started as a hunch, a technical challenge, or simply something I wanted to try for myself.</p>
               </div>
             </div>
@@ -64,9 +84,16 @@ export default function ProjectsPage() {
         {sideProjects.length > 0 && (
           <section className="mb-32">
             <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
-              <div className="max-w-xl">
-                <span className="font-label type-label tracking-[0.1em] text-secondary">03 / Side Projects</span>
-                <h2 className="font-headline type-display-small text-primary mt-4 mb-6">From Idea to Value</h2>
+              <div className="max-w-xl space-y-6">
+                <div className="hero-index-row inline-flex items-center gap-4">
+                  <span className="hero-skills-rule" aria-hidden="true" />
+                  <span className="type-hero-terminal hero-index-text">
+                    03 / Side Projects
+                  </span>
+                </div>
+                <h2 className="font-headline type-display-small text-primary">
+                  From Idea to <span className="hero-name-accent">Value</span>
+                </h2>
                 <p className="font-body type-body-medium text-on-surface-variant">Digital products and technical projects designed to solve real problems and deliver value, or simply something that surprises.</p>
               </div>
             </div>
