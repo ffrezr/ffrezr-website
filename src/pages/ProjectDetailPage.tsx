@@ -57,7 +57,7 @@ export default function ProjectDetailPage() {
 
       {/* Story Content */}
       <article className="w-full max-w-3xl px-6 md:px-0 font-body">
-        {project.content ? (
+        {project.content && project.display !== false ? (
           <MarkdownRenderer content={project.content} />
         ) : (
           <div className="text-center py-24">

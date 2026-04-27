@@ -7,6 +7,8 @@ category: Developer Guide
 date: Apr 18, 2026
 readTime: 12 min read
 image: https://images.pexels.com/photos/17483873/pexels-photo-17483873.jpeg?auto=compress&cs=tinysrgb&w=1200&h=630&fit=crop&fm=webp
+published: false
+display: false
 ---
 
 If you deployed `thinking: {type: "enabled", budget_tokens: 10000}` on Claude Opus 4.7 (released April 16, 2026), your API calls are returning HTTP 400 errors right now ([Anthropic API Docs](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), 2026). Anthropic deprecated `budget_tokens` on Opus 4.6 and Sonnet 4.6, then removed it entirely from Opus 4.7 — no grace period, no soft warning.

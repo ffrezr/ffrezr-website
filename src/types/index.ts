@@ -19,6 +19,8 @@ export interface Project {
   tags?: string[]
   type?: 'venture' | 'project' | 'product' | 'side-project'
   featured?: boolean
+  published?: boolean
+  display?: boolean
 }
 
 export interface ProjectContent extends Project {
@@ -52,6 +54,8 @@ export interface Article {
   readTime: string
   image: string
   featured?: boolean
+  published?: boolean
+  display?: boolean
 }
 
 export interface ArticleContent extends Article {

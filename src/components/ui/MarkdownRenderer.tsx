@@ -1,4 +1,4 @@
-import { Children, isValidElement, type ReactNode } from 'react'
+import { Children, isValidElement, type ReactElement, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -14,6 +14,24 @@ function extractText(node: ReactNode): string {
   return ''
 }
 
+function detectKeyTakeaways(children: ReactNode): ReactElement[] | null {
+  const significant = Children.toArray(children).filter(
+    (c) => !(typeof c === 'string' && !c.trim()) && (typeof c !== 'string' ? isValidElement(c) : true),
+  )
+
+  const header = significant[0]
+  if (!isValidElement(header)) return null
+  const headerText = extractText(header).trim()
+  if (!/^key\s*takeaways?$/i.test(headerText)) return null
+
+  const list = significant[1]
+  if (!isValidElement(list)) return null
+
+  const listProps = list.props as { children?: ReactNode }
+  const items = Children.toArray(listProps.children).filter(isValidElement) as ReactElement[]
+  return items.length > 0 ? items : null
+}
+
 const components: Components = {
   h2: ({ children, className }) => (
     <h2 className={className || 'type-headline-large font-semibold font-headline text-primary mb-8'}>
@@ -26,7 +44,7 @@ const components: Components = {
     </h3>
   ),
   p: ({ children, className }) => (
-    <p className={className || 'type-body-large text-on-surface-variant mb-12'}>
+    <p className={className || 'type-article-body text-on-surface-variant mb-10'}>
       {children}
     </p>
   ),
@@ -43,17 +61,43 @@ const components: Components = {
     </a>
   ),
   ul: ({ children }) => (
-    <ul className="list-disc list-outside ml-6 mb-12 space-y-2 type-body-large text-on-surface-variant">
+    <ul className="list-disc list-outside ml-6 mb-10 space-y-3 type-article-body text-on-surface-variant">
       {children}
     </ul>
   ),
   ol: ({ children }) => (
-    <ol className="list-decimal list-outside ml-6 mb-12 space-y-2 type-body-large text-on-surface-variant">
+    <ol className="list-decimal list-outside ml-6 mb-10 space-y-3 type-article-body text-on-surface-variant">
       {children}
     </ol>
   ),
-  li: ({ children }) => <li className="leading-[1.8]">{children}</li>,
+  li: ({ children }) => <li>{children}</li>,
   blockquote: ({ children }) => {
+    const takeaways = detectKeyTakeaways(children)
+    if (takeaways) {
+      return (
+        <aside className="key-takeaways w-full my-12 bg-surface-container-low/50 p-10 md:p-12 rounded-sm">
+          <h4 className="font-headline text-lg font-bold text-primary mb-7 tracking-tight uppercase text-secondary">
+            Key Takeaways
+          </h4>
+          <ul className="list-none m-0 p-0 space-y-5">
+            {takeaways.map((item, i) => {
+              const itemProps = item.props as { children?: ReactNode }
+              return (
+                <li key={i} className="flex items-start gap-4 text-on-surface-variant">
+                  <span className="text-primary text-xl leading-none mt-0.5 shrink-0" style={{ fontFamily: 'var(--font-serif)' }}>
+                    •
+                  </span>
+                  <span className="text-[1.0625rem] leading-[1.6]" style={{ fontFamily: 'var(--font-serif)' }}>
+                    {itemProps.children}
+                  </span>
+                </li>
+              )
+            })}
+          </ul>
+        </aside>
+      )
+    }
+
     const quoteLines: string[] = []
     let attribution = ''
 

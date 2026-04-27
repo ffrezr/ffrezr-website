@@ -4,6 +4,7 @@
   --font-headline: "Manrope", sans-serif;
   --font-body: "Manrope", sans-serif;
   --font-label: "Manrope", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
 
   --color-primary: #222222;
   --color-primary-container: #3c3b3b;
@@ -94,6 +95,16 @@
   font-weight: 300;
   line-height: 1.5;
   letter-spacing: 0;
+}
+
+.type-article-body {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0;
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
 }
 
 .type-body-medium {
@@ -542,7 +553,7 @@ body {
   padding-top: 0.1em;
   padding-right: 0.1em;
   padding-left: 0.05em;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-primary);
 }
 
@@ -553,7 +564,7 @@ body {
   padding-top: 0.1em;
   padding-right: 0.1em;
   padding-left: 0.05em;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--color-primary);
 }
 

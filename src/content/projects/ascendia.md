@@ -14,4 +14,6 @@ tags:
   - SaaS
 type: venture
 featured: true
+published: true
+display: false
 ---

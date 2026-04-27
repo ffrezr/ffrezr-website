@@ -7,6 +7,8 @@ category: Developer Guide
 date: Apr 17, 2026
 readTime: 13 min read
 image: https://images.pexels.com/photos/18069697/pexels-photo-18069697.png?auto=compress&cs=tinysrgb&w=1260&h=750
+published: false
+display: false
 ---
 
 Eight of the Fortune 10 companies are already active Claude customers ([Anthropic](https://www.anthropic.com/news), as reported by [Business of Apps](https://www.businessofapps.com/data/claude-statistics/), 2026). And on April 8, 2026, Anthropic gave every developer on those teams — and the rest of us — a new primitive: Claude Managed Agents. Before this, building a persistent agent meant wiring together your own session store, memory layer, tool router, and compute scheduler. That's weeks of infrastructure work before you write a single line of actual agent logic.

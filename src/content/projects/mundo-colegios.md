@@ -13,4 +13,6 @@ tags:
   - EdTech
   - Entrepreneurship
 type: side-project
+published: true
+display: false
 ---

@@ -2,11 +2,13 @@
 slug: how-to-use-claude-cowork
 title: "How to Use Claude Cowork: The Complete Guide"
 excerpt: >
-  Complete guide to Claude Cowork: Anthropic's desktop AI agent. Learn setup, skills, 38+ connectors, and scheduling to automate hours of work each week.
+  Anthropic's desktop AI agent. Learn setup, skills, 38+ connectors, and scheduling to automate hours of work each week.
 category: AI Tools
 date: Apr 15, 2026
 readTime: 10 min read
 image: /img/blog/how-to-use-claude-cowork/claude-cowork-og.png
+published: true
+display: true
 ---
 
 Claude Cowork is Anthropic's autonomous desktop AI agent for knowledge workers, launched in January 2026. It runs inside the Claude Desktop app and handles multi-step tasks on your behalf — from drafting reports to processing spreadsheets and scheduling recurring workflows. You don't need to write code or use a terminal. If you can describe a task, the agent can likely handle it.
@@ -17,8 +19,6 @@ Claude Cowork is Anthropic's autonomous desktop AI agent for knowledge workers, 
 > - 92% of companies plan to increase AI investments in the next three years, yet only 1% report reaching AI maturity ([McKinsey Superagency, Jan 2025](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work)) — Cowork targets that gap
 > - Computer Use (browser automation) is available on both macOS and Windows (Windows support added April 3, 2026) for Pro and Max users, still in research preview
 > - Scheduled tasks need your machine to be awake and running
-
----
 
 ## What Is Claude Cowork, and How Does It Differ from Claude Chat?
 
@@ -38,8 +38,6 @@ Think of Chat as a consultant you can question. Cowork, by contrast, is the assi
 ### Is Claude Cowork the Same as Claude Code?
 
 No. Claude Code is a command-line tool aimed at software developers. It reads and writes code, runs tests, and integrates into developer workflows. Cowork targets non-technical users: marketers, analysts, HR managers, and operations teams. The two share the same underlying Claude model but serve entirely different audiences and use cases.
-
----
 
 ## How to Set Up Claude Cowork in Under 15 Minutes
 
@@ -70,8 +68,6 @@ Create these three files to start:
 **`working-preferences.md`** — Preferred output formats (tables vs. prose, Markdown vs. DOCX), how much detail you want, and whether you prefer the agent to ask clarifying questions or make assumptions and flag them at the end.
 
 In practice, the `brand-voice.md` file has the highest return on investment. When I set up my own voice file with three annotated examples of good vs. bad writing, the revision cycle on drafted content dropped by roughly half. A one-paragraph description of tone helps, but concrete examples are dramatically more effective.
-
----
 
 ## What Can Claude Cowork Actually Do?
 
@@ -122,8 +118,6 @@ A plugin marketplace launched in February 2026 with department bundles for HR, S
 ![Cowork Connectors panel showing Gmail integration with read and write tool permissions](/img/blog/how-to-use-claude-cowork/claude-cowork-connectors.png)
 _Each connector exposes granular tool permissions — read-only tools auto-allow, while write/delete tools require approval._
 
----
-
 ## How Do Scheduled Tasks Work in Claude Cowork?
 
 Cowork supports recurring task automation using the `/schedule` command. This lets you run the same task on an hourly, daily, or weekly cadence without triggering it manually each time. As a result, repetitive reporting and data-processing workflows become something you configure once rather than babysit repeatedly.
@@ -145,8 +139,6 @@ _The Scheduled view warns up front: tasks only run while your computer is awake 
 
 Scheduled tasks skip silently if your machine is asleep or offline at run time. There's no catch-up mechanism. For more on building reliable [productivity workflows](/blog), see the Productivity category. If you schedule a daily morning report and your laptop is closed, that day's run won't happen. Until Anthropic adds a cloud execution option, treat schedules as convenience automation rather than mission-critical pipelines.
 
----
-
 ## How Does Computer Use and Browser Automation Work?
 
 Cowork's Computer Use feature lets it control your browser, click through web apps, and automate tasks that don't have an API connector. This is the most powerful feature in the product and, at the same time, the most restricted.
@@ -165,8 +157,6 @@ Reliability varies by site complexity. Simple, well-structured web apps work wel
 
 Cowork's mobile control feature, called Dispatch, lets you send tasks to your desktop agent from your phone and return later to the completed work. It relies on your desktop being awake and signed in. Anthropic still labels Dispatch a research preview, so treat it as convenience automation rather than a dependency for time-sensitive or high-stakes workflows.
 
----
-
 ## Is Claude Cowork Safe for Sensitive Documents?
 
 File security in Cowork operates on two layers: local sandboxing and enterprise audit gaps.
@@ -178,8 +168,6 @@ File security in Cowork operates on two layers: local sandboxing and enterprise 
 C-suite leaders estimate that only 4% of employees use GenAI for 30% or more of their daily work, while employee self-reports put that number at 13% ([McKinsey Superagency, 2025](https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work)). The audit log gap may explain part of that disconnect: employees are using AI tools that IT teams can't fully see.
 
 The audit log exclusion reflects how quickly Cowork shipped. Compliance tooling typically follows core product stabilization. Enterprises evaluating the tool today should treat this as a roadmap item to track, not necessarily a hard blocker, depending on their regulatory context.
-
----
 
 ## Claude Cowork vs. Microsoft Copilot and Gemini for Business
 
@@ -203,8 +191,6 @@ As of early 2026, the AI productivity assistant market has three serious desktop
 
 **The practical summary:** Copilot and Gemini are deeper inside their own ecosystems. If you live in Microsoft 365 or Google Workspace, those tools have structural advantages. Cowork's edge is breadth of connectors, autonomous multi-step execution, and the scheduler — making it the stronger choice for users who span multiple platforms or need tasks completed without monitoring the process.
 
----
-
 ## What Plan Do You Need for Claude Cowork?
 
 Claude Cowork is available on four paid Claude plans ranging from $20/month (Pro) to enterprise custom pricing. The Pro plan covers most individual knowledge workers. The Max plan at $100–$200/month adds higher task limits that reset every five hours — relevant if you run scheduled automation throughout the workday. Teams and Enterprise plans add shared workspaces and SSO.
@@ -217,8 +203,6 @@ Claude Cowork is available on four paid Claude plans ranging from $20/month (Pro
 | Enterprise | Custom | Organizations needing spend controls and SSO |
 
 The Pro plan covers most individual use cases. The Max plan is worth considering if you run scheduled tasks throughout the day or use sub-agents for parallel batch processing. Usage resets every five hours on Max, so heavy users see meaningfully higher throughput.
-
----
 
 ## Frequently Asked Questions About Claude Cowork
 
@@ -241,8 +225,6 @@ Use the `/schedule` command followed by your task description and cadence (hourl
 ### Is Claude Cowork safe for confidential files?
 
 File processing happens in a local sandboxed VM, so files don't leave your machine unless you send them through a connector. The main enterprise concern is that Cowork activity is currently excluded from Enterprise Audit Logs. Regulated industries should review this compliance gap with their IT and legal teams before deploying the tool at scale.
-
----
 
 ## How Do You Get the Most Out of Claude Cowork?
 
