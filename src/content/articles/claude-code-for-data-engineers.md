@@ -7,6 +7,8 @@ category: AI Tools
 date: Apr 15, 2026
 readTime: 18 min read
 image: https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop&q=80&fm=webp
+published: false
+display: false
 ---
 
 73% of engineering teams now use AI coding tools daily, and **Claude Code** has become the most-used among them ([Developer Survey 2026](https://claude5.ai/news/developer-survey-2026-ai-coding-73-percent-daily), 2026). The vast majority of tutorials written for those engineers focus on React components, REST APIs, and TypeScript. If your daily work involves dbt models, Airflow DAGs, BigQuery schemas, and Python ETL scripts, you've probably found that the generic guides don't translate. This one does.

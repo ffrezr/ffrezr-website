@@ -16,6 +16,8 @@ tags:
   - Sports Analytics
 type: side-project
 featured: false
+published: true
+display: false
 ---
 
 ## Football reimagined, data included

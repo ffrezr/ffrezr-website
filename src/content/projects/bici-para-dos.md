@@ -17,6 +17,8 @@ tags:
   - Creative Tech
 type: project
 featured: true
+published: true
+display: false
 ---
 
 What happens when you feed a neural network twelve seconds of audio and ask it to keep going? That was the question at the heart of **Bici para Dos** — a project born from the intersection of electronic engineering and music production, presented at **FECI 2021**, the science festival organized by AC3E (Centro Avanzado de Ingeniería Eléctrica y Electrónica).

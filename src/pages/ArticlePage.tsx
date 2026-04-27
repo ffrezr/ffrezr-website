@@ -18,22 +18,24 @@ export default function ArticlePage() {
   }
 
   return (
-    <div className="pt-[88px] flex flex-col items-center pb-32">
+    <div className="pt-[88px] flex flex-col items-center pb-32 bg-surface-container-lowest">
       {/* Article Header */}
       <header className="w-full max-w-5xl px-6 md:px-12 pt-24 pb-16 flex flex-col items-center text-center">
-        <div className="flex items-center gap-4 mb-8 text-[0.75rem] uppercase tracking-[0.05em] text-secondary font-bold font-label">
-          <span className="text-primary">{article.category}</span>
-          <span className="w-1 h-1 rounded-full bg-secondary-fixed-dim" />
-          <span>{article.date}</span>
-          <span className="w-1 h-1 rounded-full bg-secondary-fixed-dim" />
-          <span>{article.readTime}</span>
+        <div className="w-full max-w-[44rem] flex flex-col items-center">
+          <div className="flex items-center gap-4 mb-8 type-label text-secondary">
+            <span className="type-article-category text-primary">{article.category}</span>
+            <span className="w-1 h-1 rounded-full bg-secondary-fixed-dim" />
+            <span>{article.date}</span>
+            <span className="w-1 h-1 rounded-full bg-secondary-fixed-dim" />
+            <span>{article.readTime}</span>
+          </div>
+          <h1 className="type-display-large font-headline text-primary mb-8 md:text-7xl">
+            {article.title}
+          </h1>
+          <p className="type-body-large text-on-surface-variant">
+            {article.excerpt}
+          </p>
         </div>
-        <h1 className="text-5xl md:text-7xl font-light tracking-[-0.02em] text-primary mb-8 max-w-4xl leading-tight font-headline">
-          {article.title}
-        </h1>
-        <p className="text-xl md:text-2xl text-on-surface-variant font-medium max-w-3xl leading-relaxed">
-          {article.excerpt}
-        </p>
       </header>
 
       {/* Hero Image */}
@@ -44,8 +46,8 @@ export default function ArticlePage() {
       </div>
 
       {/* Article Content */}
-      <article className="w-full max-w-3xl px-6 md:px-0 font-body">
-        {article.content ? (
+      <article className="w-full max-w-[44rem] px-6 md:px-0 font-body">
+        {article.content && article.display !== false ? (
           <>
             <MarkdownRenderer content={article.content} />
             <div className="flex justify-center mb-16 pt-8">

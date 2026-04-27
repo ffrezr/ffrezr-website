@@ -8,6 +8,8 @@ category: Data Architecture
 date: Mar 15, 2025
 readTime: 8 min read
 image: https://lh3.googleusercontent.com/aida-public/AB6AXuDc9yj3dxaXsnBkjiCZZJR3XoHS2CFA27SxOHXn9TrO8wZqOwT2ykKLmSe63BNo3qZjNhukZKmBOrq85eFeQh4_wZv8bEV75SBy5OYTenBMvvgrJiQGpRyqav3WZH1tWR31P-ICCYn_lvtFfcST8_RK_sx9KxpCjRU610IKkkOuEQ-Q3SSPIuxUqZuffV8nYb6zofLfWq5CBUc5HpI7BQZ6TfVviAkPwR33w0cwAmHaHBo7QFs9ebYOzjoqxYlPfgknp1trbNUrsQ
+published: false
+display: false
 ---
 
 For years, designers have relied on the humble one-pixel border to define space, separate content, and build the scaffolding of the internet. It was a crutch, a necessity born from an era where screen resolutions were low, and colors were limited. But as our digital canvases evolved, so too did our visual language. Today, we stand on the precipice of a new era in UI design: the era of tonal carving.

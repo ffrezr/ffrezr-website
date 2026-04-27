@@ -166,8 +166,8 @@ border-bottom: 1px solid var(--color-outline-variant);
 
 ## Typography: Neo-Grotesk Voice
 
-**Font Family:** Manrope (all weights: 200-800)  
-**System Role:** Digital equivalent of Aeonik for clean, Neo-Grotesk aesthetic
+**Primary (UI / Headings / Labels):** Manrope (weights 200-800) — digital equivalent of Aeonik, clean Neo-Grotesk aesthetic.
+**Secondary (Long-form reading):** Source Serif 4 (weights 400, 600, 700) — transitional serif designed for screen reading. Used exclusively for article body via `type-article-body` (`--font-serif`), inherited by `<strong>` and drop caps inside markdown. Pairs with Manrope as the classic "transitional serif + geometric sans" editorial combination.
 
 ### Type Scale
 
@@ -180,7 +180,8 @@ border-bottom: 1px solid var(--color-outline-variant);
 | **Headline Medium** | 1.5rem (24px) | 600 (semibold) | 1.3 | 0 | `type-headline-medium` | Subsection titles |
 | **Headline Small** | 1.25rem (20px) | 700 (bold) | 1.4 | 0 | `type-headline-small` | Card headers |
 | **Headline XSmall** | 1rem (16px) | 700 (bold) | 1.4 | 0 | `type-headline-xsmall` | Small headers |
-| **Body Large** | 1.125rem (18px) | 300 (light) | 1.5 | 0 | `type-body-large` | Primary body text |
+| **Body Large** | 1.125rem (18px) | 300 (light) | 1.5 | 0 | `type-body-large` | Primary body text, hero subtitles |
+| **Article Body** | 1.25rem (20px) | 400 (regular) | 1.6 | 0 | `type-article-body` | Long-form reading (article paragraphs/lists) — uses **Source Serif 4** (`--font-serif`) |
 | **Body Medium** | 0.95rem (15.2px) | 300 (light) | 1.5 | 0 | `type-body-medium` | Secondary text |
 | **Body Small** | 0.775rem (12.4px) | 400 (regular) | 1.4 | 0 | `type-body-small` | Captions |
 | **Label** | 0.775rem (12.4px) | 400 (regular) | 1.2 | +0.05em | `type-label` | ALL CAPS metadata |
@@ -707,6 +708,7 @@ export default defineConfig({
 ```html
 <!-- index.html -->
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 ```
 

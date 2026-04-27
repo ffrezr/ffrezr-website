@@ -17,6 +17,8 @@ tags:
   - Gamification
   - Entrepreneurship
 type: venture
+published: true
+display: false
 ---
 
 ## "We are what androids dream of."

@@ -7,6 +7,8 @@ category: Developer Guide
 date: Apr 17, 2026
 readTime: 12 min read
 image: https://images.unsplash.com/photo-1551033406-611cf9a28f67?w=1200&h=630&fit=crop&q=80&fm=webp
+published: false
+display: false
 ---
 
 Cache reads in the Claude API cost 0.1× the base input price — a 90% reduction per token ([Anthropic API Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), 2026). Yet most Python integrations resend the full system prompt, tool definitions, and conversation context on every single call, paying full price for tokens the model has already processed dozens of times.

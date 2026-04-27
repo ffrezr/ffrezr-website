@@ -14,4 +14,6 @@ tags:
   - Entrepreneurship
 type: venture
 featured: true
+published: true
+display: false
 ---

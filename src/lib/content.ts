@@ -27,9 +27,14 @@ function parsePeriodEndDate(period: string): number {
   return isNaN(parsed.getTime()) ? 0 : parsed.getTime()
 }
 
+function isPublished<T extends { published?: boolean }>(item: T): boolean {
+  return item.published !== false
+}
+
 export function getAllProjects(): Project[] {
   return Object.values(projectFiles)
     .map((raw) => parseFrontmatter<Project>(raw).data)
+    .filter(isPublished)
     .sort((a, b) => parsePeriodEndDate(b.period) - parsePeriodEndDate(a.period))
 }
 
@@ -40,7 +45,7 @@ export function getFeaturedProjects(): Project[] {
 export function getProjectBySlug(slug: string): ProjectContent | undefined {
   const entry = Object.values(projectFiles)
     .map((raw) => parseFrontmatter<Project>(raw))
-    .find((p) => p.data.slug === slug)
+    .find((p) => p.data.slug === slug && isPublished(p.data))
   if (!entry) return undefined
   return { ...entry.data, content: entry.content }
 }
@@ -48,13 +53,14 @@ export function getProjectBySlug(slug: string): ProjectContent | undefined {
 export function getAllArticles(): Article[] {
   return Object.values(articleFiles)
     .map((raw) => parseFrontmatter<Article>(raw).data)
+    .filter(isPublished)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 }
 
 export function getArticleBySlug(slug: string): ArticleContent | undefined {
   const entry = Object.values(articleFiles)
     .map((raw) => parseFrontmatter<Article>(raw))
-    .find((a) => a.data.slug === slug)
+    .find((a) => a.data.slug === slug && isPublished(a.data))
   if (!entry) return undefined
   return { ...entry.data, content: entry.content }
 }
