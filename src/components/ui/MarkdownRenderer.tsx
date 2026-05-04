@@ -1,8 +1,9 @@
-import { Children, isValidElement, type ReactElement, type ReactNode } from 'react'
+import { useState, Children, isValidElement, type ReactElement, type ReactNode } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import type { Components } from 'react-markdown'
+import ImageModal from './ImageModal'
 
 function extractText(node: ReactNode): string {
   if (typeof node === 'string') return node
@@ -30,6 +31,42 @@ function detectKeyTakeaways(children: ReactNode): ReactElement[] | null {
   const listProps = list.props as { children?: ReactNode }
   const items = Children.toArray(listProps.children).filter(isValidElement) as ReactElement[]
   return items.length > 0 ? items : null
+}
+
+function ArticleCodeWindow({ children }: { children: ReactNode }) {
+  const [copied, setCopied] = useState(false)
+  const codeText = extractText(children).replace(/\n$/, '')
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(codeText)
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 1800)
+  }
+
+  return (
+    <div className="article-code-window" role="group" aria-label="Code block">
+      <div className="article-code-window-bar">
+        <div className="article-code-window-controls" aria-hidden="true">
+          <span className="article-code-window-dot article-code-window-dot-red" />
+          <span className="article-code-window-dot article-code-window-dot-yellow" />
+          <span className="article-code-window-dot article-code-window-dot-green" />
+        </div>
+        <button
+          type="button"
+          className="article-code-copy-button type-hero-terminal"
+          onClick={handleCopy}
+          aria-label={copied ? 'Code copied' : 'Copy code'}
+          title={copied ? 'Code copied' : 'Copy code'}
+        >
+          <span className="material-symbols-outlined icon-sm" aria-hidden="true">
+            {copied ? 'check' : 'content_copy'}
+          </span>
+          <span>{copied ? 'Copied' : 'Copy'}</span>
+        </button>
+      </div>
+      <pre className="article-code-window-body">{children}</pre>
+    </div>
+  )
 }
 
 const components: Components = {
@@ -128,24 +165,91 @@ const components: Components = {
       </div>
     )
   },
+  code: ({ children, className }) => {
+    const isBlock = className?.startsWith('language-') || extractText(children).includes('\n')
+    if (isBlock) return <code className={className}>{children}</code>
+    return (
+      <code className="text-[0.875em] bg-surface-container-low/50 text-secondary px-1.5 py-0.5 rounded-sm tracking-wide" style={{ fontFamily: '"SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace' }}>
+        {children}
+      </code>
+    )
+  },
+  pre: ({ children }) => (
+    <ArticleCodeWindow>{children}</ArticleCodeWindow>
+  ),
   hr: () => <hr className="border-t border-outline-variant my-16" />,
-  img: ({ src, alt }) => (
-    <div className="w-full aspect-[4/3] md:aspect-[16/9] mb-12 rounded-sm bg-surface-container-high overflow-hidden shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
-      <img
-        src={src}
-        alt={alt || ''}
-        className="w-full h-full object-cover"
-      />
+  table: ({ children }) => (
+    <div className="article-table-frame">
+      <table className="article-data-table">{children}</table>
     </div>
+  ),
+  thead: ({ children }) => <thead className="article-table-head">{children}</thead>,
+  tbody: ({ children }) => <tbody>{children}</tbody>,
+  tr: ({ children }) => <tr className="article-table-row">{children}</tr>,
+  th: ({ children }) => (
+    <th className="article-table-heading type-label">
+      {children}
+    </th>
+  ),
+  td: ({ children }) => (
+    <td className="article-table-cell type-body-medium">
+      {children}
+    </td>
   ),
 }
 
 export default function MarkdownRenderer({ content, className = '' }: { content: string; className?: string }) {
+  const [expandedImage, setExpandedImage] = useState<{ src: string; alt: string; caption?: string } | null>(null)
+
+  const imageComponents: Components = {
+    ...components,
+    img: ({ src, alt, title }) => (
+      <figure
+        className="w-full mb-12 cursor-pointer group"
+        onClick={() => src && setExpandedImage({ src, alt: alt || '', caption: title || undefined })}
+      >
+        <div className="w-full aspect-[4/3] md:aspect-[16/9] rounded-sm bg-surface-container-high overflow-hidden shadow-[0px_24px_48px_rgba(0,0,0,0.04)] group-hover:opacity-90 transition-opacity">
+          <img
+            src={src}
+            alt={alt || ''}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        {title && (
+          <figcaption className="mt-3 text-center text-sm text-secondary font-body italic">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                p: ({ children }) => <>{children}</>,
+                code: ({ children }) => (
+                  <code className="not-italic text-[0.875em] bg-surface-container-low/50 text-secondary px-1.5 py-0.5 rounded-sm tracking-wide" style={{ fontFamily: '"SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace' }}>
+                    {children}
+                  </code>
+                ),
+              }}
+            >
+              {title}
+            </ReactMarkdown>
+          </figcaption>
+        )}
+      </figure>
+    ),
+  }
+
   return (
-    <div className={`markdown-body ${className}`}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={components}>
-        {content}
-      </ReactMarkdown>
-    </div>
+    <>
+      <ImageModal
+        isOpen={!!expandedImage}
+        onClose={() => setExpandedImage(null)}
+        src={expandedImage?.src || ''}
+        alt={expandedImage?.alt || ''}
+        caption={expandedImage?.caption}
+      />
+      <div className={`markdown-body ${className}`}>
+        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]} components={imageComponents}>
+          {content}
+        </ReactMarkdown>
+      </div>
+    </>
   )
 }
