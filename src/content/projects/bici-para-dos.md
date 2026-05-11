@@ -314,13 +314,15 @@ Several hours of GPU time per ~30-second continuation on the `5b` variant. We ge
 We prioritised output quality over iteration speed. The `5b` variant produces more coherent long-range structure and, unlike `1b_lyrics`, has no lyrics conditioning — both important for an instrumental cinematic piece. The cost was generation time: several hours per ~30-second continuation. With a fixed festival deadline, that meant we ran fewer experiments and had less room to recover from bad generations, but the fidelity improvement was worth it.
 
 **Could the same approach work with newer models like MusicLM or Suno?**
-Conceptually yes, the seed-condition-curate-transcribe loop is model-agnostic. But the specific constraints would shift. Newer models have different fidelity profiles, different conditioning surfaces (text prompts instead of artist/genre tags), and different generation latencies. You'd need a fresh experimentation phase to map the new model's behavioural envelope before committing to a style.
+Conceptually yes, the seed-condition-curate-transcribe loop is model-agnostic. But the specific constraints would shift. Newer models have different fidelity profiles, different conditioning surfaces (text prompts instead of artist/genre tags), and different generation latencies. You'd need a fresh experimentation phase to map the new model's behavioural envelope before committing to a style. For a technical breakdown of how those newer diffusion-based systems work, see [AI Music Generation in 2025: Diffusion Models & Stable Audio](/blog/the-new-era-of-ai-driven-musical-composition).
 
 **How did you handle the high-frequency degradation in the final mix?**
 Two ways. First, by writing the piece to live in the low-mid register from the start, so the loss happened where there wasn't much information to begin with. Second, in post-production, by layering virtual instruments and samplers in the upper register to fill the spectral gaps Jukebox couldn't reconstruct. The result is a hybrid spectrum: low-mid is largely AI-generated, the highs are human-overlaid.
 
 **How much of the final piece is "the AI" versus "the humans"?**
 By the end of post-production the question stops being meaningful, which is partly the point. If you measure by audio source, the AI bed contributes roughly half of what you hear, mostly in the low-mid harmonic content. If you measure by *authored decisions*, almost everything (seed design, conditioning, candidate selection, transcription, complementary composition, mix) is human. The piece exists in the seam between the two.
+
+For how the AI music landscape evolved since 2021 — from Jukebox to today's diffusion models — read [AI Music Generation in 2025: Diffusion Models & Stable Audio](/blog/the-new-era-of-ai-driven-musical-composition).
 
 ## The piece in context
 
@@ -334,8 +336,6 @@ By the end of post-production the question stops being meaningful, which is part
 - **Scientific & technical support, AC3E**: Mauricio Araya, Fabián Rubilar
 - **Funding**: CONICYT / PIA, Project Code FB0008 (AC3E)
 - **Premiere venue**: Palacio Vergara, Viña del Mar, 24 October 2021
-
-If you're interested in adjacent technical work, see the Computer Vision pipeline for [Kings League — Big Data Kings](/projects/kings-league-big-data-king), the AI assistant work for [Omniduc](/projects/omniduc), or the broader research portfolio at [Electroveja Labs](/projects/electroveja-labs).
 
 ## Links
 

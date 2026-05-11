@@ -156,7 +156,8 @@ const components: Components = {
 
     return (
       <div className="w-full bg-surface-container-low p-12 md:p-16 mb-16 rounded-sm shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
-        <blockquote className="type-headline-large font-bold text-primary">
+        <span className="block text-6xl leading-none text-primary/20 mb-1 select-none" style={{ fontFamily: 'var(--font-serif)' }}>&ldquo;</span>
+        <blockquote className="type-article-quote text-primary italic">
           {quoteLines.join(' ')}
         </blockquote>
         {attribution && (

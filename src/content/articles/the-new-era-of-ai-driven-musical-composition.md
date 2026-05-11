@@ -47,7 +47,7 @@ faq:
       regardless of the platform's terms.
 ---
 
-A few years ago I had an experience that completely reshaped the way I view music and technology. During Chile's third Science Festival, I teamed up with an American musician on an ambitious experiment: to create a musical piece composed entirely by an artificial intelligence model. Our goal was to showcase a novel approach to using AI in music. We plunged into the world of generative music and developed a piece produced almost entirely by a neural network model, which was performed live by a cellist during the event.
+A few years ago I had an experience that completely reshaped the way I view music and technology. During Chile's third Science Festival, I teamed up with an American musician on an ambitious experiment — the [**Bici para Dos**](/projects/bici-para-dos) project — to create a musical piece composed almost entirely by an artificial intelligence model. Our goal was to showcase a novel approach to using AI in music. We plunged into the world of generative music and developed a piece produced almost entirely by a neural network model, which was performed live by a cellist during the event.
 
 It was an exciting project; we composed orchestrated audio with synthesizers, focused mainly on textures and atmospheres, using the concept of the Shepard tone (ascending melodies that seem never to stop rising) as input for the model.
 
@@ -84,7 +84,7 @@ As we have seen, the field of AI music generation has many facets; in this artic
 
 ## How Do Generative Audio Models Work?
 
-In the last few years, **diffusion models** have become the state-of-the-art technology for audio and music generation. Compared with earlier approaches—such as autoregressive models (for example, WaveNet or Jukebox) and generative adversarial networks (GANs)—diffusion models deliver unprecedented realism and audio quality, along with highly refined stylistic control. Whereas autoregressive models generate audio sequentially and GANs can struggle with stability or diversity, the diffusion methodology can create sound signals with exceptional fidelity and creative versatility.
+In the last few years, **diffusion models** have become the state-of-the-art technology for audio and music generation. Compared with earlier approaches—such as autoregressive models (for example, WaveNet or [Jukebox](/projects/bici-para-dos), which powered the Bici para Dos project) and generative adversarial networks (GANs)—diffusion models deliver unprecedented realism and audio quality, along with highly refined stylistic control. Whereas autoregressive models generate audio sequentially and GANs can struggle with stability or diversity, the diffusion methodology can create sound signals with exceptional fidelity and creative versatility.
 
 ### The Diffusion Process: From Noise to Audio
 
@@ -183,8 +183,6 @@ Once the compact latent representation is obtained, the next step is to apply la
 
 An interesting detail is that the model is prepared to generate music of different durations. A timing conditioning is introduced to indicate the model's position within the track, enabling the generation of various track lengths. Finally, as in its previous version, the CLAP model acts as a bridge between language and audio.
 
-> **Building with similar AI systems?** I've also written a [Python guide to Claude prompt caching](/blog/claude-prompt-caching-python-guide) and a [walkthrough of Claude Managed Agents](/blog/claude-managed-agents-guide) that cover related patterns for production AI work.
-
 ---
 
 ## Music Industry Transformed by Artificial Intelligence
@@ -265,7 +263,7 @@ Who "owns" an AI-generated melody, and should the data used to train these syste
 
 For musicians, the upside is vast: faster ideation, lower barriers, and entirely new genres born from human-machine synergy. Used as an instrument—not a shortcut—AI extends our imagination. Human creativity stays the melody; AI simply adds fresh harmonies and new timbres that propel the music somewhere we could never have gone alone.
 
-> _If you found the AI-collaboration patterns here useful, you may also like my piece on [how to use Claude Cowork](/blog/how-to-use-claude-cowork)—similar human-in-the-loop ideas, applied to software work._
+If you're curious about how these ideas played out in a real project, [**Bici para Dos**](/projects/bici-para-dos) documents the 2021 experiment that inspired this article — co-composing a cinematic soundtrack with OpenAI Jukebox, live cello, and a lot of GPU hours.
 
 ---
 
