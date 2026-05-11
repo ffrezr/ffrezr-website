@@ -45,6 +45,11 @@ export interface Certification {
   date?: string
 }
 
+export interface FaqItem {
+  question: string
+  answer: string
+}
+
 export interface Article {
   slug: string
   title: string
@@ -56,6 +61,10 @@ export interface Article {
   featured?: boolean
   published?: boolean
   display?: boolean
+  metaDescription?: string
+  tags?: string[]
+  lastUpdated?: string
+  faq?: FaqItem[]
 }
 
 export interface ArticleContent extends Article {

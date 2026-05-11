@@ -3,10 +3,21 @@ import { useParams, Link } from 'react-router'
 import { getArticleBySlug, getProjectBySlug } from '../lib/content'
 import MarkdownRenderer from '../components/ui/MarkdownRenderer'
 import Tag from '../components/ui/Tag'
+import { profile, socialLinks } from '../data/profile'
+import type { ArticleContent, FaqItem } from '../types'
+
+const SITE_URL = 'https://ffrezr.dev'
 
 interface MetaItem {
   value: string
   primary?: boolean
+}
+
+interface SeoMeta {
+  description: string
+  canonical: string
+  ogImage: string
+  jsonLd: Record<string, unknown>[]
 }
 
 interface Config {
@@ -24,10 +35,81 @@ interface Config {
   showShareButton?: boolean
   emptyTitle: string
   emptySubtitle: string
+  seo?: SeoMeta
+}
+
+function toAbsoluteUrl(path: string | undefined): string {
+  if (!path) return ''
+  if (path.startsWith('http://') || path.startsWith('https://')) return path
+  return `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`
+}
+
+function toIsoDate(input?: string): string | undefined {
+  if (!input) return undefined
+  const d = new Date(input)
+  return isNaN(d.getTime()) ? undefined : d.toISOString()
+}
+
+function buildArticleJsonLd(article: ArticleContent, canonical: string, ogImage: string): Record<string, unknown>[] {
+  const datePublished = toIsoDate(article.date)
+  const dateModified = toIsoDate(article.lastUpdated) ?? datePublished
+
+  const blogPosting: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.metaDescription ?? article.excerpt,
+    image: ogImage,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    url: canonical,
+    inLanguage: 'en',
+    author: {
+      '@type': 'Person',
+      name: profile.fullName,
+      url: `${SITE_URL}/about`,
+      sameAs: socialLinks.map((s) => s.url),
+    },
+    publisher: {
+      '@type': 'Person',
+      name: profile.fullName,
+      url: SITE_URL,
+    },
+    articleSection: article.category,
+    keywords: article.tags?.join(', '),
+  }
+  if (datePublished) blogPosting.datePublished = datePublished
+  if (dateModified) blogPosting.dateModified = dateModified
+
+  const jsonLd: Record<string, unknown>[] = [blogPosting]
+
+  if (article.faq && article.faq.length > 0) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: article.faq.map((f: FaqItem) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    })
+  }
+
+  return jsonLd
 }
 
 function buildArticleConfig(slug: string): Config {
   const article = getArticleBySlug(slug)
+  const canonical = `${SITE_URL}/blog/${slug}`
+  const ogImage = toAbsoluteUrl(article?.image)
+  const seo: SeoMeta | undefined = article
+    ? {
+        description: article.metaDescription ?? article.excerpt,
+        canonical,
+        ogImage,
+        jsonLd: buildArticleJsonLd(article, canonical, ogImage),
+      }
+    : undefined
+
   return {
     notFound: !article,
     notFoundMessage: 'Article not found',
@@ -40,12 +122,14 @@ function buildArticleConfig(slug: string): Config {
     ],
     title: article?.title ?? '',
     subtitle: article?.excerpt ?? '',
+    tags: article?.tags,
     image: article?.image,
     content: article?.content,
     display: article?.display,
     showShareButton: true,
     emptyTitle: 'This article is coming soon.',
     emptySubtitle: "Stay tuned — I'm writing this one.",
+    seo,
   }
 }
 
@@ -83,7 +167,7 @@ export default function ContentDetailPage({ contentType }: { contentType: 'artic
     : buildProjectConfig(slug!)
 
   const { notFound, notFoundMessage, backRoute, backLabel, meta, title, subtitle, tags,
-    image, content, display, showShareButton, emptyTitle, emptySubtitle } = config
+    image, content, display, showShareButton, emptyTitle, emptySubtitle, seo } = config
 
   if (notFound) {
     return (
@@ -98,6 +182,29 @@ export default function ContentDetailPage({ contentType }: { contentType: 'artic
 
   return (
     <div className="pt-[88px] flex flex-col items-center pb-32 bg-surface-container-lowest">
+      {seo && (
+        <>
+          <title>{`${title} — ${profile.name}`}</title>
+          <meta name="description" content={seo.description} />
+          <link rel="canonical" href={seo.canonical} />
+          <meta property="og:type" content={contentType === 'article' ? 'article' : 'website'} />
+          <meta property="og:title" content={title} />
+          <meta property="og:description" content={seo.description} />
+          <meta property="og:url" content={seo.canonical} />
+          {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={seo.description} />
+          {seo.ogImage && <meta name="twitter:image" content={seo.ogImage} />}
+          {seo.jsonLd.map((schema, i) => (
+            <script
+              key={i}
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+          ))}
+        </>
+      )}
       <header className="w-full max-w-5xl px-6 md:px-12 pt-24 pb-16 flex flex-col items-center text-center">
         <div className="w-full max-w-[44rem] flex flex-col items-center">
           <div className="flex items-center gap-4 mb-8 type-label text-secondary">
@@ -129,7 +236,7 @@ export default function ContentDetailPage({ contentType }: { contentType: 'artic
       {image && (
         <div className="w-full max-w-7xl px-6 md:px-12 mb-24 flex justify-center">
           <div className="rounded-sm bg-surface-container-low overflow-hidden relative shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
-            <img alt={title} className="block max-w-full h-auto" src={image} />
+            <img alt={title} className="block max-w-full h-auto" src={image} decoding="async" fetchPriority="high" />
           </div>
         </div>
       )}

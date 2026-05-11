@@ -217,6 +217,8 @@ export default function MarkdownRenderer({ content, className = '' }: { content:
           <img
             src={src}
             alt={alt || ''}
+            loading="lazy"
+            decoding="async"
             className="block max-w-full h-auto"
           />
         </div>

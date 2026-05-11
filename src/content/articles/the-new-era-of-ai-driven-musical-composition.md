@@ -1,12 +1,50 @@
 ---
 slug: the-new-era-of-ai-driven-musical-composition
-title: "The New Era of AI-Driven Musical Composition"
+title: "AI Music Generation in 2025: Diffusion Models & Stable Audio"
 excerpt: >
   From a live AI-composed cello performance to today's text-to-audio masterpieces—this is how generative music grew up.
+metaDescription: >
+  How AI music generation works in 2025: diffusion models, U-Net & DiT architectures, and a deep dive into Stable Audio 2.0, Suno, and Udio—plus the legal landscape.
 category: AI Tools
 date: Jun 3, 2025
+lastUpdated: May 11, 2026
 readTime: 15 min read
 image: /img/ai-music/cover.webp
+tags:
+  - generative-ai
+  - music
+  - diffusion-models
+  - stable-audio
+  - deep-learning
+faq:
+  - question: What is audio music generation in AI?
+    answer: >
+      Audio music generation produces raw waveforms directly—the actual sound
+      signal—rather than symbolic representations like MIDI or sheet music. This
+      lets AI capture timbre, texture, and vocal inflections that symbolic
+      generation cannot represent. Modern systems generate 44.1 kHz stereo audio
+      from text prompts using diffusion models.
+  - question: How do diffusion models generate music?
+    answer: >
+      Diffusion models start from random noise and refine it step by step into a
+      coherent audio waveform. During training the model learns the reverse of a
+      noising process — predicting what slightly noisier audio looked like
+      cleaner. At inference, it iterates that denoising from pure noise until a
+      track emerges, guided by text prompts and timing embeddings.
+  - question: What is Stable Audio 2.0?
+    answer: >
+      Stable Audio 2.0 is Stability AI's latent-diffusion music model that
+      generates up to three-minute structured tracks at 44.1 kHz stereo from
+      natural-language prompts. Version 2.0, released in April 2024, adds
+      audio-to-audio transformation and style transfer on top of the original
+      text-to-audio pipeline.
+  - question: Can AI-generated music be used commercially?
+    answer: >
+      It depends on the platform and the source material. Stable Audio, Suno,
+      and Udio each have distinct licensing terms, generally requiring a paid
+      tier for commercial use. Tracks that imitate a real artist's voice without
+      consent—like "Heart on My Sleeve"—face takedowns and legal exposure
+      regardless of the platform's terms.
 ---
 
 A few years ago I had an experience that completely reshaped the way I view music and technology. During Chile's third Science Festival, I teamed up with an American musician on an ambitious experiment: to create a musical piece composed entirely by an artificial intelligence model. Our goal was to showcase a novel approach to using AI in music. We plunged into the world of generative music and developed a piece produced almost entirely by a neural network model, which was performed live by a cellist during the event.
@@ -21,13 +59,20 @@ It was a lengthy period of experimentation. The model's unpredictability kept us
 
 While this seemed innovative at the time, generative music now sits at the frontier between art and technology. Just four years later, today's models generate sophisticated, high-fidelity compositions and offer far more intuitive workflows. Friendlier interfaces and collaborative editing let composers steer the AI and polish the output until it matches their artistic vision.
 
-Moreover, the integration of digital post-production tools has significantly improved the quality of AI-generated audio, enabling the incorporation of both acoustic and electronic elements that enrich the final work. These advances have propelled generative music from a technical curiosity to a powerful resource for composers, producers, and artists worldwide.
+The integration of digital post-production tools has also raised the quality bar, letting artists weave both acoustic and electronic elements into AI-generated audio. These advances have propelled generative music from a technical curiosity to a powerful resource for composers, producers, and artists worldwide.
+
+> ## Key Takeaways
+>
+> - Diffusion models turn random noise into coherent audio through gradual, controlled denoising guided by text prompts and timing embeddings.
+> - Stable Audio 2.0 generates structured 3-minute tracks at 44.1 kHz stereo from natural-language prompts, with audio-to-audio and style transfer added in April 2024.
+> - The contrast between "Heart on My Sleeve" (taken down) and "Now and Then" (Grammy-nominated) shows that consent and context matter as much as audio quality.
+> - For musicians, AI works best as a creative collaborator—an instrument that extends imagination—rather than a shortcut that replaces human musicality.
 
 ---
 
 ## Audio Music Generation
 
-The field of AI music generation can be divided into two main directions: **symbolic music generation** and **audio music generation**. While the former focuses on creating representations of music, such as MIDI files, sheet music, or piano rolls based on musical structures and patterns, the latter dives directly into the realm of sound waves.
+The field of AI music generation can be divided into two main directions: **symbolic music generation** and **audio music generation**. While the former focuses on creating representations of music, such as MIDI files, sheet music, or piano rolls based on musical structures and patterns, the latter works directly with sound waves.
 
 In audio music generation, the AI produces the raw audio signal—that is, it generates the very waveform found in a recorded track. This lets it capture essential sound nuances such as texture, timbre, and even vocal inflections—facets that symbolic generation, working with discrete data, cannot address in the same way. This approach closely resembles the recording and mixing stages of music production, enabling compositions with striking realism and sonic complexity.
 
@@ -81,7 +126,7 @@ Once the model has mastered the task of injecting noise in a controlled manner, 
 
 ## Leading Music Generation Architecture
 
-In today's landscape, numerous models can generate music with high-quality audio. However, in this section, I would like to delve deeper into what I consider the leader—and for many, one of the most outstanding developments in this field: **Stable Audio**. It is a latent diffusion model architecture for audio that is conditioned on text metadata as well as audio file duration and start time. This design allows precise control over both the content and the duration of the generated audio.
+Today, many models can generate music at production-grade quality. In this section, I'll focus on what I consider the leader—and for many, one of the most outstanding developments in this field: **Stable Audio**. It is a latent diffusion model architecture for audio that is conditioned on text metadata as well as audio file duration and start time. This design allows precise control over both the content and the duration of the generated audio.
 
 Stable Audio generates audio tracks in response to descriptive text prompts and a specific duration requested by the user. For example, entering a prompt like:
 
@@ -89,7 +134,7 @@ Stable Audio generates audio tracks in response to descriptive text prompts and 
 
 Along with a request for a 95-second track enables the model to generate audio that adheres to both the desired style and duration. Check the result below:
 
-<iframe width="100%" style="aspect-ratio:16/9;border-radius:2px;margin:1rem 0" src="https://www.youtube.com/embed/lvN67Xe7HNI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe loading="lazy" width="100%" style="aspect-ratio:16/9;border-radius:2px;margin:1rem 0" src="https://www.youtube.com/embed/lvN67Xe7HNI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 This additional temporal conditioning overcomes a common limitation of traditional systems, which often produce fixed-size outputs and may interrupt musical phrases due to being trained on cropped segments of longer recordings.
 
@@ -103,7 +148,9 @@ The VAE plays a critical role by compressing stereo audio into a data-efficient,
 
 To effectively condition the model on text prompts, a frozen text encoder from a [CLAP](https://github.com/LAION-AI/CLAP/) model is utilized. This CLAP model, trained from scratch on a dedicated dataset, allows the extracted text features to capture nuanced relationships between words and sounds. These features are then supplied to the diffusion U-Net via cross-attention layers, ensuring that the generated audio accurately reflects the prompt.
 
-During training, two key timing properties are calculated—"seconds_start" (the audio chunk's starting second) and "seconds_total" (the full duration of the original audio)—which are translated into per-second discrete learned embeddings and concatenated with the prompt tokens to guide the U-Net diffusion model via cross-attention layers. The U-Net architecture derived from Moûsai, utilizing residual, self-attention, and cross-attention layers to effectively denoise audio inputs conditioned by both textual prompts and timing embeddings, with memory-efficient attention implementations enabling scalability to longer sequences.
+During training, two timing properties are computed for each audio chunk: `seconds_start` (where the chunk begins inside the original recording) and `seconds_total` (the full duration of the source audio). Both values are translated into per-second discrete learned embeddings and concatenated with the prompt tokens. These tokens then guide the U-Net diffusion model through cross-attention layers.
+
+The U-Net architecture itself is derived from Moûsai and combines residual, self-attention, and cross-attention layers to denoise audio conditioned on text and timing. Memory-efficient attention implementations are what allow it to scale to long sequences without blowing up GPU memory.
 
 ### Evolution of Stable Audio
 
@@ -118,8 +165,8 @@ This model is available to use for free on the [Stable Audio website](https://st
 Stable Audio 2.0 significantly enhances creative tools by supporting both text-to-audio and audio-to-audio prompting. It can produce structured compositions of up to three minutes, including intros, developments, outros, and dynamic stereo effects.
 
 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:0.5rem 0">
-  <iframe src="https://stableaudio.com/1/share/10851c11-f998-418e-ad0b-1f7654ce5fe5/iframe" width="100%" height="350" frameborder="0" style="border-radius:2px" allow="autoplay"></iframe>
-  <iframe src="https://stableaudio.com/1/share/99dfdd21-ae68-4e2e-bfa5-33b72fa3bdaa/iframe" width="100%" height="350" frameborder="0" style="border-radius:2px" allow="autoplay"></iframe>
+  <iframe loading="lazy" src="https://stableaudio.com/1/share/10851c11-f998-418e-ad0b-1f7654ce5fe5/iframe" width="100%" height="350" frameborder="0" style="border-radius:2px" allow="autoplay"></iframe>
+  <iframe loading="lazy" src="https://stableaudio.com/1/share/99dfdd21-ae68-4e2e-bfa5-33b72fa3bdaa/iframe" width="100%" height="350" frameborder="0" style="border-radius:2px" allow="autoplay"></iframe>
 </div>
 
 Users can directly upload audio files, transforming them through natural language instructions. An integrated style transfer functionality allows further customization, matching generated or uploaded audio precisely to a project's theme and tone.
@@ -136,11 +183,13 @@ Once the compact latent representation is obtained, the next step is to apply la
 
 An interesting detail is that the model is prepared to generate music of different durations. A timing conditioning is introduced to indicate the model's position within the track, enabling the generation of various track lengths. Finally, as in its previous version, the CLAP model acts as a bridge between language and audio.
 
+> **Building with similar AI systems?** I've also written a [Python guide to Claude prompt caching](/blog/claude-prompt-caching-python-guide) and a [walkthrough of Claude Managed Agents](/blog/claude-managed-agents-guide) that cover related patterns for production AI work.
+
 ---
 
 ## Music Industry Transformed by Artificial Intelligence
 
-In recent years, AI-based music technology has advanced significantly, opening new opportunities within the commercial realm. Platforms dedicated to AI-driven music generation now offer practical and innovative solutions for producers, composers, and marketing professionals who require high-quality music but lack expertise in complex music production techniques. This democratization of AI-based music creation is not only facilitating access to professional-quality sounds but also driving commercial creativity toward previously unimaginable horizons.
+In recent years, AI-based music technology has advanced significantly, opening new opportunities within the commercial realm. Platforms dedicated to AI-driven music generation now offer practical and innovative solutions for producers, composers, and marketing professionals who require high-quality music but lack expertise in complex music production techniques. This democratization of AI-based music creation is not only making professional-quality sounds widely accessible but also driving commercial creativity into directions that weren't practical before.
 
 ### AI-Generated Music Platforms for Full Tracks
 
@@ -148,9 +197,13 @@ Here's an overview of the latest releases of AI music generation platforms. I en
 
 #### Stable Audio 2.0
 
-![Stable Audio web interface](/img/ai-music/stable-audio-web.png)
+![Stable Audio web interface](/img/ai-music/stable-audio-web.png "Stable Audio 2.0 web interface (source: [Stable Audio](https://stableaudio.com/))")
 
-We've already talked about its architecture, but here I'd like to go into a little detail about its platform. Stable Audio is offered via an easy web interface and an API. This model enables high-quality, full tracks with coherent musical structure up to three minutes long at 44.1 kHz stereo from a single natural language prompt. In terms of user experience, Stable Audio is prompt-driven—there's no granular editing of the composition after generation, but you can refine the text prompts to steer the style. The system encourages iterative prompt engineering (specifying details like instruments or emotional tone) to get the best results. While it doesn't generate vocals or lyrics, it excels at instrumental music and atmospheric soundscapes. It's ideal for royalty-free music beds, podcasts, or video background tracks where high audio quality is needed. Stable Audio is focused on achieving high-quality audio by sacrificing functionality in its creation.
+We've already covered its architecture; here I'll focus on the platform itself. Stable Audio is offered via an easy web interface and an API. The model produces high-quality, full tracks with coherent musical structure up to three minutes long at 44.1 kHz stereo from a single natural-language prompt.
+
+In terms of user experience, Stable Audio is prompt-driven—there's no granular editing of the composition after generation, but you can refine the text prompts to steer the style. The system encourages iterative prompt engineering (specifying details like instruments or emotional tone) to get the best results.
+
+While it doesn't generate vocals or lyrics, it excels at instrumental music and atmospheric soundscapes. It's ideal for royalty-free music beds, podcasts, or video background tracks where high audio quality is needed. Stable Audio is focused on achieving high-quality audio by sacrificing functionality in its creation.
 
 #### Suno – Text-to-Music with Lyrics & Vocals
 
@@ -158,7 +211,7 @@ We've already talked about its architecture, but here I'd like to go into a litt
 
 [Suno](https://suno.com/) (v4 November 2024) is a cutting-edge AI music generator that creates full songs with vocals and lyrics from text prompts. Users can describe a genre, mood, and theme (e.g. "happy pop song about a vacation with fast piano and singing") and Suno's AI will compose melody, chords, beats, and even sing generated lyrics. It supports multiple languages and genres (from pop and rock to classical, jazz, etc.) and can also produce instrumental-only tracks on demand. Suno's vocals are synthetic but surprisingly expressive, capable of rapping or singing in various styles.
 
-Suno offers a web-based interface that's easy for beginners. You simply type a prompt and receive two song variants (up to ~80 seconds each) within seconds. A unique feature is real-time collaboration via Discord, where users can share and co-create music live. All generated music is copyright-free and can be used in content, but commercial use requires a paid plan.
+Suno offers a web-based interface that's easy for beginners. You simply type a prompt and receive two song variants (up to about 80 seconds each) within a few seconds. A unique feature is real-time collaboration via Discord, where users can share and co-create music live. All generated music is copyright-free and can be used in content, but commercial use requires a paid plan.
 
 #### Udio – AI Song Generator with Realistic Vocals
 
@@ -176,17 +229,25 @@ To showcase how AI is reshaping the music landscape, let's explore some prominen
 
 #### "Heart on My Sleeve" – Ghostwriter (Drake AI feat. The Weeknd AI, 2023)
 
-Perhaps the most talked-about AI song of 2023, this track was created by an anonymous producer _Ghostwriter977_ using AI models of Drake's and The Weeknd's voices. The song, a catchy hip-hop/R&B number, went viral on TikTok and was briefly available on streaming platforms. Listeners were stunned at how convincingly it sounded like a collaboration between those superstars—to some, it proved that fan-made AI can rival official music in public appeal. However, the reception from the music industry was swift and negative. Universal Music Group condemned the track and pressed platforms to remove it due to **copyright and impersonation issues**. Within days, "Heart on My Sleeve" was taken down from Spotify, Apple Music, etc., though it still circulates online. This incident was a wake-up call: it demonstrated AI's power to generate hit-like songs and forced the industry to grapple with managing such content. It also sparked legal discussions via DMCA and calls for new laws. Despite the takedown, the song's popularity showed a potential audience appetite for AI-produced novelty tracks—albeit one that clashes with current copyright frameworks.
+Perhaps the most talked-about AI song of 2023, this track was created by an anonymous producer _Ghostwriter977_ using AI models of Drake's and The Weeknd's voices. The song, a catchy hip-hop/R&B number, went viral on TikTok and was briefly available on streaming platforms. Listeners were stunned at how convincingly it sounded like a collaboration between those superstars—to some, it proved that fan-made AI can rival official music in public appeal.
+
+The reception from the music industry, however, was swift and negative. Universal Music Group condemned the track and pressed platforms to remove it due to **copyright and impersonation issues**. Within days, "Heart on My Sleeve" was taken down from Spotify, Apple Music, and the other majors, though it still circulates online. This incident was a wake-up call: it demonstrated AI's power to generate hit-like songs and forced the industry to grapple with managing such content. It also sparked legal discussions via DMCA and calls for new laws.
+
+Despite the takedown, the song's popularity showed a potential audience appetite for AI-produced novelty tracks—albeit one that clashes with current copyright frameworks.
 
 #### ["Now and Then" – The Beatles (2023)](https://www.youtube.com/watch?v=Opxhh9Oh3rg)
 
-<iframe width="100%" style="aspect-ratio:16/9;border-radius:2px;margin:1rem 0" src="https://www.youtube.com/embed/Opxhh9Oh3rg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe loading="lazy" width="100%" style="aspect-ratio:16/9;border-radius:2px;margin:1rem 0" src="https://www.youtube.com/embed/Opxhh9Oh3rg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-In a very different scenario, AI was used by legitimate artists to create a new Beatles release. "Now and Then" was an unfinished John Lennon demo from the 1970s. In the 2020s, Paul McCartney, Ringo Starr, and the team used AI audio separation technology (developed during Peter Jackson's Beatles documentary) to isolate Lennon's vocal and piano from a hiss-filled tape. The cleaned-up vocals allowed the remaining Beatles to finish the production and arrangement. Released in late 2023 as "the last Beatles song," it received a warm reception from fans and critics, largely because it authentically sounded like the Beatles and brought closure to their catalog. The use of AI here was seen as _a restoration tool_ rather than generating something from scratch—an example of AI being used to preserve and enhance human recordings. Industry-wise, it was even nominated for a Grammy award, indicating establishment acceptance. This positive reception contrasts with the Ghostwriter case: it was authorized and carefully done with respect for the artist's legacy. "Now and Then" showed how AI can be a **tool for nostalgia and preservation**, extending what's possible in music production.
+In a very different scenario, AI was used by legitimate artists to create a new Beatles release. "Now and Then" was an unfinished John Lennon demo from the 1970s. In the 2020s, Paul McCartney, Ringo Starr, and the team used AI audio separation technology (developed during Peter Jackson's Beatles documentary) to isolate Lennon's vocal and piano from a hiss-filled tape. The cleaned-up vocals allowed the remaining Beatles to finish the production and arrangement.
+
+Released in late 2023 as "the last Beatles song," it received a warm reception from fans and critics, largely because it authentically sounded like the Beatles and brought closure to their catalog. The use of AI here was seen as _a restoration tool_ rather than generating something from scratch—an example of AI being used to preserve and enhance human recordings.
+
+Industry-wise, it was even nominated for a Grammy award, indicating establishment acceptance. This positive reception contrasts with the Ghostwriter case: it was authorized and carefully done with respect for the artist's legacy. "Now and Then" showed how AI can be a **tool for nostalgia and preservation**, extending what's possible in music production.
 
 #### ["BBL Drizzy" by King Willonius (2024)](https://www.youtube.com/watch?v=1uW_AUwEv-0)
 
-<iframe width="100%" style="aspect-ratio:16/9;border-radius:2px;margin:1rem 0" src="https://www.youtube.com/embed/1uW_AUwEv-0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe loading="lazy" width="100%" style="aspect-ratio:16/9;border-radius:2px;margin:1rem 0" src="https://www.youtube.com/embed/1uW_AUwEv-0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 In 2024, comedian and content creator King Willonius gained significant attention with his AI-generated song **"BBL Drizzy"**, a parody addressing humorous rumors surrounding rapper Drake. Utilizing **Udio**, King Willonius crafted an R&B track stylistically reminiscent of the 1970s, combining satirical, humorous lyrics with authentic-sounding musical production.
 
@@ -202,24 +263,26 @@ Artificial intelligence has shifted from novelty to indispensable creative partn
 
 Who "owns" an AI-generated melody, and should the data used to train these systems be disclosed—compensating the original artists in the process? As AI models grow more adept at imitating voices and styles, we must ask whether faithful reproduction crosses the line into unauthorized impersonation. Clear rules on authorship and compensation will determine whether AI becomes an ally or an ethical minefield.
 
-For musicians, the upside is vast: faster ideation, lower barriers, and entirely new genres born from human-machine synergy. Used as an instrument—not a shortcut—AI extends our imagination. Human creativity stays the melody; AI simply adds fresh harmonies and new timbres that propels the music somewhere we could never have gone alone.
+For musicians, the upside is vast: faster ideation, lower barriers, and entirely new genres born from human-machine synergy. Used as an instrument—not a shortcut—AI extends our imagination. Human creativity stays the melody; AI simply adds fresh harmonies and new timbres that propel the music somewhere we could never have gone alone.
+
+> _If you found the AI-collaboration patterns here useful, you may also like my piece on [how to use Claude Cowork](/blog/how-to-use-claude-cowork)—similar human-in-the-loop ideas, applied to software work._
 
 ---
 
 ## References
 
-1. Landschoot, C. (2023). [_The State of Generative Music_](https://medium.com/whitebalance/the-state-of-generative-music-0fcb2745baf9). **Medium**.
-2. Rouard, S., & Hadjeres, G. (2023). [_CRASH: Raw Audio Score-based Generative Modeling for Controllable High-resolution Drum Sound Synthesis_](https://arxiv.org/abs/2402.04825). **arXiv preprint arXiv:2402.04825**.
-3. Ronneberger, O., Fischer, P., & Brox, T. (2015). [_U-Net: Convolutional Networks for Biomedical Image Segmentation_](https://arxiv.org/pdf/1505.04597). **arXiv preprint arXiv:1505.04597**.
-4. Stability AI. (2023). [_Stable Audio: Efficient Timing Latent Diffusion_](https://stability.ai/research/stable-audio-efficient-timing-latent-diffusion).
-5. Stability AI. (2023). [_Using AI to Generate Music_](https://stability.ai/news/stable-audio-using-ai-to-generate-music).
-6. Stability AI. (2024). [_Stable Audio 2.0_](https://stability.ai/news/stable-audio-2-0).
-7. Billboard. (2024). [_Metro Boomin, Future and the AI Sampling Controversy Around "BBL Drizzy"_](https://www.billboard.com/business/tech/metro-boomin-bbl-drizzy-future-ai-sampling-1235682587/).
-8. Erdem, U. (2023). [_A Step-by-Step Visual Introduction to Diffusion Models_](https://erdem.pl/2023/11/step-by-step-visual-introduction-to-diffusion-models).
-9. WandB. (2023). [_A Technical Guide to Diffusion Models for Audio Generation_](https://wandb.ai/wandb_gen/audio/reports/A-Technical-Guide-to-Diffusion-Models-for-Audio-Generation--VmlldzoyNjc5ODIx).
-10. Toward Data Science. (2023). [_Audio Diffusion: Generative Music's Secret Sauce_](https://towardsdatascience.com/audio-diffusion-generative-musics-secret-sauce-f625d0aca800).
-11. Suno AI. (2024). [_Suno v4 – AI Music Generation Platform_](https://suno.ai/).
-12. Udio. (2024). [_AI Song Generator with Realistic Vocals_](https://udio.ai/).
-13. Ghostwriter977. (2023). **Heart on My Sleeve** (AI-generated track featuring Drake and The Weeknd). Viral release via **TikTok**.
-14. The Beatles. (2023). **Now and Then**. AI-assisted music production for official release.
-15. King Willonius. (2024). **BBL Drizzy**. AI-generated track viral on **TikTok** and **SoundCloud**, sampled by **Metro Boomin**.
+1. Ho, J., Jain, A., & Abbeel, P. (2020). [_Denoising Diffusion Probabilistic Models_](https://arxiv.org/abs/2006.11239). **arXiv:2006.11239** — foundational DDPM paper.
+2. Rouard, S., & Hadjeres, G. (2021). [_CRASH: Raw Audio Score-based Generative Modeling for Controllable High-resolution Drum Sound Synthesis_](https://arxiv.org/abs/2106.07431). **arXiv:2106.07431**.
+3. Ronneberger, O., Fischer, P., & Brox, T. (2015). [_U-Net: Convolutional Networks for Biomedical Image Segmentation_](https://arxiv.org/abs/1505.04597). **arXiv:1505.04597**.
+4. Evans, Z., Carr, C. J., Taylor, J., Hawley, S. H., & Pons, J. (2024). [_Fast Timing-Conditioned Latent Audio Diffusion_](https://arxiv.org/abs/2402.04825). **arXiv:2402.04825** — the original Stable Audio paper.
+5. Stability AI. (2024). [_Introducing Stable Audio 2.0_](https://stability.ai/news/stable-audio-2-0).
+6. Stability AI. (2023). [_Stable Audio: Times Best Inventions of 2023_](https://stability.ai/news/stable-audio-times-best-inventions-of-2023).
+7. Stability AI. (2023). [_Using AI to Generate Music_](https://stability.ai/news/stable-audio-using-ai-to-generate-music).
+8. Sohl-Dickstein, J., Weiss, E. A., Maheswaranathan, N., & Ganguli, S. (2015). [_Deep Unsupervised Learning using Nonequilibrium Thermodynamics_](https://arxiv.org/abs/1503.03585). **arXiv:1503.03585** — origin of diffusion-based generative models.
+9. Agostinelli, A., Denk, T. I., Borsos, Z., Engel, J., Verzetti, M., et al. (2023). [_MusicLM: Generating Music From Text_](https://arxiv.org/abs/2301.11325). **arXiv:2301.11325**.
+10. Forsgren, S., & Martiros, H. (2022). [_Riffusion: Stable Diffusion for Real-time Music Generation_](https://www.riffusion.com/about). **Riffusion**.
+11. Suno AI. (2024). [_Suno v4 — AI Music Generation Platform_](https://suno.com/).
+12. Udio. (2024). [_AI Song Generator with Realistic Vocals_](https://www.udio.com/).
+13. Billboard. (2023). [_AI Drake Track 'Heart on My Sleeve' Pulled From Streaming Services_](https://www.billboard.com/business/legal/ai-drake-track-pulled-streaming-services-1235312078/).
+14. Billboard. (2024). [_Metro Boomin, Future and the AI Sampling Controversy Around "BBL Drizzy"_](https://www.billboard.com/business/tech/metro-boomin-bbl-drizzy-future-ai-sampling-1235682587/).
+15. Apple. (2023). [_"Now and Then" — The Beatles, the Last Beatles Song_](https://www.thebeatles.com/now-and-then).
