@@ -205,14 +205,14 @@ export default function MarkdownRenderer({ content, className = '' }: { content:
     ...components,
     img: ({ src, alt, title }) => (
       <figure
-        className="w-full mb-12 cursor-pointer group"
+        className="w-full mb-12 cursor-pointer group flex flex-col items-center"
         onClick={() => src && setExpandedImage({ src, alt: alt || '', caption: title || undefined })}
       >
-        <div className="w-full aspect-[4/3] md:aspect-[16/9] rounded-sm bg-surface-container-high overflow-hidden shadow-[0px_24px_48px_rgba(0,0,0,0.04)] group-hover:opacity-90 transition-opacity">
+        <div className="w-fit max-w-full rounded-sm overflow-hidden shadow-[0px_24px_48px_rgba(0,0,0,0.04)] group-hover:opacity-90 transition-opacity">
           <img
             src={src}
             alt={alt || ''}
-            className="w-full h-full object-cover"
+            className="block max-w-full h-auto"
           />
         </div>
         {title && (

@@ -127,9 +127,9 @@ export default function ContentDetailPage({ contentType }: { contentType: 'artic
       </header>
 
       {image && (
-        <div className="w-full max-w-7xl px-6 md:px-12 mb-24">
-          <div className="aspect-[21/9] w-full rounded-sm bg-surface-container-low overflow-hidden relative shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
-            <img alt={title} className="w-full h-full object-cover" src={image} />
+        <div className="w-full max-w-7xl px-6 md:px-12 mb-24 flex justify-center">
+          <div className="rounded-sm bg-surface-container-low overflow-hidden relative shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
+            <img alt={title} className="block max-w-full h-auto" src={image} />
           </div>
         </div>
       )}
