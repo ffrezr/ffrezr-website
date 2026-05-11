@@ -71,14 +71,19 @@ function ArticleCodeWindow({ children }: { children: ReactNode }) {
 
 const components: Components = {
   h2: ({ children, className }) => (
-    <h2 className={className || 'type-headline-large font-semibold font-headline text-primary mb-8'}>
+    <h2 className={className || 'type-headline-large font-semibold font-headline text-primary mt-16 mb-8'}>
       {children}
     </h2>
   ),
   h3: ({ children, className }) => (
-    <h3 className={className || 'type-headline-small font-headline text-primary mb-4'}>
+    <h3 className={className || 'type-headline-medium font-headline text-primary mt-12 mb-6'}>
       {children}
     </h3>
+  ),
+  h4: ({ children, className }) => (
+    <h4 className={className || 'type-headline-small font-headline text-primary mt-8 mb-4'}>
+      {children}
+    </h4>
   ),
   p: ({ children, className }) => (
     <p className={className || 'type-article-body text-on-surface-variant mb-10'}>
@@ -221,6 +226,17 @@ export default function MarkdownRenderer({ content, className = '' }: { content:
               remarkPlugins={[remarkGfm]}
               components={{
                 p: ({ children }) => <>{children}</>,
+                a: ({ href, children }) => (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="not-italic text-primary underline underline-offset-2 decoration-outline-variant hover:decoration-primary transition-colors"
+                  >
+                    {children}
+                  </a>
+                ),
                 code: ({ children }) => (
                   <code className="not-italic text-[0.875em] bg-surface-container-low/50 text-secondary px-1.5 py-0.5 rounded-sm tracking-wide" style={{ fontFamily: '"SFMono-Regular", "SF Mono", Consolas, "Liberation Mono", Menlo, monospace' }}>
                     {children}

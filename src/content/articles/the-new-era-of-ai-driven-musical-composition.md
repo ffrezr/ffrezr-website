@@ -117,9 +117,10 @@ This model is available to use for free on the [Stable Audio website](https://st
 
 Stable Audio 2.0 significantly enhances creative tools by supporting both text-to-audio and audio-to-audio prompting. It can produce structured compositions of up to three minutes, including intros, developments, outros, and dynamic stereo effects.
 
-<iframe src="https://stableaudio.com/1/share/10851c11-f998-418e-ad0b-1f7654ce5fe5/iframe" width="100%" height="160" frameborder="0" style="border-radius:2px;margin:0.5rem 0" allow="autoplay"></iframe>
-
-<iframe src="https://stableaudio.com/1/share/99dfdd21-ae68-4e2e-bfa5-33b72fa3bdaa/iframe" width="100%" height="160" frameborder="0" style="border-radius:2px;margin:0.5rem 0" allow="autoplay"></iframe>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin:0.5rem 0">
+  <iframe src="https://stableaudio.com/1/share/10851c11-f998-418e-ad0b-1f7654ce5fe5/iframe" width="100%" height="350" frameborder="0" style="border-radius:2px" allow="autoplay"></iframe>
+  <iframe src="https://stableaudio.com/1/share/99dfdd21-ae68-4e2e-bfa5-33b72fa3bdaa/iframe" width="100%" height="350" frameborder="0" style="border-radius:2px" allow="autoplay"></iframe>
+</div>
 
 Users can directly upload audio files, transforming them through natural language instructions. An integrated style transfer functionality allows further customization, matching generated or uploaded audio precisely to a project's theme and tone.
 
