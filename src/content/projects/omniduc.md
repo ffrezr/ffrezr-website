@@ -1,12 +1,12 @@
 ---
 slug: omniduc
 title: Omniduc
-seoTitle: "Omniduc Post-Mortem: B2B EdTech Math Startup in Chile (2021-2022)"
+seoTitle: "Omniduc Post-Mortem: B2B EdTech in Chile (2021-2022)"
 role: Founder & CEO
 period: Sep 2021 — Sep 2022
 location: Valparaíso, Chile
 description: "How I built Omniduc from scratch: a Chilean B2B EdTech startup that combined an adaptive video game with real-time learning analytics for math teachers. Architecture, validation, post-mortem, and lessons after one year of operation."
-metaDescription: "Founder post-mortem of Omniduc, a Chilean B2B EdTech startup (2021-2022). Architecture, $25,000M CLP TAM, 5 root causes of failure, and lessons for math education."
+metaDescription: "Founder post-mortem of Omniduc, a Chilean B2B EdTech startup (2021-2022). Architecture, $25,000M CLP TAM, and 5 root causes of failure."
 image: /img/entrepreneurship/omniduc/banner.png
 tags:
   - EdTech
@@ -20,19 +20,6 @@ featured: true
 published: true
 display: true
 lastUpdated: "2026-05-11"
-faq:
-  - question: "What was Omniduc?"
-    answer: "Omniduc was a Chilean B2B EdTech startup (2021-2022) that combined a tablet math video game (Ascendia: Magic Lands) with a teacher analytics portal. Students answered curriculum-aligned questions inside the game, and teachers saw real-time performance data by student, class, and learning objective."
-  - question: "Why did Omniduc shut down?"
-    answer: "The product worked and was pedagogically validated, but the B2B school sales channel in Chile required a 6-12 month sales cycle, a distributed decision-maker (principal + Academic Affairs + governing body + teachers), and near-zero discretionary budget. With a part-time team and limited runway, we could not close enough subscriptions to reach scale before the funding ran out."
-  - question: "What was the business model?"
-    answer: "Annual subscription paid by the school at $20,000 CLP per student per year, covering all students in a given grade plus teacher portal access. The estimated TAM for Chile was approximately $25,000 million CLP, based on 8,200 schools and 1.25 million students from 2nd to 6th grade."
-  - question: "What public funding did Omniduc receive?"
-    answer: "Omniduc was awarded the Corfo Semilla Expande grant in December 2021, which funded development of the first MVP. We were later awarded the Corfo Crea y Valida fund in 2022 but chose not to continue with it, because more funding without solving the channel mechanics would have only extended the runway without changing the outcome."
-  - question: "What was the technical architecture?"
-    answer: "Two pieces connected through a cloud data layer. The tablet video game captured per-question events (student_id, question_id, objective_id, answer, is_correct, time_to_answer_ms) and synced them to a backend that maintained transactional and aggregated views. The teacher portal frontend polled the aggregated view every few seconds, enabling real-time intervention during class."
-  - question: "What is the main lesson from Omniduc for EdTech founders?"
-    answer: "The channel matters more than the product. In B2B EdTech for primary schools, the commercial network (known principals, governing-body alliances, publisher distribution deals) determines whether your MVP ever reaches paying customers. As a founder with an engineering background, I systematically underestimated this. Today I would evaluate channel access as the #1 go/no-go factor before writing a single line of code."
 ---
 
 **Omniduc** was an EdTech startup I founded in Valparaíso between 2021 and 2022 to tackle one of the most persistent problems in the Chilean education system: **poor math performance in primary school**. The proposition combined two pieces. First, a tablet video game that replaced written exams with adaptive gameplay sessions. Second, a web portal where teachers could see, student by student and question by question, exactly where each student was struggling in real time.
@@ -175,7 +162,7 @@ The commercial structure was as follows:
 - **Segment**: Chilean schools offering primary education (private, subsidized-private, and public schools with budgetary autonomy).
 - **Product**: annual subscription to the Omniduc service, including access to the video game for all students in the covered grade level and to the teacher portal for their teachers.
 - **Price**: **$20,000 CLP annual per student**, designed to enter below the market price of comparable platforms while above the per-unit operational cost.
-- **TAM**: approximately **$25,000 billion CLP** ([CEM MINEDUC, 2018](https://centroestudios.mineduc.cl/), retrieved 2026-05-10), equivalent to 8,200 schools × 1,250,000 students from 2nd to 6th grade × $20,000 per year.
+- **TAM**: approximately **$25,000 million CLP** ([CEM MINEDUC, 2018](https://centroestudios.mineduc.cl/), retrieved 2026-05-10), equivalent to 8,200 schools × 1,250,000 students from 2nd to 6th grade × $20,000 per year.
 
 The reasoning behind the ticket was that a typical school with 60 students per grade level would pay $1.2M CLP per year per grade. That is comparable to what many schools already spend on publisher workbooks or external platform licenses, but it also delivers analytics that workbooks don't.
 
@@ -395,26 +382,6 @@ This isn't a retrospective excuse. The channel would still be problem #1 to solv
 Omniduc's core hypothesis (that continuous formative assessment with real-time data improves learning) has become technical consensus over the past four years. Both UNESCO and World Bank reports post-pandemic reinforced the idea that "tutoring interventions with learning data" are one of the few strategies with robust evidence for learning recovery ([World Bank Learning Recovery, 2023](https://www.worldbank.org/en/topic/education)).
 
 The market also deepened. Platforms like Aprendolibre, Khan Academy in Spanish, ALEKS, and Math Kangaroo have grown in Chile. The difference compared to 2022 is that **today it is easier to convince a governing body that the category exists**, something that in 2022 still required evangelism. That market friction, paradoxically, is what affected us most. We were too early for the category that schools would be willing to buy today.
-
-## Frequently Asked Questions About Omniduc
-
-**What was Omniduc?**
-Omniduc was a Chilean B2B EdTech startup (2021-2022) that combined a tablet math video game (*Ascendia: Magic Lands*) with a teacher analytics portal. Students answered curriculum-aligned questions inside the game, and teachers saw real-time performance data by student, class, and learning objective.
-
-**Why did Omniduc shut down?**
-The product worked and was pedagogically validated, but the B2B school sales channel in Chile required a 6 to 12 month sales cycle, a distributed decision-maker (principal, Academic Affairs, governing body, teachers), and near-zero discretionary budget. With a part-time team and limited runway, we could not close enough subscriptions to reach scale before the funding ran out.
-
-**What was the business model?**
-Annual subscription paid by the school at $20,000 CLP per student per year, covering all students in a given grade plus teacher portal access. The estimated TAM for Chile was approximately $25,000 million CLP, based on 8,200 schools and 1.25 million students from 2nd to 6th grade.
-
-**What public funding did Omniduc receive?**
-Omniduc was awarded the Corfo Semilla Expande grant in December 2021, which funded development of the first MVP. We were later awarded the Corfo Crea y Valida fund in 2022 but chose not to continue with it, because more funding without solving the channel mechanics would have only extended the runway without changing the outcome.
-
-**What was the technical architecture?**
-Two pieces connected through a cloud data layer. The tablet video game captured per-question events (`student_id`, `question_id`, `objective_id`, `answer`, `is_correct`, `time_to_answer_ms`) and synced them to a backend that maintained transactional and aggregated views. The teacher portal frontend polled the aggregated view every few seconds, enabling real-time intervention during class.
-
-**What is the main lesson from Omniduc for EdTech founders?**
-The channel matters more than the product. In B2B EdTech for primary schools, the commercial network (known principals, governing-body alliances, publisher distribution deals) determines whether your MVP ever reaches paying customers. As a founder with an engineering background, I systematically underestimated this. Today I would evaluate channel access as the #1 go/no-go factor before writing a single line of code.
 
 ## Links and Sources
 
