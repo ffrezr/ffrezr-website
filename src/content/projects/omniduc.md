@@ -39,7 +39,7 @@ faq:
 
 We secured a Corfo Semilla Expande seed grant, shipped the first MVP, signed pilot agreements with three schools, and ended up closing the company 12 months after launch. This post covers everything: the quantified problem, the technical architecture, the pedagogical model, the validation we did and didn't do, the business model, the milestones, the technical decisions, the team, an honest post-mortem on why the venture never reached scale despite having a working product and funding, and what I learned building a B2B EdTech company from scratch in Chile.
 
-> **What you'll find here**
+> **Key Takeaways**
 > - **The quantified problem**: 52% of Chilean students failed to meet minimum math competencies in PISA 2018 ([OECD PISA 2018 CN Chile](https://www.oecd.org/pisa/publications/PISA2018_CN_CHL.pdf), 2019), the country's weakest subject across all areas the test evaluates.
 > - **The technical solution**: a B2B service with two technologies talking to each other. A video game (*Ascendia: Magic Lands*) for 3rd and 4th grade, and a Teacher Portal with real-time learning analytics.
 > - **The business model**: annual subscription of $20,000 CLP per student, paid by the school. Estimated TAM: $25,000M CLP for Chile (8,200 schools, 1.25M students from 2nd to 6th grade, [CEM MINEDUC](https://centroestudios.mineduc.cl/), 2018).
@@ -48,7 +48,7 @@ We secured a Corfo Semilla Expande seed grant, shipped the first MVP, signed pil
 
 ## Why Does Math Education Fail in Chilean Primary Schools?
 
-> **To understand Omniduc, you have to understand just how large the gap it was trying to close really was.** National and international indicators converge on the same diagnosis: the majority of primary school students in Chile and Latin America don't learn math at the level the curriculum sets as a minimum, and this gap is inherited and amplified throughout the school career.
+**To understand Omniduc, you have to understand just how large the gap it was trying to close really was.** National and international indicators converge on the same diagnosis: the majority of primary school students in Chile and Latin America don't learn math at the level the curriculum sets as a minimum, and this gap is inherited and amplified throughout the school career.
 
 Four data points defined the starting point in 2021:
 
@@ -112,7 +112,7 @@ The other conceptual pillar came from Sir Ken Robinson's critique of the industr
 
 ## What Was Omniduc? Continuous Formative Assessment in Video Game Format
 
-> **Omniduc was a B2B technology service supporting formative assessment**, sold as a subscription to schools. It combined a math video game for students with an analytics portal for teachers, so that each student interaction with the game became, in real time, actionable information for the teacher.
+**Omniduc was a B2B technology service supporting formative assessment**, sold as a subscription to schools. It combined a math video game for students with an analytics portal for teachers, so that each student interaction with the game became, in real time, actionable information for the teacher.
 
 The value proposition for the school was structured around three fronts:
 
@@ -126,7 +126,7 @@ The diagram above describes exactly the operational difference from the traditio
 
 ## How Did Omniduc's Technical Architecture Work?
 
-> **Omniduc consisted of two pieces that communicated through a cloud data layer**. The client (video game on tablets) captured interaction events and sent them to the backend. The server processed and stored those events. The Teacher Portal frontend read that data in real time and rendered it into consumable dashboards. It was a deliberately simple design for the size of the problem we had.
+**Omniduc consisted of two pieces that communicated through a cloud data layer**. The client (video game on tablets) captured interaction events and sent them to the backend. The server processed and stored those events. The Teacher Portal frontend read that data in real time and rendered it into consumable dashboards. It was a deliberately simple design for the size of the problem we had.
 
 ![Diagram of module interconnection and technology of the Omniduc solution](/img/entrepreneurship/omniduc/arquitectura-tecnologica.png "Architecture diagram: the student interacts with the Ascendia video game, which sends practice data (correct and incorrect answers, time per stage, interaction maps) to cloud storage. The web platform processes that data using Data Science techniques and delivers processed, useful information to the academic team for the teacher. The teacher can then make personalized adjustments (add questions, modify difficulty, configure positive reinforcement) that feed back into the video game, closing the loop.")
 
@@ -168,7 +168,7 @@ The backend also stored metadata for each question (learning objective, thematic
 
 ## What Was Omniduc's Business Model?
 
-> **The model was an annual subscription paid by the school, not by families.** That decision was early and deliberate: selling to schools meant longer sales cycles, but higher ticket size, multi-year retention, and the ability to cover all students in an entire grade level in a single transaction. Selling to families meant sky-high CAC, weak retention, and dependency on a decision repeated every month.
+**The model was an annual subscription paid by the school, not by families.** That decision was early and deliberate: selling to schools meant longer sales cycles, but higher ticket size, multi-year retention, and the ability to cover all students in an entire grade level in a single transaction. Selling to families meant sky-high CAC, weak retention, and dependency on a decision repeated every month.
 
 The commercial structure was as follows:
 
@@ -328,7 +328,7 @@ The pivot exercise, however, ended up being useful for a different conclusion. I
 
 <!-- [UNIQUE INSIGHT] -->
 
-> **We closed Omniduc in September 2022, exactly one year after launching.** It wasn't for lack of product, or lack of pedagogical validation, or lack of initial funding. It was a combination of structural problems we didn't solve in time that, in retrospect, were detectable much earlier than we detected them.
+**We closed Omniduc in September 2022, exactly one year after launching.** It wasn't for lack of product, or lack of pedagogical validation, or lack of initial funding. It was a combination of structural problems we didn't solve in time that, in retrospect, were detectable much earlier than we detected them.
 
 The company's own final pitch (October 2022) listed these as the "current problems": sales process, pricing strategy, and commercial strategy. The honest way to read that list is that **the product was ready and the go-to-market was not**.
 
@@ -390,7 +390,7 @@ This isn't a retrospective excuse. The channel would still be problem #1 to solv
 
 ## What Happened Next: The Ecosystem Four Years Later
 
-> **The problem Omniduc was trying to address is still active, but the context has changed.** The 2024 SIMCE showed the most significant improvement in 4th grade math in a decade: 264 average points, 14 points higher than 2022 ([MINEDUC, March 2025](https://www.mineduc.cl/resultados-simce-2024-revelan-historico-avance-en-4basico/)). It is real progress, but most students are still far from the adequate standard, and the driver behind the improvement is a combination of full school days post-pandemic, Aprendizajes Clave programs, and greater use of digital platforms in the classroom.
+**The problem Omniduc was trying to address is still active, but the context has changed.** The 2024 SIMCE showed the most significant improvement in 4th grade math in a decade: 264 average points, 14 points higher than 2022 ([MINEDUC, March 2025](https://www.mineduc.cl/resultados-simce-2024-revelan-historico-avance-en-4basico/)). It is real progress, but most students are still far from the adequate standard, and the driver behind the improvement is a combination of full school days post-pandemic, Aprendizajes Clave programs, and greater use of digital platforms in the classroom.
 
 Omniduc's core hypothesis (that continuous formative assessment with real-time data improves learning) has become technical consensus over the past four years. Both UNESCO and World Bank reports post-pandemic reinforced the idea that "tutoring interventions with learning data" are one of the few strategies with robust evidence for learning recovery ([World Bank Learning Recovery, 2023](https://www.worldbank.org/en/topic/education)).
 
