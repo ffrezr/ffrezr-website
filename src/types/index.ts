@@ -21,6 +21,10 @@ export interface Project {
   featured?: boolean
   published?: boolean
   display?: boolean
+  seoTitle?: string
+  metaDescription?: string
+  lastUpdated?: string
+  faq?: FaqItem[]
 }
 
 export interface ProjectContent extends Project {

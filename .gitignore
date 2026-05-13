@@ -25,3 +25,7 @@ dist-ssr
 
 # Claude Code local configuration
 .claude/
+
+docs/Omniduc/
+docs/Electroveja/
+docs/Ascendia/

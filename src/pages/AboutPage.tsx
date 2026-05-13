@@ -1,4 +1,5 @@
 import { profile, skills, experiences, education, certifications, awards, aboutHeroImage, hobbyImages, universityImages } from '../data/profile'
+import ResponsiveImage from '../components/ui/ResponsiveImage'
 import Tag from '../components/ui/Tag'
 
 const certLogos: Record<string, string> = {
@@ -35,10 +36,12 @@ export default function AboutPage() {
         </div>
         <div className="lg:col-span-5">
           <div className="hero-image-frame aspect-[4/5] bg-surface-container-low overflow-hidden">
-            <img
+            <ResponsiveImage
               alt="Professional portrait"
               className="w-full h-full object-cover"
               src={aboutHeroImage}
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
         </div>
@@ -151,10 +154,12 @@ export default function AboutPage() {
           <div className="grid grid-cols-3 gap-3 mt-8">
             {universityImages.map((img) => (
               <div key={img.src} className="aspect-[3/4] overflow-hidden bg-surface-container-low">
-                <img
+                <ResponsiveImage
                   alt={img.alt}
                   className="w-full h-full object-cover"
                   src={img.src}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             ))}
@@ -176,10 +181,12 @@ export default function AboutPage() {
                 key={cert.name}
                 className="flex items-center gap-4 p-6 bg-surface-container-low rounded-sm group hover:bg-surface-container-highest transition-colors"
               >
-                <img
+                <ResponsiveImage
                   alt={cert.issuer}
                   src={certLogos[cert.issuer] ?? '/img/logos/google.svg'}
                   className="w-6 h-6 shrink-0 object-contain"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div>
                   <h4 className="type-headline-xsmall font-headline text-primary">{cert.name}</h4>
@@ -262,10 +269,12 @@ export default function AboutPage() {
           {hobbyImages.map((img) => (
             <div key={img.label} className="group relative">
               <div className="aspect-[3/4] overflow-hidden bg-surface-container-low">
-                <img
+                <ResponsiveImage
                   alt={img.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                   src={img.src}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <span className="absolute bottom-0 left-0 right-0 py-3 px-4 type-label text-white bg-gradient-to-t from-black/60 to-transparent">

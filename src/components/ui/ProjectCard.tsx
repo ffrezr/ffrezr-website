@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import type { Project } from '../../types'
+import ResponsiveImage from './ResponsiveImage'
 import Tag from './Tag'
 
 interface ProjectCardProps {
@@ -14,10 +15,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <article className="flex flex-col gap-6">
         <div className="hero-image-frame overflow-hidden w-full aspect-[1.91/1] bg-surface-container-low">
           {project.image ? (
-            <img
+            <ResponsiveImage
               alt={project.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000 ease-in-out"
               src={project.image}
+              loading="lazy"
+              decoding="async"
             />
           ) : (
             <div className="w-full h-full flex flex-col items-center justify-center gap-4">

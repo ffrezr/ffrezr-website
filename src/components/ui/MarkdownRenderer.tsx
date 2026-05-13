@@ -4,6 +4,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import type { Components } from 'react-markdown'
 import ImageModal from './ImageModal'
+import { deriveImageSiblings } from '../../lib/images'
 
 function extractText(node: ReactNode): string {
   if (typeof node === 'string') return node
@@ -209,19 +210,25 @@ export default function MarkdownRenderer({ content, className = '' }: { content:
 
   const imageComponents: Components = {
     ...components,
-    img: ({ src, alt, title }) => (
+    img: ({ src, alt, title }) => {
+      const { avif, webp } = deriveImageSiblings(src)
+      return (
       <figure
         className="w-full mb-12 cursor-pointer group flex flex-col items-center"
         onClick={() => src && setExpandedImage({ src, alt: alt || '', caption: title || undefined })}
       >
         <div className="w-fit max-w-full rounded-sm overflow-hidden shadow-[0px_24px_48px_rgba(0,0,0,0.04)] group-hover:opacity-90 transition-opacity">
-          <img
-            src={src}
-            alt={alt || ''}
-            loading="lazy"
-            decoding="async"
-            className="block max-w-full h-auto"
-          />
+          <picture>
+            {avif && <source srcSet={avif} type="image/avif" />}
+            {webp && <source srcSet={webp} type="image/webp" />}
+            <img
+              src={src}
+              alt={alt || ''}
+              loading="lazy"
+              decoding="async"
+              className="block max-w-full h-auto"
+            />
+          </picture>
         </div>
         {title && (
           <figcaption className="mt-3 text-center text-sm text-secondary font-body italic">
@@ -252,7 +259,8 @@ export default function MarkdownRenderer({ content, className = '' }: { content:
           </figcaption>
         )}
       </figure>
-    ),
+      )
+    },
   }
 
   return (

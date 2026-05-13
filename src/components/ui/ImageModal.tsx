@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { deriveImageSiblings } from '../../lib/images'
 
 interface ImageModalProps {
   src: string
@@ -88,6 +89,7 @@ export default function ImageModal({ src, alt, caption, isOpen, onClose }: Image
   }
 
   const cursor = zoom > 1 ? (isDragging.current ? 'grabbing' : 'grab') : 'default'
+  const { avif, webp } = deriveImageSiblings(src)
 
   return (
     <div
@@ -107,21 +109,25 @@ export default function ImageModal({ src, alt, caption, isOpen, onClose }: Image
         style={{ cursor }}
         onClick={handleOverlayClick}
       >
-        <img
-          src={src}
-          alt={alt}
-          draggable={false}
-          onClick={(e) => e.stopPropagation()}
-          style={{
-            transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
-            transformOrigin: 'center center',
-            transition: isDragging.current ? 'none' : 'transform 0.15s ease',
-            maxWidth: '90vw',
-            maxHeight: '90vh',
-            objectFit: 'contain',
-            userSelect: 'none',
-          }}
-        />
+        <picture>
+          {avif && <source srcSet={avif} type="image/avif" />}
+          {webp && <source srcSet={webp} type="image/webp" />}
+          <img
+            src={src}
+            alt={alt}
+            draggable={false}
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              transform: `translate(${pan.x}px, ${pan.y}px) scale(${zoom})`,
+              transformOrigin: 'center center',
+              transition: isDragging.current ? 'none' : 'transform 0.15s ease',
+              maxWidth: '90vw',
+              maxHeight: '90vh',
+              objectFit: 'contain',
+              userSelect: 'none',
+            }}
+          />
+        </picture>
       </div>
 
       {/* Caption */}

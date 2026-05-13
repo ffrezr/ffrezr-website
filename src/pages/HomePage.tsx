@@ -6,6 +6,7 @@ import {
 import ExperienceRow from '../components/ui/ExperienceRow'
 import ArticleCard from '../components/ui/ArticleCard'
 import ProjectCard from '../components/ui/ProjectCard'
+import ResponsiveImage from '../components/ui/ResponsiveImage'
 import { profile, experiences, heroImage, skills } from '../data/profile'
 import { getAllArticles, getFeaturedProjects } from '../lib/content'
 
@@ -20,11 +21,13 @@ function HeroSkillLogo({ skill }: { skill: string }) {
   if (!src) return null
 
   return (
-    <img
+    <ResponsiveImage
       alt=""
       aria-hidden="true"
       className="hero-skill-logo h-5 w-5 shrink-0 object-contain"
       src={src}
+      loading="lazy"
+      decoding="async"
     />
   )
 }
@@ -88,10 +91,12 @@ export default function HomePage() {
         </div>
         <div className="lg:col-span-5">
           <div className="hero-image-frame aspect-[4/5] bg-surface-container-low overflow-hidden">
-            <img
+            <ResponsiveImage
               alt="Professional portrait"
               className="w-full h-full object-cover"
               src={heroImage}
+              fetchPriority="high"
+              decoding="async"
             />
           </div>
         </div>
@@ -101,10 +106,12 @@ export default function HomePage() {
       <section className="mb-56 max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
         <div className="md:col-span-5">
           <div className="hero-image-frame aspect-[4/5] bg-surface-container-low overflow-hidden">
-            <img
+            <ResponsiveImage
               alt="Professional portrait"
               className="w-full h-full object-cover"
               src="/img/me/latam-hangar-visit.jpeg"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>

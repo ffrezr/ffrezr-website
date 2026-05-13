@@ -2,9 +2,10 @@ import React from 'react'
 import { useParams, Link } from 'react-router'
 import { getArticleBySlug, getProjectBySlug } from '../lib/content'
 import MarkdownRenderer from '../components/ui/MarkdownRenderer'
+import ResponsiveImage from '../components/ui/ResponsiveImage'
 import Tag from '../components/ui/Tag'
 import { profile, socialLinks } from '../data/profile'
-import type { ArticleContent, FaqItem } from '../types'
+import type { ArticleContent, FaqItem, ProjectContent } from '../types'
 
 const SITE_URL = 'https://ffrezr.dev'
 
@@ -14,9 +15,11 @@ interface MetaItem {
 }
 
 interface SeoMeta {
+  title?: string
   description: string
   canonical: string
   ogImage: string
+  ogType: 'article' | 'website'
   jsonLd: Record<string, unknown>[]
 }
 
@@ -106,6 +109,7 @@ function buildArticleConfig(slug: string): Config {
         description: article.metaDescription ?? article.excerpt,
         canonical,
         ogImage,
+        ogType: 'article',
         jsonLd: buildArticleJsonLd(article, canonical, ogImage),
       }
     : undefined
@@ -133,12 +137,72 @@ function buildArticleConfig(slug: string): Config {
   }
 }
 
+function buildProjectJsonLd(project: ProjectContent, canonical: string, ogImage: string): Record<string, unknown>[] {
+  const dateModified = toIsoDate(project.lastUpdated)
+
+  const article: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: project.seoTitle ?? project.title,
+    description: project.metaDescription ?? project.description,
+    image: ogImage,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+    url: canonical,
+    inLanguage: 'en',
+    author: {
+      '@type': 'Person',
+      name: profile.fullName,
+      url: `${SITE_URL}/about`,
+      sameAs: socialLinks.map((s) => s.url),
+    },
+    publisher: {
+      '@type': 'Person',
+      name: profile.fullName,
+      url: SITE_URL,
+    },
+    keywords: project.tags?.join(', '),
+  }
+  if (dateModified) {
+    article.dateModified = dateModified
+    article.datePublished = dateModified
+  }
+
+  const jsonLd: Record<string, unknown>[] = [article]
+
+  if (project.faq && project.faq.length > 0) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: project.faq.map((f: FaqItem) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    })
+  }
+
+  return jsonLd
+}
+
 function buildProjectConfig(slug: string): Config {
   const project = getProjectBySlug(slug)
   const typeLabel =
     project?.type === 'venture' ? 'Venture'
     : project?.type === 'side-project' ? 'Side Project'
     : 'Project'
+  const canonical = `${SITE_URL}/projects/${slug}`
+  const ogImage = toAbsoluteUrl(project?.image)
+  const seo: SeoMeta | undefined = project
+    ? {
+        title: project.seoTitle,
+        description: project.metaDescription ?? project.description,
+        canonical,
+        ogImage,
+        ogType: 'article',
+        jsonLd: buildProjectJsonLd(project, canonical, ogImage),
+      }
+    : undefined
+
   return {
     notFound: !project,
     notFoundMessage: 'Project not found',
@@ -157,6 +221,7 @@ function buildProjectConfig(slug: string): Config {
     display: project?.display,
     emptyTitle: 'The full story behind this project is coming soon.',
     emptySubtitle: "Stay tuned — I'm writing about this experience.",
+    seo,
   }
 }
 
@@ -184,16 +249,16 @@ export default function ContentDetailPage({ contentType }: { contentType: 'artic
     <div className="pt-[88px] flex flex-col items-center pb-32 bg-surface-container-lowest">
       {seo && (
         <>
-          <title>{`${title} — ${profile.name}`}</title>
+          <title>{`${seo.title ?? title} — ${profile.name}`}</title>
           <meta name="description" content={seo.description} />
           <link rel="canonical" href={seo.canonical} />
-          <meta property="og:type" content={contentType === 'article' ? 'article' : 'website'} />
-          <meta property="og:title" content={title} />
+          <meta property="og:type" content={seo.ogType} />
+          <meta property="og:title" content={seo.title ?? title} />
           <meta property="og:description" content={seo.description} />
           <meta property="og:url" content={seo.canonical} />
           {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:title" content={title} />
+          <meta name="twitter:title" content={seo.title ?? title} />
           <meta name="twitter:description" content={seo.description} />
           {seo.ogImage && <meta name="twitter:image" content={seo.ogImage} />}
           {seo.jsonLd.map((schema, i) => (
@@ -236,7 +301,13 @@ export default function ContentDetailPage({ contentType }: { contentType: 'artic
       {image && (
         <div className="w-full max-w-7xl px-6 md:px-12 mb-24 flex justify-center">
           <div className="rounded-sm bg-surface-container-low overflow-hidden relative shadow-[0px_24px_48px_rgba(0,0,0,0.04)]">
-            <img alt={title} className="block max-w-full h-auto" src={image} decoding="async" fetchPriority="high" />
+            <ResponsiveImage
+              alt={title}
+              className="block max-w-full h-auto"
+              src={image}
+              decoding="async"
+              fetchPriority="high"
+            />
           </div>
         </div>
       )}
