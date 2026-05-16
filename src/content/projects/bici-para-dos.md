@@ -47,88 +47,88 @@ Architecturally, Jukebox is a three-stage system, and understanding each stage m
   </defs>
 
   <rect x="260" y="20" width="200" height="48" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <text x="360" y="42" font-size="13" font-weight="700" text-anchor="middle" fill="currentColor">Raw audio</text>
-  <text x="360" y="60" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.6">44.1 kHz waveform</text>
+  <text x="360" y="42" font-size="15" font-weight="700" text-anchor="middle" fill="currentColor">Raw audio</text>
+  <text x="360" y="60" font-size="12" text-anchor="middle" fill="currentColor" opacity="0.6">44.1 kHz waveform</text>
 
   <line x1="360" y1="68" x2="360" y2="98" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
 
   <rect x="50" y="100" width="620" height="44" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <text x="360" y="120" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">VQ-VAE encoder</text>
-  <text x="360" y="135" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.6">hierarchical · lossy · non-uniform across the spectrum</text>
+  <text x="360" y="120" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">VQ-VAE encoder</text>
+  <text x="360" y="135" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.6">hierarchical · lossy · non-uniform across the spectrum</text>
 
   <line x1="150" y1="144" x2="150" y2="178" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
   <line x1="360" y1="144" x2="360" y2="178" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
   <line x1="570" y1="144" x2="570" y2="178" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
 
   <rect x="50" y="180" width="200" height="130" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.7"/>
-  <text x="150" y="204" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">Top tokens</text>
-  <text x="150" y="226" font-size="11" text-anchor="middle" fill="currentColor">128× compression</text>
-  <text x="150" y="252" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">long-range</text>
-  <text x="150" y="266" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">song structure</text>
-  <text x="150" y="294" font-size="9" text-anchor="middle" fill="currentColor" opacity="0.5">codebook · 2048 codes</text>
+  <text x="150" y="204" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">Top tokens</text>
+  <text x="150" y="226" font-size="12" text-anchor="middle" fill="currentColor">128× compression</text>
+  <text x="150" y="252" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">long-range</text>
+  <text x="150" y="266" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">song structure</text>
+  <text x="150" y="294" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.5">codebook · 2048 codes</text>
 
   <rect x="260" y="180" width="200" height="130" rx="2" fill="none" stroke="currentColor" stroke-width="1" opacity="0.85"/>
-  <text x="360" y="204" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">Middle tokens</text>
-  <text x="360" y="226" font-size="11" text-anchor="middle" fill="currentColor">32× compression</text>
-  <text x="360" y="252" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">medium</text>
-  <text x="360" y="266" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">phrase structure</text>
-  <text x="360" y="294" font-size="9" text-anchor="middle" fill="currentColor" opacity="0.5">codebook · 2048 codes</text>
+  <text x="360" y="204" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">Middle tokens</text>
+  <text x="360" y="226" font-size="12" text-anchor="middle" fill="currentColor">32× compression</text>
+  <text x="360" y="252" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">medium</text>
+  <text x="360" y="266" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">phrase structure</text>
+  <text x="360" y="294" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.5">codebook · 2048 codes</text>
 
   <rect x="470" y="180" width="200" height="130" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-  <text x="570" y="204" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">Bottom tokens</text>
-  <text x="570" y="226" font-size="11" text-anchor="middle" fill="currentColor">8× compression</text>
-  <text x="570" y="252" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">fine timbral detail</text>
-  <text x="570" y="266" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">— frequency-biased loss</text>
-  <text x="570" y="294" font-size="9" text-anchor="middle" fill="currentColor" opacity="0.5">codebook · 2048 codes</text>
+  <text x="570" y="204" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">Bottom tokens</text>
+  <text x="570" y="226" font-size="12" text-anchor="middle" fill="currentColor">8× compression</text>
+  <text x="570" y="252" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">fine timbral detail</text>
+  <text x="570" y="266" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">— frequency-biased loss</text>
+  <text x="570" y="294" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.5">codebook · 2048 codes</text>
 
   <line x1="150" y1="312" x2="150" y2="346" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
   <line x1="360" y1="312" x2="360" y2="346" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
   <line x1="570" y1="312" x2="570" y2="346" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
 
   <rect x="50" y="348" width="200" height="110" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
-  <text x="150" y="372" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">Top prior</text>
-  <text x="150" y="392" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">autoregressive</text>
-  <text x="150" y="406" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">transformer</text>
-  <text x="150" y="434" font-size="9" text-anchor="middle" fill="currentColor" opacity="0.5">~1B params</text>
+  <text x="150" y="372" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">Top prior</text>
+  <text x="150" y="392" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">autoregressive</text>
+  <text x="150" y="406" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">transformer</text>
+  <text x="150" y="434" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.5">~1B params</text>
 
   <rect x="260" y="348" width="200" height="110" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
-  <text x="360" y="372" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">Upsampler prior 1</text>
-  <text x="360" y="392" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">conditioned on</text>
-  <text x="360" y="406" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">top-level tokens</text>
-  <text x="360" y="434" font-size="9" text-anchor="middle" fill="currentColor" opacity="0.5">~1B params</text>
+  <text x="360" y="372" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">Upsampler prior 1</text>
+  <text x="360" y="392" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">conditioned on</text>
+  <text x="360" y="406" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">top-level tokens</text>
+  <text x="360" y="434" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.5">~1B params</text>
 
   <rect x="470" y="348" width="200" height="110" rx="2" fill="none" stroke="currentColor" stroke-width="1"/>
-  <text x="570" y="372" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">Upsampler prior 0</text>
-  <text x="570" y="392" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">conditioned on</text>
-  <text x="570" y="406" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.65">middle tokens</text>
-  <text x="570" y="434" font-size="9" text-anchor="middle" fill="currentColor" opacity="0.5">~1B params</text>
+  <text x="570" y="372" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">Upsampler prior 0</text>
+  <text x="570" y="392" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">conditioned on</text>
+  <text x="570" y="406" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.65">middle tokens</text>
+  <text x="570" y="434" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.5">~1B params</text>
 
   <path d="M 150 458 L 150 496 L 360 496" stroke="currentColor" stroke-width="1" fill="none"/>
   <path d="M 570 458 L 570 496 L 360 496" stroke="currentColor" stroke-width="1" fill="none"/>
   <line x1="360" y1="458" x2="360" y2="538" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
 
   <rect x="50" y="540" width="620" height="44" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <text x="360" y="560" font-size="12" font-weight="700" text-anchor="middle" fill="currentColor">VQ-VAE decoder · upsampler</text>
-  <text x="360" y="575" font-size="10" text-anchor="middle" fill="currentColor" opacity="0.6">reconstructs the waveform · highs degrade first</text>
+  <text x="360" y="560" font-size="14" font-weight="700" text-anchor="middle" fill="currentColor">VQ-VAE decoder · upsampler</text>
+  <text x="360" y="575" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.6">reconstructs the waveform · highs degrade first</text>
 
   <line x1="360" y1="584" x2="360" y2="612" stroke="currentColor" stroke-width="1" marker-end="url(#jb-arrow)"/>
 
   <rect x="260" y="612" width="200" height="48" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
-  <text x="360" y="634" font-size="13" font-weight="700" text-anchor="middle" fill="currentColor">Generated audio</text>
-  <text x="360" y="652" font-size="11" text-anchor="middle" fill="currentColor" opacity="0.6">44.1 kHz waveform</text>
+  <text x="360" y="634" font-size="15" font-weight="700" text-anchor="middle" fill="currentColor">Generated audio</text>
+  <text x="360" y="652" font-size="12" text-anchor="middle" fill="currentColor" opacity="0.6">44.1 kHz waveform</text>
 </svg>
 <figcaption style="margin-top:0.75rem;text-align:center;font-size:0.875rem;color:var(--color-secondary);font-style:italic;">Three-stage Jukebox pipeline: hierarchical VQ-VAE compression, three autoregressive transformer priors, ancestral upsampling. Architecture adapted from <a href="https://arxiv.org/abs/2005.00341" style="color:inherit;text-decoration:underline;">Dhariwal et al., 2020</a>, Fig. 1.</figcaption>
 </figure>
 
-1. **A Vector-Quantised Variational AutoEncoder (VQ-VAE)** that compresses raw audio into a hierarchy of discrete tokens at three temporal resolutions. The top level is the most aggressive compression, capturing long-range structure (the "shape" of a song). The bottom level is the most detailed, encoding fine timbral texture and high-frequency content. The compression is lossy, and the loss isn't uniform across the spectrum. This becomes the most important fact about the model.
-2. **Three autoregressive transformer priors**, one per VQ-VAE level. Each prior learns to predict the next token at its resolution, effectively learning *how songs unfold over time* at multiple scales. This is the part that's "trained on 1.2M songs."
-3. **An upsampling stage** that reconstructs the lower-resolution generations back into 44.1 kHz audio.
+1. A Vector-Quantised Variational AutoEncoder (VQ-VAE) that compresses raw audio into a hierarchy of discrete tokens at three temporal resolutions. The top level is the most aggressive compression, capturing long-range structure (the "shape" of a song). The bottom level is the most detailed, encoding fine timbral texture and high-frequency content. The compression is lossy, and the loss isn't uniform across the spectrum. This becomes the most important fact about the model.
+2. Three autoregressive transformer priors, one per VQ-VAE level. Each prior learns to predict the next token at its resolution, effectively learning *how songs unfold over time* at multiple scales. This is the part that's "trained on 1.2M songs."
+3. An upsampling stage that reconstructs the lower-resolution generations back into 44.1 kHz audio.
 
 In practice, this gave us a workflow with three knobs we cared about:
 
-- **Primer audio** (a real audio clip, ~12 seconds in our case) that seeds the generation.
-- **Metadata conditioning**: `artist`, `genre`, and optional `lyrics`.
-- **Sampling temperature** (we landed on `0.98`), which controls how adventurous vs. on-distribution the generations are.
+- Primer audio (a real audio clip, ~12 seconds in our case) that seeds the generation.
+- Metadata conditioning: `artist`, `genre`, and optional `lyrics`.
+- Sampling temperature (we landed on `0.98`), which controls how adventurous vs. on-distribution the generations are.
 
 We chose the **`5b`** variant, the largest available model, specifically because it produces more coherent long-range structure and does not have lyrics conditioning — important for an instrumental piece. The trade-off was generation time: each ~30-second continuation took **several hours of GPU time**. That single fact, *several hours per take*, shaped every creative decision that followed.
 
@@ -140,10 +140,10 @@ The compression has a notable bias: high-frequency content (cymbals, sibilants, 
 
 That's why we wrote down the following constraints before generating a single sample:
 
-- **Mono-leaning, dark, sustained**. No fast transients, no bright cymbal washes, no piccolo lines.
-- **Low-to-mid register dominance**. Most of the harmonic information would live below ~1 kHz.
-- **Ostinato-driven, harmonically simple**. Two notes a semitone apart used as a slow oscillating backbone.
-- **Hans Zimmer–style soundtrack**. Specifically because his published catalogue, well represented in Jukebox's training distribution, lives inside the band the encoder handles cleanly.
+- Mono-leaning, dark, sustained — no fast transients, no bright cymbal washes, no piccolo lines.
+- Low-to-mid register dominance — most of the harmonic information would live below ~1 kHz.
+- Ostinato-driven, harmonically simple — two notes a semitone apart used as a slow oscillating backbone.
+- Hans Zimmer–style soundtrack, specifically because his published catalogue, well represented in Jukebox's training distribution, lives inside the band the encoder handles cleanly.
 
 The two-note ostinato is also the source of the title. The piece centres harmonically on **B (Si) and C (Do)**, separated by a semitone. **Bi-Ci** for the two notes, **para Dos** ("for two") for the duo behind it. A human and a machine on a tandem bicycle. The name was a joke that turned into a thesis statement.
 
@@ -239,27 +239,27 @@ metas = [dict(
 
 A few of the parameter choices are worth unpacking:
 
-- **`sampling_temperature = .98`** is the default recommended by OpenAI in the reference notebook. We kept it as-is.
-- **`artist="Hans Zimmer"` and `genre="Soundtrack"`** as conditioning together. The artist tag pushes timbre and texture; the genre tag pushes overall structure and arrangement conventions. Using both narrows the distribution more than either alone.
-- **`lyrics=""`** with the `5b` model. The `5b` variant has no lyrics conditioning, which is what we wanted for a purely instrumental piece. Leaving `lyrics` empty is appropriate here.
-- **`n_samples = 3`** — the maximum the `5b` model supports per run given its memory footprint.
-- **`hop_fraction = [.5, .5, .125]`** is the default, but worth flagging: the smaller bottom-level hop (`.125`) is what gives the upsampler enough overlap to reconstruct fine detail without seams.
+- `sampling_temperature = .98` is the default recommended by OpenAI in the reference notebook. We kept it as-is.
+- `artist="Hans Zimmer"` and `genre="Soundtrack"` as conditioning together. The artist tag pushes timbre and texture; the genre tag pushes overall structure and arrangement conventions. Using both narrows the distribution more than either alone.
+- `lyrics=""` with the `5b` model. The `5b` variant has no lyrics conditioning, which is what we wanted for a purely instrumental piece. Leaving `lyrics` empty is appropriate here.
+- `n_samples = 3` — the maximum the `5b` model supports per run given its memory footprint.
+- `hop_fraction = [.5, .5, .125]` is the default, but worth flagging: the smaller bottom-level hop (`.125`) is what gives the upsampler enough overlap to reconstruct fine detail without seams.
 
 ## Building the base: from a 12-second seed to three usable generations
 
 Once the experimentation phase was over, we collapsed everything we'd learned into a single recipe for the base track:
 
-1. **René composed a 12-second seed**: an orchestrated synthesizer pad rich in textures and atmosphere, voiced in the low-to-mid register, employing a [Shepard-tone](https://en.wikipedia.org/wiki/Shepard_tone) effect for the illusion of perpetual ascent. The seed was deliberately *dense* because we now knew Jukebox responds better to dense input. It was deliberately *low* because we now knew anything bright would degrade. And it was deliberately *Zimmer-adjacent* in palette so the conditioning would reinforce the seed rather than fight it.
+1. René composed a 12-second seed: an orchestrated synthesizer pad rich in textures and atmosphere, voiced in the low-to-mid register, employing a [Shepard-tone](https://en.wikipedia.org/wiki/Shepard_tone) effect for the illusion of perpetual ascent. The seed was deliberately *dense* because we now knew Jukebox responds better to dense input. It was deliberately *low* because we now knew anything bright would degrade. And it was deliberately *Zimmer-adjacent* in palette so the conditioning would reinforce the seed rather than fight it.
 
    <figure style="margin: 1.25rem 0 0.5rem;">
    <div style="font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: 0.5rem;">René's 12-second seed · the actual primer fed to Jukebox</div>
    <audio controls preload="none" src="/audio/projects/bici-para-dos/seed-input.mp3" style="width: 100%;"></audio>
    </figure>
 
-2. **I conditioned Jukebox** on `artist="Hans Zimmer"`, `genre="Soundtrack"`, sampling temperature `0.98`, and primed it with René's seed. I ran the pipeline three separate times, generating roughly 90 seconds of new material per run.
-3. **I generated three full continuations**. Each was different. But all three preserved the harmonic centre and emotional temperature of the seed. The metadata conditioning was working, and the dense seed was holding the model on-style.
+2. I conditioned Jukebox on `artist="Hans Zimmer"`, `genre="Soundtrack"`, sampling temperature `0.98`, and primed it with René's seed. I ran the pipeline three separate times, generating roughly 90 seconds of new material per run.
+3. I generated three full continuations. Each was different. But all three preserved the harmonic centre and emotional temperature of the seed. The metadata conditioning was working, and the dense seed was holding the model on-style.
 
-Rather than picking one generation and discarding the others, **we kept all three** and treated them as **three voices of the same instrument**. They became the raw material for the post-production phase.
+Rather than picking one generation and discarding the others, we kept all three and treated them as three voices of the same instrument. They became the raw material for the post-production phase.
 
 ## From AI bed to acoustic piece: post-production as the actual composition
 
@@ -267,11 +267,11 @@ This is the part that's easy to underestimate. With three Jukebox generations in
 
 Specifically, the post-production work broke into five concrete stages:
 
-1. **Stitching**. Edit, crossfade, and EQ-balance the three Jukebox outputs into a single coherent foundation, so the listener experiences one piece, not three concatenated experiments. This involved tempo-matching the three generations and locking them to a shared key centre.
-2. **Transcription**. Identify the most salient melodic lines in the AI bed and write them out in standard notation. Re-record those lines on cello and on a small set of synthesisers. This is what gives the piece its emotional human anchor. The AI bed alone is harmonically rich but timbrally generic.
-3. **Complementary composition**. Add tracks that the AI didn't produce: rhythmic pulses, additional pads, the low B–C ostinato that anchors the harmonic centre. These are *human-authored* sections that respond to what the AI generated.
-4. **Spectral filling**. Layer virtual instruments and samplers to fill the high-frequency gaps left by Jukebox's lossy compression. The highs the model couldn't hold on to. This is essentially running an inverse of the encoder's degradation profile, restoring brightness where it had been lost.
-5. **Mixing and mastering**. Final mix and master for live performance at the venue, with attention to the playback system the piece would actually be heard on.
+1. Stitching — edit, crossfade, and EQ-balance the three Jukebox outputs into a single coherent foundation, so the listener experiences one piece, not three concatenated experiments. This involved tempo-matching the three generations and locking them to a shared key centre.
+2. Transcription — identify the most salient melodic lines in the AI bed and write them out in standard notation. Re-record those lines on cello and on a small set of synthesisers. This is what gives the piece its emotional human anchor. The AI bed alone is harmonically rich but timbrally generic.
+3. Complementary composition — add tracks that the AI didn't produce: rhythmic pulses, additional pads, the low B–C ostinato that anchors the harmonic centre. These are *human-authored* sections that respond to what the AI generated.
+4. Spectral filling — layer virtual instruments and samplers to fill the high-frequency gaps left by Jukebox's lossy compression. The highs the model couldn't hold on to. This is essentially running an inverse of the encoder's degradation profile, restoring brightness where it had been lost.
+5. Mixing and mastering — final mix and master for live performance at the venue, with attention to the playback system the piece would actually be heard on.
 
 The result is a roughly two-minute work that, played to a listener cold, doesn't announce itself as "AI-generated music." It announces itself as **music**. Only on a second listen, when you start to ask *what is this voicing? whose phrasing is this?*, do you notice that the timbral fingerprints don't quite match any single instrument or any single performer. That ambiguity, in our view, is the actual artistic content of the piece.
 
@@ -307,19 +307,24 @@ The result is a roughly two-minute work that, played to a listener cold, doesn't
 
 ## Frequently asked technical questions
 
-**How long did each Jukebox generation take?**
+### How long did each Jukebox generation take?
+
 Several hours of GPU time per ~30-second continuation on the `5b` variant. We generated 3 candidates per run, then kept the 1-2 musically usable ones. The full base track required three independent generation runs, plus a substantial number of discarded experiments during the calibration phase.
 
-**Why did you use the 5B model instead of the smaller 1B variants?**
+### Why did you use the 5B model instead of the smaller 1B variants?
+
 We prioritised output quality over iteration speed. The `5b` variant produces more coherent long-range structure and, unlike `1b_lyrics`, has no lyrics conditioning — both important for an instrumental cinematic piece. The cost was generation time: several hours per ~30-second continuation. With a fixed festival deadline, that meant we ran fewer experiments and had less room to recover from bad generations, but the fidelity improvement was worth it.
 
-**Could the same approach work with newer models like MusicLM or Suno?**
+### Could the same approach work with newer models like MusicLM or Suno?
+
 Conceptually yes, the seed-condition-curate-transcribe loop is model-agnostic. But the specific constraints would shift. Newer models have different fidelity profiles, different conditioning surfaces (text prompts instead of artist/genre tags), and different generation latencies. You'd need a fresh experimentation phase to map the new model's behavioural envelope before committing to a style. For a technical breakdown of how those newer diffusion-based systems work, see [AI Music Generation in 2025: Diffusion Models & Stable Audio](/blog/the-new-era-of-ai-driven-musical-composition).
 
-**How did you handle the high-frequency degradation in the final mix?**
+### How did you handle the high-frequency degradation in the final mix?
+
 Two ways. First, by writing the piece to live in the low-mid register from the start, so the loss happened where there wasn't much information to begin with. Second, in post-production, by layering virtual instruments and samplers in the upper register to fill the spectral gaps Jukebox couldn't reconstruct. The result is a hybrid spectrum: low-mid is largely AI-generated, the highs are human-overlaid.
 
-**How much of the final piece is "the AI" versus "the humans"?**
+### How much of the final piece is "the AI" versus "the humans"?
+
 By the end of post-production the question stops being meaningful, which is partly the point. If you measure by audio source, the AI bed contributes roughly half of what you hear, mostly in the low-mid harmonic content. If you measure by *authored decisions*, almost everything (seed design, conditioning, candidate selection, transcription, complementary composition, mix) is human. The piece exists in the seam between the two.
 
 For how the AI music landscape evolved since 2021 — from Jukebox to today's diffusion models — read [AI Music Generation in 2025: Diffusion Models & Stable Audio](/blog/the-new-era-of-ai-driven-musical-composition).
@@ -330,12 +335,12 @@ For how the AI music landscape evolved since 2021 — from Jukebox to today's di
 
 ## Project credits
 
-- **Composition, transcription, orchestration, mixing & mastering**: René Verón
-- **AI engineering, model selection, prompt design, sampling pipeline, audio editing**: Francisco Frez
-- **Project lead, AC3E**: Matías Zañartu
-- **Scientific & technical support, AC3E**: Mauricio Araya, Fabián Rubilar
-- **Funding**: CONICYT / PIA, Project Code FB0008 (AC3E)
-- **Premiere venue**: Palacio Vergara, Viña del Mar, 24 October 2021
+- Composition, transcription, orchestration, mixing & mastering: René Verón
+- AI engineering, model selection, prompt design, sampling pipeline, audio editing: Francisco Frez
+- Project lead, AC3E: Matías Zañartu
+- Scientific & technical support, AC3E: Mauricio Araya, Fabián Rubilar
+- Funding: CONICYT / PIA, Project Code FB0008 (AC3E)
+- Premiere venue: Palacio Vergara, Viña del Mar, 24 October 2021
 
 ## Links
 

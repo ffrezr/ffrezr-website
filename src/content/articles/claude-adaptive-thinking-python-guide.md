@@ -34,7 +34,7 @@ The timing also matters strategically. Opus 4.7 ships with a new `xhigh` effort 
 
 ![Abstract illustration of machine learning neural network — Claude adaptive thinking and effort parameter API](https://images.pexels.com/photos/17483867/pexels-photo-17483867.jpeg?auto=compress&cs=tinysrgb&w=800&h=450&fit=crop&fm=webp)
 
-**Citation capsule:** Anthropic's Claude Opus 4.7 (released April 16, 2026) removes support for `thinking: {type: "enabled", budget_tokens: N}` entirely, returning HTTP 400 for any request that uses it. The replacement is `thinking: {type: "adaptive"}`, which lets the model dynamically allocate thinking tokens per request rather than using a fixed preset budget. On Claude Opus 4.6 and Sonnet 4.6, `budget_tokens` is deprecated but still functional — Anthropic will remove it in a future model release.
+Anthropic's Claude Opus 4.7 (released April 16, 2026) removes support for `thinking: {type: "enabled", budget_tokens: N}` entirely, returning HTTP 400 for any request that uses it. The replacement is `thinking: {type: "adaptive"}`, which lets the model dynamically allocate thinking tokens per request rather than using a fixed preset budget. On Claude Opus 4.6 and Sonnet 4.6, `budget_tokens` is deprecated but still functional — Anthropic will remove it in a future model release.
 
 The migration is a deliberate API simplification: adaptive mode consistently outperforms fixed-budget thinking on bimodal task distributions (mixes of easy and complex requests) because the model skips unnecessary reasoning on trivial queries instead of spending a fixed budget regardless. Source: [Anthropic API Docs — Adaptive Thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), 2026; [Anthropic Migration Guide](https://platform.claude.com/docs/en/about-claude/models/migration-guide), 2026.
 
@@ -106,7 +106,7 @@ response = client.messages.create(
 )
 ```
 
-**Citation capsule:** Migrating from `budget_tokens` to adaptive thinking requires two API changes: replacing `thinking: {type: "enabled", budget_tokens: N}` with `thinking: {type: "adaptive"}`, and adding `output_config: {effort: "level"}` where the effort level maps to the former token budget (larger budgets → higher effort). A third change is recommended on Opus 4.7: explicitly setting `display: "summarized"` in the thinking config.
+Migrating from `budget_tokens` to adaptive thinking requires two API changes: replacing `thinking: {type: "enabled", budget_tokens: N}` with `thinking: {type: "adaptive"}`, and adding `output_config: {effort: "level"}` where the effort level maps to the former token budget (larger budgets → higher effort). A third change is recommended on Opus 4.7: explicitly setting `display: "summarized"` in the thinking config.
 
 Opus 4.7 defaults to `display: "omitted"`, silently suppressing thinking text output while still billing for the full thinking token count. Applications that log or display Claude's reasoning will see empty thinking fields without this opt-in. The Python SDK forwards unrecognized dict keys transparently, so no SDK update is required. Source: [Anthropic API Docs — Adaptive Thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), 2026; [Effort parameter](https://platform.claude.com/docs/en/build-with-claude/effort), 2026.
 
@@ -118,39 +118,37 @@ For session-level thinking configuration in stateful agents, see how `thinking` 
 
 The `effort` parameter lives in `output_config` and accepts five values. It is a behavioral signal, not a hard token cap — at lower levels Claude still thinks on genuinely hard problems, just less than it would at higher levels ([Anthropic API Docs — Effort](https://platform.claude.com/docs/en/build-with-claude/effort), 2026). At `high` and above, Claude almost always engages extended thinking when adaptive mode is active.
 
-**Effort Level Guide for Claude Opus 4.7**
-
 <figure>
 <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="background:#1a1a2e;border-radius:8px;display:block;max-width:100%">
-  <text x="280" y="28" text-anchor="middle" fill="white" font-size="13" font-weight="bold" font-family="sans-serif">Effort Level vs Thinking Depth (Opus 4.7)</text>
+  <text x="280" y="28" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">Effort Level vs Thinking Depth (Opus 4.7)</text>
 
   <!-- Y axis labels -->
-  <text x="72" y="75" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">max</text>
-  <text x="72" y="120" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">xhigh</text>
-  <text x="72" y="165" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">high</text>
-  <text x="72" y="210" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">medium</text>
-  <text x="72" y="255" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">low</text>
+  <text x="72" y="75" text-anchor="end" fill="#ccccee" font-size="12" font-family="sans-serif">max</text>
+  <text x="72" y="120" text-anchor="end" fill="#ccccee" font-size="12" font-family="sans-serif">xhigh</text>
+  <text x="72" y="165" text-anchor="end" fill="#ccccee" font-size="12" font-family="sans-serif">high</text>
+  <text x="72" y="210" text-anchor="end" fill="#ccccee" font-size="12" font-family="sans-serif">medium</text>
+  <text x="72" y="255" text-anchor="end" fill="#ccccee" font-size="12" font-family="sans-serif">low</text>
 
   <!-- Bars: max width ~360px = absolute maximum -->
   <!-- max: 360px -->
   <rect x="80" y="59" width="360" height="22" rx="4" fill="#ff6584"/>
-  <text x="448" y="75" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">Frontier tasks, no token limit</text>
+  <text x="448" y="75" fill="white" font-size="11" font-weight="bold" font-family="sans-serif">Frontier tasks, no token limit</text>
 
   <!-- xhigh: 290px -->
   <rect x="80" y="104" width="290" height="22" rx="4" fill="#6c63ff"/>
-  <text x="378" y="120" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">Agentic coding, long-horizon work</text>
+  <text x="378" y="120" fill="white" font-size="11" font-weight="bold" font-family="sans-serif">Agentic coding, long-horizon work</text>
 
   <!-- high (default): 220px -->
   <rect x="80" y="149" width="220" height="22" rx="4" fill="#43e97b"/>
-  <text x="308" y="165" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">Complex reasoning (default)</text>
+  <text x="308" y="165" fill="white" font-size="11" font-weight="bold" font-family="sans-serif">Complex reasoning (default)</text>
 
   <!-- medium: 140px -->
   <rect x="80" y="194" width="140" height="22" rx="4" fill="#43e97b" opacity="0.6"/>
-  <text x="228" y="210" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">Balanced cost + quality</text>
+  <text x="228" y="210" fill="white" font-size="11" font-weight="bold" font-family="sans-serif">Balanced cost + quality</text>
 
   <!-- low: 70px -->
   <rect x="80" y="239" width="70" height="22" rx="4" fill="#43e97b" opacity="0.35"/>
-  <text x="158" y="255" fill="white" font-size="10" font-weight="bold" font-family="sans-serif">Speed, simple tasks</text>
+  <text x="158" y="255" fill="white" font-size="11" font-weight="bold" font-family="sans-serif">Speed, simple tasks</text>
 
   <!-- X axis -->
   <line x1="80" y1="272" x2="460" y2="272" stroke="#444466" stroke-width="1"/>
@@ -200,7 +198,7 @@ response = client.messages.create(
 )
 ```
 
-**Citation capsule:** The `effort` parameter in `output_config` is the Anthropic-recommended replacement for `budget_tokens` on Claude Opus 4.7, Opus 4.6, and Sonnet 4.6. It accepts five levels: `low`, `medium`, `high` (default), `xhigh` (Opus 4.7 only), and `max`. Rather than pre-specifying a thinking token count, `effort` communicates task importance and expected reasoning depth to the model.
+The `effort` parameter in `output_config` is the Anthropic-recommended replacement for `budget_tokens` on Claude Opus 4.7, Opus 4.6, and Sonnet 4.6. It accepts five levels: `low`, `medium`, `high` (default), `xhigh` (Opus 4.7 only), and `max`. Rather than pre-specifying a thinking token count, `effort` communicates task importance and expected reasoning depth to the model.
 
 For data engineering agents, a tiered effort strategy — `xhigh` for complex root-cause diagnosis, `medium` for routine status checks, `low` for classification — can reduce daily thinking token costs by 40–60% compared to a flat `high` effort setting across all calls. Set `max_tokens` to at least 32k when using `xhigh` or `max`, because at those levels the model may exhaust its reasoning budget before producing the text response. Source: [Anthropic API Docs — Effort](https://platform.claude.com/docs/en/build-with-claude/effort), 2026.
 
@@ -238,7 +236,7 @@ with client.messages.stream(
 
 One behavioral note: at `high` effort and above on Opus 4.7, the model thinks before producing any text. This means there may be a longer delay before the first `text_delta` compared to Opus 4.6 at the same effort level. If your streaming UI shows a loading indicator until first text, consider setting `display: "omitted"` — the server skips streaming the thinking summary and delivers text tokens faster.
 
-**Citation capsule:** Streaming with Claude adaptive thinking uses the same event model as manual extended thinking: `thinking_delta` events carry the model's reasoning process (when `display: "summarized"` is set), followed by `text_delta` events for the final response. No changes to stream handling logic are required when migrating from `budget_tokens` to adaptive thinking — the delta types and event sequence remain identical.
+Streaming with Claude adaptive thinking uses the same event model as manual extended thinking: `thinking_delta` events carry the model's reasoning process (when `display: "summarized"` is set), followed by `text_delta` events for the final response. No changes to stream handling logic are required when migrating from `budget_tokens` to adaptive thinking — the delta types and event sequence remain identical.
 
 Setting `display: "omitted"` in the thinking config produces the fastest time-to-first-text-token when streaming, because the server skips emitting the thinking summary and begins text output immediately. You are still billed for the full thinking tokens regardless of display setting. For latency-sensitive pipelines, `display: "omitted"` at `high` effort is a practical middle ground. Source: [Anthropic API Docs — Adaptive Thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), 2026.
 
@@ -248,51 +246,49 @@ Setting `display: "omitted"` in the thinking config produces the fastest time-to
 
 Adaptive thinking and prompt caching work together, but there is one rule that trips up migrations: switching between `adaptive` and `enabled`/`disabled` thinking modes **breaks cache breakpoints for the messages array** ([Anthropic API Docs](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), 2026). System prompts and tool definitions remain cached regardless of thinking mode changes — only the message-level cache is affected.
 
-**Thinking Mode × Cache Behavior**
-
 <figure>
 <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="background:#1a1a2e;border-radius:8px;display:block;max-width:100%">
-  <text x="280" y="28" text-anchor="middle" fill="white" font-size="13" font-weight="bold" font-family="sans-serif">Prompt Cache Behavior When Switching Thinking Modes</text>
+  <text x="280" y="28" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">Prompt Cache Behavior When Switching Thinking Modes</text>
 
   <!-- Header row -->
   <rect x="30" y="44" width="240" height="26" rx="3" fill="#2a2a4e"/>
-  <text x="150" y="62" text-anchor="middle" fill="#ccccee" font-size="11" font-weight="bold" font-family="sans-serif">Content Block</text>
+  <text x="150" y="62" text-anchor="middle" fill="#ccccee" font-size="12" font-weight="bold" font-family="sans-serif">Content Block</text>
   <rect x="275" y="44" width="120" height="26" rx="3" fill="#2a2a4e"/>
-  <text x="335" y="62" text-anchor="middle" fill="#ccccee" font-size="11" font-weight="bold" font-family="sans-serif">Cache preserved?</text>
+  <text x="335" y="62" text-anchor="middle" fill="#ccccee" font-size="12" font-weight="bold" font-family="sans-serif">Cache preserved?</text>
   <rect x="400" y="44" width="130" height="26" rx="3" fill="#2a2a4e"/>
-  <text x="465" y="62" text-anchor="middle" fill="#ccccee" font-size="11" font-weight="bold" font-family="sans-serif">Action needed?</text>
+  <text x="465" y="62" text-anchor="middle" fill="#ccccee" font-size="12" font-weight="bold" font-family="sans-serif">Action needed?</text>
 
   <!-- Row 1: System prompt -->
   <rect x="30" y="74" width="240" height="26" rx="3" fill="#1e1e3e"/>
-  <text x="150" y="92" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">System prompt</text>
+  <text x="150" y="92" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">System prompt</text>
   <rect x="275" y="74" width="120" height="26" rx="3" fill="#1e1e3e"/>
-  <text x="335" y="92" text-anchor="middle" fill="#43e97b" font-size="11" font-weight="bold" font-family="sans-serif">✓ Always</text>
+  <text x="335" y="92" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">✓ Always</text>
   <rect x="400" y="74" width="130" height="26" rx="3" fill="#1e1e3e"/>
-  <text x="465" y="92" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">None</text>
+  <text x="465" y="92" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">None</text>
 
   <!-- Row 2: Tool definitions -->
   <rect x="30" y="104" width="240" height="26" rx="3" fill="#252545"/>
-  <text x="150" y="122" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">Tool definitions</text>
+  <text x="150" y="122" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">Tool definitions</text>
   <rect x="275" y="104" width="120" height="26" rx="3" fill="#252545"/>
-  <text x="335" y="122" text-anchor="middle" fill="#43e97b" font-size="11" font-weight="bold" font-family="sans-serif">✓ Always</text>
+  <text x="335" y="122" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">✓ Always</text>
   <rect x="400" y="104" width="130" height="26" rx="3" fill="#252545"/>
-  <text x="465" y="122" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">None</text>
+  <text x="465" y="122" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">None</text>
 
   <!-- Row 3: Messages (same mode) -->
   <rect x="30" y="134" width="240" height="26" rx="3" fill="#1e1e3e"/>
-  <text x="150" y="152" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">Messages (same mode)</text>
+  <text x="150" y="152" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">Messages (same mode)</text>
   <rect x="275" y="134" width="120" height="26" rx="3" fill="#1e1e3e"/>
-  <text x="335" y="152" text-anchor="middle" fill="#43e97b" font-size="11" font-weight="bold" font-family="sans-serif">✓ Preserved</text>
+  <text x="335" y="152" text-anchor="middle" fill="#43e97b" font-size="12" font-weight="bold" font-family="sans-serif">✓ Preserved</text>
   <rect x="400" y="134" width="130" height="26" rx="3" fill="#1e1e3e"/>
-  <text x="465" y="152" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">None</text>
+  <text x="465" y="152" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">None</text>
 
   <!-- Row 4: Messages (mode switch) -->
   <rect x="30" y="164" width="240" height="26" rx="3" fill="#3a1e2e"/>
-  <text x="150" y="182" text-anchor="middle" fill="#ccccee" font-size="11" font-family="sans-serif">Messages (mode switch)</text>
+  <text x="150" y="182" text-anchor="middle" fill="#ccccee" font-size="12" font-family="sans-serif">Messages (mode switch)</text>
   <rect x="275" y="164" width="120" height="26" rx="3" fill="#3a1e2e"/>
-  <text x="335" y="182" text-anchor="middle" fill="#ff6584" font-size="11" font-weight="bold" font-family="sans-serif">✗ Broken</text>
+  <text x="335" y="182" text-anchor="middle" fill="#ff6584" font-size="12" font-weight="bold" font-family="sans-serif">✗ Broken</text>
   <rect x="400" y="164" width="130" height="26" rx="3" fill="#3a1e2e"/>
-  <text x="465" y="182" text-anchor="middle" fill="#ff6584" font-size="11" font-family="sans-serif">Consistent mode</text>
+  <text x="465" y="182" text-anchor="middle" fill="#ff6584" font-size="12" font-family="sans-serif">Consistent mode</text>
 
   <line x1="30" y1="200" x2="530" y2="200" stroke="#444466" stroke-width="1"/>
   <text x="280" y="218" text-anchor="middle" fill="#aaaacc" font-size="9" font-family="sans-serif">Switching adaptive ↔ enabled ↔ disabled breaks message-level cache.</text>
@@ -308,7 +304,7 @@ In testing a dbt pipeline monitoring agent with a 60k-token conversation history
 
 For full prompt caching strategy including breakpoint placement and the cache write vs. read cost math, see the [Claude Prompt Caching Python guide](/blog/claude-prompt-caching-python-guide).
 
-**Citation capsule:** Adaptive thinking and prompt caching are fully compatible, with one critical rule: switching thinking modes between `adaptive`, `enabled`, and `disabled` within a conversation breaks the prompt cache for the messages array. A mode switch forces a cache miss — the model treats the prefix as a new entry even if the content is identical. System prompts and tool definitions are unaffected and remain cached across mode switches.
+Adaptive thinking and prompt caching are fully compatible, with one critical rule: switching thinking modes between `adaptive`, `enabled`, and `disabled` within a conversation breaks the prompt cache for the messages array. A mode switch forces a cache miss — the model treats the prefix as a new entry even if the content is identical. System prompts and tool definitions are unaffected and remain cached across mode switches.
 
 The practical implication for migration is to complete the `budget_tokens` → `adaptive` transition at session boundaries rather than mid-conversation. In long agentic sessions where conversation history is the largest input cost, a mid-session mode switch can eliminate all cached message savings for that session. Source: [Anthropic API Docs — Adaptive Thinking](https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking), 2026; [Prompt Caching Docs](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), 2026.
 

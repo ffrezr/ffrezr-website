@@ -570,6 +570,22 @@ body {
   margin-top: -1.5rem;
 }
 
+.markdown-body svg[viewBox] {
+  width: 118% !important;
+  max-width: 118% !important;
+  margin-left: -9%;
+  height: auto !important;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .markdown-body svg[viewBox] {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0;
+  }
+}
+
 .markdown-body > p:first-child::first-letter {
   float: left;
   font-size: 5rem;

@@ -37,7 +37,7 @@ For data engineering-specific workflows and CLAUDE.md setup, see the [Claude Cod
 
 ![Abstract digital illustration of language model text generation for the Claude Managed Agents developer guide, created for the Google DeepMind Visualising AI project](https://images.pexels.com/photos/18069697/pexels-photo-18069697.png?auto=compress&cs=tinysrgb&w=800&fm=webp)
 
-**Citation capsule:** Claude Managed Agents, launched April 8, 2026, are Anthropic's hosted infrastructure layer for building persistent, stateful AI agent sessions. Before this release, developers building multi-turn agents had to implement their own session storage, conversation history serialization, tool call routing, and compute scaling — commonly requiring weeks of infrastructure work before any agent logic could be written. With Managed Agents, all of that is handled server-side. A developer creates a session with a single API call, specifying the model, system prompt, and tool definitions. The session then persists conversation history and tool call results automatically across multiple turns. Compute billing runs at $0.08/session-hour and stops when the session is closed or expires. As of April 2026, Managed Agents access is available on all paid Anthropic API tiers with no separate enrollment. Source: [SiliconAngle](https://siliconangle.com/2026/04/08/anthropic-launches-claude-managed-agents-speed-ai-agent-development/), April 2026; Anthropic Agent SDK documentation, April 2026.
+Claude Managed Agents, launched April 8, 2026, are Anthropic's hosted infrastructure layer for building persistent, stateful AI agent sessions. Before this release, developers building multi-turn agents had to implement their own session storage, conversation history serialization, tool call routing, and compute scaling — commonly requiring weeks of infrastructure work before any agent logic could be written. With Managed Agents, all of that is handled server-side. A developer creates a session with a single API call, specifying the model, system prompt, and tool definitions. The session then persists conversation history and tool call results automatically across multiple turns. Compute billing runs at $0.08/session-hour and stops when the session is closed or expires. As of April 2026, Managed Agents access is available on all paid Anthropic API tiers with no separate enrollment. Source: [SiliconAngle](https://siliconangle.com/2026/04/08/anthropic-launches-claude-managed-agents-speed-ai-agent-development/), April 2026; Anthropic Agent SDK documentation, April 2026.
 
 ---
 
@@ -45,43 +45,41 @@ For data engineering-specific workflows and CLAUDE.md setup, see the [Claude Cod
 
 Anthropic has grown from $1B in annualized revenue in December 2024 to $14B by February 2026 ([Anthropic](https://www.anthropic.com/news), as reported by [Business of Apps](https://www.businessofapps.com/data/claude-statistics/), March 2026), and Managed Agents reflects exactly where that investment went: production-grade agent infrastructure most teams couldn't afford to build themselves.
 
-The lifecycle of a Managed Agent session has five stages.
+The lifecycle of a Managed Agent session has four stages.
 
-**1. Session Create.** You call the sessions endpoint with a model, a system prompt, and optional tool definitions. Anthropic allocates compute and returns a `session_id`.
+Session create — you call the sessions endpoint with a model, a system prompt, and optional tool definitions. Anthropic allocates compute and returns a `session_id`.
 
-**2. Tool Calls.** Within the running instance, Claude can invoke registered tools — HTTP requests, database queries, Python functions you've exposed via the SDK. The platform tracks every function invocation and its result.
+Tool calls — within the running instance, Claude can invoke registered tools (HTTP requests, database queries, Python functions you've exposed via the SDK). The platform tracks every function invocation and its result.
 
-**3. Generate Response.** Claude synthesizes tool results and conversation history into a response. The model state is persisted server-side between turns.
+Generate response — Claude synthesizes tool results and conversation history into a response. The model state is persisted server-side between turns.
 
-**4. Session Expire.** Agent instances expire after inactivity (default: 30 minutes) or explicit close. Compute billing stops at expiration.
+Session expire — agent instances expire after inactivity (default: 30 minutes) or explicit close. Compute billing stops at expiration.
 
 Billing is straightforward. You pay $0.08 per session-hour for compute, on top of standard token pricing. A stateful context that runs for 15 minutes costs $0.02 in compute. For long-running workflows, that adds up — so instance hygiene matters.
 
 So why not just use raw API calls with a Redis state store? You could. But you're then responsible for serializing/deserializing conversation history, handling function call retries, and scaling compute yourself. Managed Agents trade a small compute premium for a significant reduction in infrastructure complexity.
 
-**Architecture: Managed Agent Session Lifecycle**
-
 <svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" style="background:#1a1a2e;border-radius:8px;display:block;max-width:100%">
   <!-- Nodes -->
   <rect x="10" y="70" width="90" height="44" rx="8" fill="#2d2d44"/>
-  <text x="55" y="91" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">User</text>
-  <text x="55" y="105" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Request</text>
+  <text x="55" y="91" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">User</text>
+  <text x="55" y="105" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Request</text>
 
   <rect x="125" y="70" width="90" height="44" rx="8" fill="#2d2d44"/>
-  <text x="170" y="91" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Create</text>
-  <text x="170" y="105" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Session</text>
+  <text x="170" y="91" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Create</text>
+  <text x="170" y="105" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Session</text>
 
   <rect x="240" y="70" width="90" height="44" rx="8" fill="#2d2d44"/>
-  <text x="285" y="91" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Tool</text>
-  <text x="285" y="105" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Calls</text>
+  <text x="285" y="91" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Tool</text>
+  <text x="285" y="105" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Calls</text>
 
   <rect x="355" y="70" width="90" height="44" rx="8" fill="#2d2d44"/>
-  <text x="400" y="91" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Generate</text>
-  <text x="400" y="105" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Response</text>
+  <text x="400" y="91" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Generate</text>
+  <text x="400" y="105" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Response</text>
 
   <rect x="468" y="70" width="82" height="44" rx="8" fill="#2d2d44"/>
-  <text x="509" y="91" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Session</text>
-  <text x="509" y="105" text-anchor="middle" fill="white" font-size="10" font-family="sans-serif">Expires</text>
+  <text x="509" y="91" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Session</text>
+  <text x="509" y="105" text-anchor="middle" fill="white" font-size="14" font-family="sans-serif">Expires</text>
 
   <!-- Arrows -->
   <line x1="100" y1="92" x2="123" y2="92" stroke="#6c63ff" stroke-width="2" marker-end="url(#arrowhead)"/>
@@ -96,10 +94,10 @@ So why not just use raw API calls with a Redis state store? You could. But you'r
   </defs>
 
   <!-- Labels -->
-  <text x="280" y="155" text-anchor="middle" fill="#aaaacc" font-size="9" font-family="sans-serif">Managed Agent Session Lifecycle — Anthropic, April 2026</text>
+  <text x="280" y="155" text-anchor="middle" fill="#aaaacc" font-size="13" font-family="sans-serif">Managed Agent Session Lifecycle — Anthropic, April 2026</text>
 </svg>
 
-**Citation capsule:** A Claude Managed Agent session proceeds through five defined stages: the user sends a request; Anthropic provisions a session and returns a session ID; the agent makes one or more tool calls, with each result persisted server-side; the model synthesizes the conversation and tool results into a response; and the session expires due to inactivity or explicit close. Compute billing runs at $0.08/session-hour and stops at the moment of session expiration or close. The default inactivity timeout is 30 minutes, configurable between 5 and 120 minutes per session. Token costs are charged separately at the standard rate for the selected model — Claude Opus costs more per token, Claude Sonnet less. For a monitoring agent running 15 minutes per pipeline check, the total compute overhead is $0.02 per run. Source: [Anthropic pricing page](https://www.anthropic.com/pricing), April 2026; [Anthropic Agent SDK documentation](https://docs.anthropic.com/en/docs/agents-managed), April 2026.
+A Claude Managed Agent session proceeds through five defined stages: the user sends a request; Anthropic provisions a session and returns a session ID; the agent makes one or more tool calls, with each result persisted server-side; the model synthesizes the conversation and tool results into a response; and the session expires due to inactivity or explicit close. Compute billing runs at $0.08/session-hour and stops at the moment of session expiration or close. The default inactivity timeout is 30 minutes, configurable between 5 and 120 minutes per session. Token costs are charged separately at the standard rate for the selected model — Claude Opus costs more per token, Claude Sonnet less. For a monitoring agent running 15 minutes per pipeline check, the total compute overhead is $0.02 per run. Source: [Anthropic pricing page](https://www.anthropic.com/pricing), April 2026; [Anthropic Agent SDK documentation](https://docs.anthropic.com/en/docs/agents-managed), April 2026.
 
 ---
 
@@ -185,7 +183,7 @@ Notice the explicit `sessions.close()` call at the end. Without it, the agent in
 
 ![Data flow and AI processing visualization representing Claude Managed Agents session pipelines, from the Google DeepMind Visualising AI project](https://images.pexels.com/photos/17485706/pexels-photo-17485706.png?auto=compress&cs=tinysrgb&w=800&fm=webp)
 
-**Citation capsule:** Building a first Claude Managed Agent requires three primary SDK calls. The `sessions.create()` call provisions a stateful session, taking the model name, system prompt, tool definitions, and optional `max_turns` limit as parameters — Anthropic allocates compute and returns a session ID. The `sessions.send_message()` call sends user messages within the active session; the server retains the full conversation history between calls. When the agent invokes a tool, the developer handles the tool call locally and returns the result via `sessions.submit_tool_result()`, which continues the agentic loop. Finally, `sessions.close()` explicitly terminates the session and stops compute billing. Forgetting this call leaves the session open until the inactivity timeout fires, which runs up unnecessary compute cost. As of April 2026, Managed Agents access requires no separate enrollment — it's available on all paid Anthropic API tiers. Source: [Anthropic Agent SDK documentation](https://docs.anthropic.com/en/docs/agents-managed), April 2026.
+Building a first Claude Managed Agent requires three primary SDK calls. The `sessions.create()` call provisions a stateful session, taking the model name, system prompt, tool definitions, and optional `max_turns` limit as parameters — Anthropic allocates compute and returns a session ID. The `sessions.send_message()` call sends user messages within the active session; the server retains the full conversation history between calls. When the agent invokes a tool, the developer handles the tool call locally and returns the result via `sessions.submit_tool_result()`, which continues the agentic loop. Finally, `sessions.close()` explicitly terminates the session and stops compute billing. Forgetting this call leaves the session open until the inactivity timeout fires, which runs up unnecessary compute cost. As of April 2026, Managed Agents access requires no separate enrollment — it's available on all paid Anthropic API tiers. Source: [Anthropic Agent SDK documentation](https://docs.anthropic.com/en/docs/agents-managed), April 2026.
 
 ---
 
@@ -320,34 +318,32 @@ This pattern scales cleanly. Add more tools (Slack notifications, BigQuery valid
 
 The chart below shows developer AI adoption from Stack Overflow's 2025 survey. The pipeline/data work figure (29%) is an estimate derived from segment breakdowns — the 84% and 51% figures are directly reported.
 
-**How Developers Use AI Tools Daily (2025)**
-
 <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" style="background:#1a1a2e;border-radius:8px;display:block;max-width:100%">
-  <text x="280" y="30" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="sans-serif">How Developers Use AI Tools Daily (2025)</text>
+  <text x="280" y="30" text-anchor="middle" fill="white" font-size="19" font-weight="bold" font-family="sans-serif">How Developers Use AI Tools Daily (2025)</text>
 
   <!-- Bar labels -->
-  <text x="130" y="75" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">Use AI tools at all</text>
-  <text x="130" y="135" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">Use AI daily</text>
-  <text x="130" y="195" text-anchor="end" fill="#ccccee" font-size="11" font-family="sans-serif">Use for pipeline/data work</text>
+  <text x="130" y="75" text-anchor="end" fill="#ccccee" font-size="15" font-family="sans-serif">Use AI tools at all</text>
+  <text x="130" y="135" text-anchor="end" fill="#ccccee" font-size="15" font-family="sans-serif">Use AI daily</text>
+  <text x="130" y="195" text-anchor="end" fill="#ccccee" font-size="15" font-family="sans-serif">Use for pipeline/data work</text>
 
   <!-- Bars -->
   <!-- 84% bar: max width ~370px at 100% -->
   <rect x="140" y="57" width="311" height="28" rx="4" fill="#6c63ff"/>
-  <text x="458" y="76" fill="white" font-size="12" font-weight="bold" font-family="sans-serif">84%</text>
+  <text x="458" y="76" fill="white" font-size="16" font-weight="bold" font-family="sans-serif">84%</text>
 
   <!-- 51% bar -->
   <rect x="140" y="117" width="189" height="28" rx="4" fill="#6c63ff"/>
-  <text x="336" y="136" fill="white" font-size="12" font-weight="bold" font-family="sans-serif">51%</text>
+  <text x="336" y="136" fill="white" font-size="16" font-weight="bold" font-family="sans-serif">51%</text>
 
   <!-- 29% bar -->
   <rect x="140" y="177" width="107" height="28" rx="4" fill="#6c63ff"/>
-  <text x="254" y="196" fill="white" font-size="12" font-weight="bold" font-family="sans-serif">29% (est.)</text>
+  <text x="254" y="196" fill="white" font-size="16" font-weight="bold" font-family="sans-serif">29% (est.)</text>
 
   <!-- Source -->
-  <text x="280" y="240" text-anchor="middle" fill="#aaaacc" font-size="9" font-family="sans-serif">Source: Stack Overflow Developer Survey, 2025 — pipeline/data work figure estimated from segment breakdown</text>
+  <text x="280" y="240" text-anchor="middle" fill="#aaaacc" font-size="13" font-family="sans-serif">Source: Stack Overflow Developer Survey, 2025 — pipeline/data work figure estimated from segment breakdown</text>
 </svg>
 
-**Citation capsule:** 84% of developers report using AI tools and 51% use them daily, according to the Stack Overflow Developer Survey 2025. Despite this, AI integration in data engineering workflows remains largely limited to one-shot prompts — querying a model once for a SQL suggestion or asking it to explain a DAG failure. A Claude Managed Agent session enables a fundamentally different pattern: multi-turn reasoning across sequential tool calls within a single stateful context. In practice, a data pipeline monitoring agent can call the dbt Cloud API to list recent runs, inspect failure details for any errored jobs, cross-reference BigQuery table freshness, and synthesize a structured JSON summary — all within one session, without the developer passing conversation history between steps. For teams where pipeline failures mean late-night alerts and manual investigation, this pattern can turn a 20-minute debugging workflow into a 30-second automated report. Source: [Stack Overflow Developer Survey, 2025](https://survey.stackoverflow.co/2025/); first-hand testing against dbt Cloud staging environment, April 2026.
+84% of developers report using AI tools and 51% use them daily, according to the Stack Overflow Developer Survey 2025. Despite this, AI integration in data engineering workflows remains largely limited to one-shot prompts — querying a model once for a SQL suggestion or asking it to explain a DAG failure. A Claude Managed Agent session enables a fundamentally different pattern: multi-turn reasoning across sequential tool calls within a single stateful context. In practice, a data pipeline monitoring agent can call the dbt Cloud API to list recent runs, inspect failure details for any errored jobs, cross-reference BigQuery table freshness, and synthesize a structured JSON summary — all within one session, without the developer passing conversation history between steps. For teams where pipeline failures mean late-night alerts and manual investigation, this pattern can turn a 20-minute debugging workflow into a 30-second automated report. Source: [Stack Overflow Developer Survey, 2025](https://survey.stackoverflow.co/2025/); first-hand testing against dbt Cloud staging environment, April 2026.
 
 ---
 
@@ -375,7 +371,7 @@ The session inactivity timeout defaults to 30 minutes. You can configure it per 
 
 Is there a case where you'd skip Managed Agents entirely? Yes. If you're making a single-turn API call in a serverless function with no state requirements, a raw `messages.create()` call is simpler and marginally cheaper. Don't over-engineer it.
 
-**Citation capsule:** Claude Managed Agents compute billing is $0.08/session-hour, applied on top of standard Claude API per-token pricing. Sessions support configurable inactivity timeouts between 5 and 120 minutes; billing stops the moment a session is closed or expires. For a pipeline monitoring agent that runs for 15 minutes per check, the compute overhead is $0.02 per run — negligible against the developer hours saved. The more meaningful cost comparison is infrastructure: teams that would otherwise spend two to three days building a custom session store, tool router, and compute layer are effectively subsidizing Managed Agents at any usage level. That said, the platform isn't a fit for every workload. Single-turn API calls — a classification request, a one-off summarization job, a serverless function generating a single response — are better handled with the standard `messages.create()` endpoint, which has no session overhead and lower effective cost per call. Source: Anthropic pricing page, April 2026; [Anthropic managed agents overview](https://platform.claude.com/docs/en/managed-agents/overview), April 2026.
+Claude Managed Agents compute billing is $0.08/session-hour, applied on top of standard Claude API per-token pricing. Sessions support configurable inactivity timeouts between 5 and 120 minutes; billing stops the moment a session is closed or expires. For a pipeline monitoring agent that runs for 15 minutes per check, the compute overhead is $0.02 per run — negligible against the developer hours saved. The more meaningful cost comparison is infrastructure: teams that would otherwise spend two to three days building a custom session store, tool router, and compute layer are effectively subsidizing Managed Agents at any usage level. That said, the platform isn't a fit for every workload. Single-turn API calls — a classification request, a one-off summarization job, a serverless function generating a single response — are better handled with the standard `messages.create()` endpoint, which has no session overhead and lower effective cost per call. Source: Anthropic pricing page, April 2026; [Anthropic managed agents overview](https://platform.claude.com/docs/en/managed-agents/overview), April 2026.
 
 ---
 

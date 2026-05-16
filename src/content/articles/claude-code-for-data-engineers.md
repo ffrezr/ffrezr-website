@@ -160,15 +160,15 @@ The "Forbidden Patterns" section alone cut hallucinated `SELECT *` in intermedia
 <figure>
 
 <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;background:#f8fafc;border-radius:12px;padding:8px">
-  <text x="280" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#1e293b">Data Team AI Adoption Priorities (2026)</text>
-  <text x="280" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Source: dbt Labs State of Analytics Engineering 2026</text>
+  <text x="280" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#1e293b">Data Team AI Adoption Priorities (2026)</text>
+  <text x="280" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Source: dbt Labs State of Analytics Engineering 2026</text>
 
   <!-- Labels -->
-  <text x="170" y="85"  text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Trust in data</text>
-  <text x="170" y="125" text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#334155">AI-assisted coding</text>
-  <text x="170" y="165" text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Shipping faster</text>
-  <text x="170" y="205" text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Pipeline management (AI)</text>
-  <text x="170" y="245" text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Increased team budget</text>
+  <text x="170" y="85"  text-anchor="end" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Trust in data</text>
+  <text x="170" y="125" text-anchor="end" font-family="system-ui,sans-serif" font-size="13" fill="#334155">AI-assisted coding</text>
+  <text x="170" y="165" text-anchor="end" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Shipping faster</text>
+  <text x="170" y="205" text-anchor="end" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Pipeline management (AI)</text>
+  <text x="170" y="245" text-anchor="end" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Increased team budget</text>
 
   <!-- Bars (max width = 330px at 100%) -->
   <rect x="180" y="68"  width="274" height="22" rx="4" fill="#6366f1"/>
@@ -178,11 +178,11 @@ The "Forbidden Patterns" section alone cut hallucinated `SELECT *` in intermedia
   <rect x="180" y="228" width="119" height="22" rx="4" fill="#94a3b8"/>
 
   <!-- Value labels -->
-  <text x="460" y="84"  font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e293b">83%</text>
-  <text x="424" y="124" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e293b">72%</text>
-  <text x="420" y="164" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e293b">71%</text>
-  <text x="265" y="204" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e293b">24%</text>
-  <text x="305" y="244" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1e293b">36%</text>
+  <text x="460" y="84"  font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#1e293b">83%</text>
+  <text x="424" y="124" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#1e293b">72%</text>
+  <text x="420" y="164" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#1e293b">71%</text>
+  <text x="265" y="204" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#1e293b">24%</text>
+  <text x="305" y="244" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="#1e293b">36%</text>
 </svg>
 
 <figcaption style="text-align:center;font-size:0.85rem;color:#64748b;margin-top:6px">Despite 72% prioritizing AI-assisted coding, only 24% have AI-assisted pipeline management — the widest adoption gap in the 2026 survey.</figcaption>
@@ -244,18 +244,19 @@ Hooks are defined in your `.claude/settings.json` under a `hooks` key. Each hook
 }
 ```
 
-**What each hook does:**
+The first PostToolUse hook runs `dbt parse` every time Claude writes a SQL or YAML file. It catches Jinja errors and missing `ref()` references before you even look at the output. This alone has saved me from committing broken models more times than I can count.
 
-- **PostToolUse Write/Edit → `dbt parse`**: Every time Claude writes a SQL or YAML file, `dbt parse` runs immediately. It catches Jinja errors and missing `ref()` references before you even look at the output. This alone has saved me from committing broken models more times than I can count.
-- **PreToolUse Bash → credential scan**: The `exit 2` code tells Claude to abort the tool call entirely if the input contains credential keywords. Running Claude Code unattended on a pipeline repo without this hook is a real risk — especially if the model references a `.env` file or a config with an embedded service account.
-- **PostToolUse Write → `py_compile`**: Catches Python syntax errors in DAG files immediately. Airflow's import-time DAG parsing means a syntax error in a DAG file can silently break your entire scheduler.
-- **Stop → reminder**: A lightweight reminder to run `dbt build` on modified models after the session. Small, but useful when you've been working for 90 minutes and want a checklist nudge.
+The PreToolUse Bash hook scans every shell command Claude wants to run for credential keywords. The `exit 2` code tells Claude to abort the tool call entirely if it finds any. Running Claude Code unattended on a pipeline repo without this hook is a real risk — especially if the model references a `.env` file or a config with an embedded service account.
+
+The second PostToolUse hook compiles modified Python files with `py_compile`, catching syntax errors in DAG files immediately. Airflow's import-time DAG parsing means a syntax error in a DAG file can silently break your entire scheduler.
+
+The Stop hook prints a lightweight reminder to run `dbt build` on modified models after the session. Small, but useful when you've been working for 90 minutes and want a checklist nudge.
 
 The gap between the 72% of data teams using AI for coding and the 24% using it for pipeline management ([dbt Labs](https://www.getdbt.com/resources/state-of-analytics-engineering-2026), 2026) is largely explained by this missing layer. Hooks close it. Once Claude edits a DAG and `dbt parse` fires automatically, the tool stops feeling like an assistant and starts functioning like a pair programmer who runs the checks you'd otherwise forget.
 
 For the full list of hook event types and configuration options, see the [Claude Code hooks reference](https://code.claude.com/docs/en/hooks).
 
-> **Citation capsule:** Claude Code Hooks fire shell commands on 17 event types during an agent session. A `PostToolUse` hook running `dbt parse` after every SQL file write catches Jinja errors and broken `ref()` references before they reach git — closing the gap between the 72% of data teams using AI for coding and the 24% using it for pipeline management (dbt Labs State of Analytics Engineering, 2026).
+> Claude Code Hooks fire shell commands on 17 event types during an agent session. A `PostToolUse` hook running `dbt parse` after every SQL file write catches Jinja errors and broken `ref()` references before they reach git — closing the gap between the 72% of data teams using AI for coding and the 24% using it for pipeline management (dbt Labs State of Analytics Engineering, 2026).
 
 ---
 
@@ -321,13 +322,13 @@ If you prefer to keep everything local (no remote GCP calls), the open-source [`
 
 The managed remote server is the better default for most teams: it handles auth via ADC, requires no Python environment, and runs on Google's infrastructure rather than your laptop.
 
-> **Citation capsule:** Google launched a fully managed remote BigQuery MCP server in January 2026, accessible at `https://bigquery.googleapis.com/mcp`. Configured via a single URL entry in `.mcp.json` and authenticated through Application Default Credentials, it lets Claude Code query schemas, inspect table metadata, and write SQL against live BigQuery data — eliminating hallucinated column names without a locally hosted package (Google Cloud Blog, 2026).
+> Google launched a fully managed remote BigQuery MCP server in January 2026, accessible at `https://bigquery.googleapis.com/mcp`. Configured via a single URL entry in `.mcp.json` and authenticated through Application Default Credentials, it lets Claude Code query schemas, inspect table metadata, and write SQL against live BigQuery data — eliminating hallucinated column names without a locally hosted package (Google Cloud Blog, 2026).
 
 <figure>
 
 <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;background:#f8fafc;border-radius:12px;padding:8px">
-  <text x="280" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#1e293b">AI Tool Preference for Complex Tasks — All Developers (2026)</text>
-  <text x="280" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Source: Developer Survey 2026 (multi-file refactoring, architecture, debugging)</text>
+  <text x="280" y="30" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#1e293b">AI Tool Preference for Complex Tasks — All Developers (2026)</text>
+  <text x="280" y="46" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Source: Developer Survey 2026 (multi-file refactoring, architecture, debugging)</text>
 
   <!-- Donut chart centered at 280,185 r=100 -->
   <!-- Total: 100%. Angles: Claude 44% = 158.4°, Copilot 28% = 100.8°, ChatGPT 19% = 68.4°, Other 9% = 32.4° -->
@@ -343,18 +344,18 @@ The managed remote server is the better default for most teams: it handles auth 
 
   <!-- Inner circle (donut hole) -->
   <circle cx="280" cy="185" r="55" fill="#f8fafc"/>
-  <text x="280" y="181" text-anchor="middle" font-family="system-ui,sans-serif" font-size="22" font-weight="700" fill="#6366f1">44%</text>
-  <text x="280" y="197" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Claude / Claude 5</text>
+  <text x="280" y="181" text-anchor="middle" font-family="system-ui,sans-serif" font-size="23" font-weight="700" fill="#6366f1">44%</text>
+  <text x="280" y="197" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Claude / Claude 5</text>
 
   <!-- Legend -->
   <rect x="60" y="300" width="12" height="12" rx="2" fill="#6366f1"/>
-  <text x="78" y="311" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Claude / Claude 5 (44%)</text>
+  <text x="78" y="311" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Claude / Claude 5 (44%)</text>
   <rect x="195" y="300" width="12" height="12" rx="2" fill="#94a3b8"/>
-  <text x="213" y="311" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Copilot (28%)</text>
+  <text x="213" y="311" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Copilot (28%)</text>
   <rect x="320" y="300" width="12" height="12" rx="2" fill="#cbd5e1"/>
-  <text x="338" y="311" font-family="system-ui,sans-serif" font-size="12" fill="#334155">ChatGPT (19%)</text>
+  <text x="338" y="311" font-family="system-ui,sans-serif" font-size="13" fill="#334155">ChatGPT (19%)</text>
   <rect x="435" y="300" width="12" height="12" rx="2" fill="#e2e8f0"/>
-  <text x="453" y="311" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Other (9%)</text>
+  <text x="453" y="311" font-family="system-ui,sans-serif" font-size="13" fill="#334155">Other (9%)</text>
 </svg>
 
 <figcaption style="text-align:center;font-size:0.85rem;color:#64748b;margin-top:6px">For complex tasks — multi-file refactors, architecture design, hard debugging — 44% of developers prefer Claude (including Claude Code CLI users). GitHub Copilot at 28% leads for inline completions. Source: Developer Survey 2026.</figcaption>
@@ -371,8 +372,8 @@ Altimate AI open-sourced a collection of data engineering skills specifically be
 <figure>
 
 <svg viewBox="0 0 560 295" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;background:#f8fafc;border-radius:12px;padding:8px">
-  <text x="280" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" font-weight="600" fill="#1e293b">Claude Code Performance on dbt Tasks — Baseline vs Skills</text>
-  <text x="280" y="44" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Source: Altimate AI ADE-bench evaluation, 2026 (43 tasks)</text>
+  <text x="280" y="28" text-anchor="middle" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="#1e293b">Claude Code Performance on dbt Tasks — Baseline vs Skills</text>
+  <text x="280" y="44" text-anchor="middle" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Source: Altimate AI ADE-bench evaluation, 2026 (43 tasks)</text>
 
   <!-- X axis: x=80 = 0%, x=480 = 100% (4px per %) -->
   <line x1="80" y1="252" x2="480" y2="252" stroke="#e2e8f0" stroke-width="1"/>
@@ -384,45 +385,45 @@ Altimate AI open-sourced a collection of data engineering skills specifically be
   <text x="480" y="265" text-anchor="middle" font-family="system-ui,sans-serif" font-size="9" fill="#94a3b8">100%</text>
 
   <!-- Row labels -->
-  <text x="70" y="82"  text-anchor="end" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Model creation</text>
+  <text x="70" y="82"  text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Model creation</text>
   <text x="70" y="94"  text-anchor="end" font-family="system-ui,sans-serif" font-size="9"  fill="#94a3b8">(accuracy)</text>
-  <text x="70" y="152" text-anchor="end" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">SQL optimization</text>
+  <text x="70" y="152" text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">SQL optimization</text>
   <text x="70" y="164" text-anchor="end" font-family="system-ui,sans-serif" font-size="9"  fill="#94a3b8">(exec speed)</text>
-  <text x="70" y="222" text-anchor="end" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">Overall accuracy</text>
+  <text x="70" y="222" text-anchor="end" font-family="system-ui,sans-serif" font-size="12" fill="#64748b">Overall accuracy</text>
   <text x="70" y="234" text-anchor="end" font-family="system-ui,sans-serif" font-size="9"  fill="#94a3b8">(ADE-bench)</text>
 
   <!-- Row 1: Model creation 40%→65%. x=80+40*4=240, x=80+65*4=340 -->
   <line x1="240" y1="82" x2="340" y2="82" stroke="#94a3b8" stroke-width="2"/>
   <circle cx="240" cy="82" r="8" fill="#cbd5e1"/>
   <circle cx="340" cy="82" r="8" fill="#6366f1"/>
-  <text x="240" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">40%</text>
-  <text x="340" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#6366f1">65% (+25pp)</text>
+  <text x="240" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">40%</text>
+  <text x="340" y="100" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6366f1">65% (+25pp)</text>
 
   <!-- Row 2: SQL speed gain — qualitative markers -->
   <line x1="200" y1="152" x2="312" y2="152" stroke="#94a3b8" stroke-width="2"/>
   <circle cx="200" cy="152" r="8" fill="#cbd5e1"/>
   <circle cx="312" cy="152" r="8" fill="#6366f1"/>
-  <text x="200" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">baseline</text>
-  <text x="312" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#6366f1">+22% faster</text>
+  <text x="200" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">baseline</text>
+  <text x="312" y="170" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6366f1">+22% faster</text>
 
   <!-- Row 3: Overall 46.5%→53.5%. x=80+46.5*4=266, x=80+53.5*4=294 -->
   <line x1="266" y1="222" x2="294" y2="222" stroke="#94a3b8" stroke-width="2"/>
   <circle cx="266" cy="222" r="8" fill="#cbd5e1"/>
   <circle cx="294" cy="222" r="8" fill="#6366f1"/>
-  <text x="250" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" fill="#64748b">46.5%</text>
-  <text x="310" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="10" font-weight="600" fill="#6366f1">53.5% (+7pp)</text>
+  <text x="250" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" fill="#64748b">46.5%</text>
+  <text x="310" y="240" text-anchor="middle" font-family="system-ui,sans-serif" font-size="11" font-weight="600" fill="#6366f1">53.5% (+7pp)</text>
 
   <!-- Legend -->
   <circle cx="155" cy="280" r="6" fill="#cbd5e1"/>
-  <text x="167" y="284" font-family="system-ui,sans-serif" font-size="11" fill="#334155">Baseline Claude Code</text>
+  <text x="167" y="284" font-family="system-ui,sans-serif" font-size="12" fill="#334155">Baseline Claude Code</text>
   <circle cx="320" cy="280" r="6" fill="#6366f1"/>
-  <text x="332" y="284" font-family="system-ui,sans-serif" font-size="11" fill="#334155">With dbt Skills</text>
+  <text x="332" y="284" font-family="system-ui,sans-serif" font-size="12" fill="#334155">With dbt Skills</text>
 </svg>
 
 <figcaption style="text-align:center;font-size:0.85rem;color:#64748b;margin-top:6px">With dbt skills, Claude Code improves model creation accuracy by 25 percentage points (40%→65%) and SQL execution speed by 22%. Overall ADE-bench accuracy improves from 46.5% to 53.5% across 43 tasks. Source: Altimate AI, 2026.</figcaption>
 </figure>
 
-> **Citation capsule:** Altimate AI's dbt skills, evaluated on ADE-bench (43 real-world dbt and SQL tasks), improve Claude Code's model creation accuracy by 25 percentage points — from 40% to 65% — by adding a "discover existing conventions" step before code generation. Overall ADE-bench accuracy rises from 46.5% to 53.5% with skills installed, with SQL execution speed improving 22% on optimization tasks (Altimate AI, 2026).
+> Altimate AI's dbt skills, evaluated on ADE-bench (43 real-world dbt and SQL tasks), improve Claude Code's model creation accuracy by 25 percentage points — from 40% to 65% — by adding a "discover existing conventions" step before code generation. Overall ADE-bench accuracy rises from 46.5% to 53.5% with skills installed, with SQL execution speed improving 22% on optimization tasks (Altimate AI, 2026).
 
 ### Installing and Using Skills
 
@@ -461,9 +462,7 @@ Claude Code is the most-loved AI coding tool in 2026 with a 46% rating, having o
 | Complex task preference (Claude model) | 44% of developers | — | 28% |
 | Price | $20/month (Pro) | $20/month | $10/month |
 
-**The honest breakdown for data engineers:**
-
-Claude Code wins when the task spans multiple files — refactoring a dbt model and updating all downstream refs, restructuring a DAG and updating its YAML config in one pass, generating schema tests for an entire domain. It's also the only tool with MCP support, which means it can actually query your warehouse instead of hallucinating schema details.
+The honest breakdown for data engineers: Claude Code wins when the task spans multiple files — refactoring a dbt model and updating all downstream refs, restructuring a DAG and updating its YAML config in one pass, generating schema tests for an entire domain. It's also the only tool with MCP support, which means it can actually query your warehouse instead of hallucinating schema details.
 
 Cursor wins when you're building or debugging the Python/API layer around your data platform: dashboards, data apps, REST endpoints. Its IDE interface is faster for that kind of visual, iterative work.
 
@@ -479,15 +478,13 @@ A dedicated Claude Code vs Cursor deep-dive for data engineering teams is coming
 
 Claude Code is genuinely useful for data engineering work in 2026. It's also worth being clear about where it still falls short, because the failures in data contexts are more consequential than in application development. A hallucinated React component breaks visibly. A hallucinated `LEFT JOIN` condition produces wrong numbers that pass silently through your pipeline.
 
-**Known limitations as of April 2026:**
+Schema hallucination without MCP is the biggest one. Without the BigQuery MCP server, Claude generates SQL based on column names it infers from context. For tables with non-obvious naming (e.g., `dim_cust_acq_src_v2`), it will guess wrong and the error won't be obvious. The fix is straightforward: always connect the MCP server before asking Claude to write queries.
 
-**Schema hallucination without MCP**: Without the BigQuery MCP server, Claude generates SQL based on column names it infers from context. For tables with non-obvious naming (e.g., `dim_cust_acq_src_v2`), it will guess wrong and the error won't be obvious. The fix is straightforward: always connect the MCP server before asking Claude to write queries.
+dbt lineage understanding is similarly partial. Claude reads individual model files well but doesn't natively parse the full `ref()` graph without explicit MCP tooling. Asking "which models depend on `fct_orders`?" requires either a dbt MCP server or passing `manifest.json` as context. Altimate's skills help here, but it's not automatic.
 
-**dbt lineage understanding**: Claude reads individual model files well but doesn't natively parse the full `ref()` graph without explicit MCP tooling. Asking "which models depend on `fct_orders`?" requires either a dbt MCP server or passing `manifest.json` as context. Altimate's skills help here, but it's not automatic.
+Airflow task dependency logic is the other rough edge. Claude generates individual operators accurately. Where it struggles is in multi-task DAG dependencies — particularly when XCom passing, dynamic task mapping, or conditional branching is involved. Always review generated task dependency chains before running them.
 
-**Airflow task dependency logic**: Claude generates individual operators accurately. Where it struggles is in multi-task DAG dependencies — particularly when XCom passing, dynamic task mapping, or conditional branching is involved. Always review generated task dependency chains before running them.
-
-**No cloud execution for hooks**: Hooks run on your local machine. If you schedule a Claude Code session to run overnight and your laptop sleeps, the session stops. There's no cloud execution mode for Claude Code (unlike Claude Cowork, which handles scheduling differently; see [How to Use Claude Cowork](/blog/how-to-use-claude-cowork)).
+There's also no cloud execution for hooks. Hooks run on your local machine. If you schedule a Claude Code session to run overnight and your laptop sleeps, the session stops. There's no cloud execution mode for Claude Code (unlike Claude Cowork, which handles scheduling differently; see [How to Use Claude Cowork](/blog/how-to-use-claude-cowork)).
 
 The trust gap that dbt Labs identified is real: 71% of data professionals worry about hallucinated outputs reaching stakeholders ([dbt Labs](https://www.getdbt.com/resources/state-of-analytics-engineering-2026), 2026). The mitigations in this guide (CLAUDE.md conventions, `dbt parse` hooks, skills) reduce the failure rate significantly. They don't eliminate it. Keep a human in the loop for any Claude-generated SQL that runs against production tables.
 
